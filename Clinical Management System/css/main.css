@@ -64,3 +64,13 @@
   background-color: #50d8af;
   color: #fff;
 }
+
+.nav-user-data{
+  display: none;
+}
+
+@media (max-width: 991px) {
+  .nav-user-data{
+    display: block;
+  }
+}
