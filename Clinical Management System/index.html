@@ -27,6 +27,8 @@
 
   <!-- Main Stylesheet File -->
   <link href="css/style.css" rel="stylesheet">
+  <link href="css/main.css" rel="stylesheet">
+  <link href="css/index.css" rel="stylesheet">
 
   <!-- =======================================================
     Theme Name: Reveal
@@ -56,13 +58,125 @@
       </div> -->
 
       <div class="social-links float-right">
-          <a href="#"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
-          <a href="#">Register</a>
-        <a href="#">Login</a>
+          <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+          <a href="#" data-toggle="modal" data-target="#register-model">Register</a>
+        <a href="#" data-toggle="modal" data-target="#login-model">Login</a>
       </div> 
     </div>
   </section>
+  <!--Register model-->
+  <div class="modal fade" id="register-model" tabindex="-1" role="dialog" aria-labelledby="register-model-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content reg-modal">
+        <div class="modal-header text-center modal-header-type-1">
+          <h5 class="modal-title white-text"  id="">Kenway Medicals | Register</h5>
+          <button type="button" class="close hover-white-text" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body pl-5 pr-5">
+            <form>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text bg-color-type-1 border-type-1" id="name"><i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                      </span>
+                    </div>
+                    <input type="text" class="form-control input-type-1" placeholder="Name" aria-label="Name" aria-describedby="name" autofocus>
+                  </div>
 
+                  <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text bg-color-type-1 border-type-1" id="age"><i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                        </span>
+                      </div>
+                      <input type="number" min="0" max="120" oninput="validity.valid||(value='');" class="form-control input-type-1" placeholder="Age" aria-label="Age" aria-describedby="age">
+                    </div>
+                    
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text bg-color-type-1 border-type-1" id="email"><i class="fa fa-envelope" aria-hidden="true"></i>
+                          </span>
+                        </div>
+                        <input type="email" class="form-control input-type-1" placeholder="Email" aria-label="Email" aria-describedby="email">
+                      </div>
+
+                      <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text bg-color-type-1 border-type-1" id="telephone"><i class="fa fa-phone" aria-hidden="true"></i>
+                            </span>
+                          </div>
+                          <input type="tel" class="form-control input-type-1" placeholder="Telephone No" aria-label="Telephone No" aria-describedby="telephone">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text bg-color-type-1 border-type-1" id="address"><i class="fa fa-home" aria-hidden="true"></i>
+                              </span>
+                            </div>
+                            <input type="text" class="form-control input-type-1" placeholder="Address" aria-label="Address" aria-describedby="address">
+                          </div>
+
+                          <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text bg-color-type-1 border-type-1" id="password"><i class="fa fa-key" aria-hidden="true"></i>
+                                </span>
+                              </div>
+                              <input type="password" class="form-control input-type-1" placeholder="Password" aria-label="Password" aria-describedby="passowrd">
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text bg-color-type-1 border-type-1" id="cmf-password"><i class="fa fa-key" aria-hidden="true"></i>
+                                  </span>
+                                </div>
+                                <input type="password" class="form-control input-type-1" placeholder="Retype Password" aria-label="Retype Password" aria-describedby="cmf-passowrd">
+                              </div>
+
+                  <div class="form-group">
+                      <center><button type="button" class="btn btn-type-1">Register</button></center>
+                    </div>                      
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Register model-->
+    <!--Login model-->
+  <div class="modal fade" id="login-model" tabindex="-1" role="dialog" aria-labelledby="login-model-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content login-modal">
+        <div class="modal-header text-center modal-header-type-1">
+          <h5 class="modal-title white-text"  id="">Kenway Medicals | Login</h5>
+          <button type="button" class="close hover-white-text" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body pl-5 pr-5">
+            <form>
+              
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text bg-color-type-1 border-type-1" id="cred-email"><i class="fa fa-envelope" aria-hidden="true"></i>
+                          </span>
+                        </div>
+                        <input type="email" class="form-control input-type-1" placeholder="Email" aria-label="Email" aria-describedby="cred-email" autofocus>
+                      </div>
+
+                          <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text bg-color-type-1 border-type-1" id="cred-password"><i class="fa fa-key" aria-hidden="true"></i>
+                                </span>
+                              </div>
+                              <input type="password" class="form-control input-type-1" placeholder="Password" aria-label="Password" aria-describedby="cred-passowrd">
+                            </div>
+
+                      <center><button type="button" class="btn btn-type-1">Login</button></center>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!--Login model-->
   <!--==========================
     Header
   ============================-->

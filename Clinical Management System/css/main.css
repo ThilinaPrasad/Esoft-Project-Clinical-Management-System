@@ -1,0 +1,66 @@
+.btn-type-1 {
+    font-family: "Raleway", sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 10px 32px;
+    border-radius: 25px;
+    transition: 0.5s;
+    margin: 10px;
+    color: #fff;
+  }
+.btn-type-1 {
+    background: #50d8af;
+    border: 2px solid #50d8af;
+  }
+  
+.btn-type-1:hover {
+    background: none;
+    color: #50d8af;
+  }
+
+  .modal-content{
+    border: none!important;
+  }
+
+  .modal-header-type-1{
+    background-color: #50d8af!important;
+    }
+
+.input-type-1{
+  border: 2px solid #50d8af;
+  color: #50d8af!important;
+  outline: none;
+  opacity: 0.7;
+}
+
+.input-type-1:focus{
+  border: 2px solid #50d8af;
+  box-shadow: 0 4px 8px 0 rgba(80, 216, 175, 0.7), 0 6px 20px 0 rgba(80, 216, 175, 0.19);
+}
+
+.text-color-type-1, .hover-color-type-1:hover{
+  color: #50d8af;
+}
+
+.hover-white-text{
+  color:rgba(255,255,255,0.5);
+}
+
+.hover-white-text:hover{
+  color:rgba(255,255,255,1);
+}
+
+.white-text{
+  color:white;
+}
+
+.border-type-1{
+  border: 2px solid #50d8af;
+
+}
+.bg-color-type-1{
+  background-color: #50d8af;
+  color: #fff;
+}

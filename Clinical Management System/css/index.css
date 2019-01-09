@@ -1,0 +1,10 @@
+.reg-modal{
+    background: url('../img/custom/model_back_1.png') left bottom no-repeat, 
+    #fff!important;
+}
+
+.login-modal{
+    background: url('../img/custom/model_back_2.png') right bottom no-repeat, 
+    #fff!important;
+}
+

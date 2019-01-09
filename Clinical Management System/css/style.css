@@ -1137,3 +1137,23 @@ body.mobile-nav-active #mobile-nav-toggle {
     margin-top: 20px;
   }
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background:transparent; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #50d8af; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #0c2e8a; 
+}
