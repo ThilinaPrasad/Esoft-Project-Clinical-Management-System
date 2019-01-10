@@ -24,6 +24,7 @@
   <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
   <link href="lib/magnific-popup/magnific-popup.css" rel="stylesheet">
   <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 
   <!-- Main Stylesheet File -->
   <link href="css/style.css" rel="stylesheet">
@@ -81,7 +82,7 @@
                       <span class="input-group-text bg-color-type-1 border-type-1" id="name"><i class="fa fa-user-circle-o" aria-hidden="true"></i>
                       </span>
                     </div>
-                    <input type="text" class="form-control input-type-1" placeholder="Name" aria-label="Name" aria-describedby="name" autofocus>
+                    <input type="text" class="form-control input-type-1" placeholder="Name" id="name-input" aria-label="Name" aria-describedby="name" autofocus>
                   </div>
 
                   <div class="input-group mb-3">
@@ -89,23 +90,26 @@
                         <span class="input-group-text bg-color-type-1 border-type-1" id="age"><i class="fa fa-user-circle-o" aria-hidden="true"></i>
                         </span>
                       </div>
-                      <input type="number" min="0" max="120" oninput="validity.valid||(value='');" class="form-control input-type-1" placeholder="Age" aria-label="Age" aria-describedby="age">
+                      <input type="number" min="0" max="120" oninput="validity.valid||(value='');" id="age-input" class="form-control input-type-1" placeholder="Age" aria-label="Age" aria-describedby="age">
                     </div>
                     
                     <div class="input-group mb-3">
-                        <div class="input-group-prepend">
+                      <div class="input-group-prepend">
                           <span class="input-group-text bg-color-type-1 border-type-1" id="email"><i class="fa fa-envelope" aria-hidden="true"></i>
                           </span>
                         </div>
-                        <input type="email" class="form-control input-type-1" placeholder="Email" aria-label="Email" aria-describedby="email">
-                      </div>
+                        <input type="email" oninput="email(this.value,'#email');" class="form-control input-type-1" id="email-input"  placeholder="Email" aria-label="Email" aria-describedby="email">
+                      <p class="error text-danger invalid-feedback text-right" id="email-input-error">error msg</p>
+
+                    </div>
 
                       <div class="input-group mb-3">
                           <div class="input-group-prepend">
                             <span class="input-group-text bg-color-type-1 border-type-1" id="telephone"><i class="fa fa-phone" aria-hidden="true"></i>
                             </span>
                           </div>
-                          <input type="tel" class="form-control input-type-1" placeholder="Telephone No" aria-label="Telephone No" aria-describedby="telephone">
+                          <input type="tel" class="form-control input-type-1" id="telephone-input" placeholder="Telephone No" aria-label="Telephone No" aria-describedby="telephone">
+
                         </div>
 
                         <div class="input-group mb-3">
@@ -113,7 +117,7 @@
                               <span class="input-group-text bg-color-type-1 border-type-1" id="address"><i class="fa fa-home" aria-hidden="true"></i>
                               </span>
                             </div>
-                            <input type="text" class="form-control input-type-1" placeholder="Address" aria-label="Address" aria-describedby="address">
+                            <input type="text" class="form-control input-type-1" id="address-input" placeholder="Address" aria-label="Address" aria-describedby="address">
                           </div>
 
                           <div class="input-group mb-3">
@@ -121,20 +125,24 @@
                                 <span class="input-group-text bg-color-type-1 border-type-1" id="password"><i class="fa fa-key" aria-hidden="true"></i>
                                 </span>
                               </div>
-                              <input type="password" class="form-control input-type-1" placeholder="Password" aria-label="Password" aria-describedby="passowrd">
+                              <input type="password" class="form-control input-type-1" oninput="cmf_password('#cmf-password')" id="password-input" placeholder="Password" aria-label="Password" aria-describedby="passowrd">
                             </div>
 
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                  <span class="input-group-text bg-color-type-1 border-type-1" id="cmf-password"><i class="fa fa-key" aria-hidden="true"></i>
+                                  <span class="input-group-text bg-color-type-1 border-type-1"  id="cmf-password"><i class="fa fa-key" aria-hidden="true"></i>
                                   </span>
                                 </div>
-                                <input type="password" class="form-control input-type-1" placeholder="Retype Password" aria-label="Retype Password" aria-describedby="cmf-passowrd">
-                              </div>
+                                <input type="password" class="form-control input-type-1" oninput="cmf_password('#cmf-password')" id="cmf-password-input" placeholder="Retype Password" aria-label="Retype Password" aria-describedby="cmf-passowrd">
+                              <p class="error text-danger invalid-feedback text-right" id="cmf-password-input-error">error msg</p>
+
+                            </div>
 
                   <div class="form-group">
-                      <center><button type="button" class="btn btn-type-1">Register</button></center>
-                    </div>                      
+                    <center><div id="register-spinner"><i class="fa fa-spinner rotating spinner"  aria-hidden="true"></i></div></center>
+                    <center><button type="button" class="btn btn-type-1" id="register-btn" onclick="reg_user();">Register</button></center>
+                      <p class="error text-danger invalid-feedback text-center" id="register-btn-input-error">Please enter all valid inputs!</p>
+                  </div>
           </form>
         </div>
       </div>
@@ -146,7 +154,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content login-modal">
         <div class="modal-header text-center modal-header-type-1">
-          <h5 class="modal-title white-text"  id="">Kenway Medicals | Login</h5>
+          <h5 class="modal-title white-text"  >Kenway Medicals | Login</h5>
           <button type="button" class="close hover-white-text" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -673,9 +681,11 @@
   <script src="lib/owlcarousel/owl.carousel.min.js"></script>
   <script src="lib/magnific-popup/magnific-popup.min.js"></script>
   <script src="lib/sticky/sticky.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 
   <!-- Template Main Javascript File -->
   <script src="js/main.js"></script>
+  <script src="js/operations/registerUser.js"></script>
 
 </body>
 </html>
