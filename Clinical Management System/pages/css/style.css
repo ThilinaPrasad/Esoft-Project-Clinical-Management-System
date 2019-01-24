@@ -7567,8 +7567,20 @@ fieldset[disabled] .form-control {
     white-space: nowrap;
     position: relative;
     border-bottom: 1px solid #e9e9e9;
-    background: url("../images/user-img-background.jpg") no-repeat no-repeat;
     height: 135px; }
+
+.sidebar .doctor-info{
+  background: url("../images/doctor-background.jpg") no-repeat no-repeat;
+}
+
+.sidebar .staff-info{
+  background: url("../images/staff-background.jpg") no-repeat no-repeat;
+}
+
+.sidebar .patient-info{
+  background: url("../images/patient-background.jpg") no-repeat no-repeat;
+}
+
     .sidebar .user-info .image {
       margin-right: 12px;
       display: inline-block; }
