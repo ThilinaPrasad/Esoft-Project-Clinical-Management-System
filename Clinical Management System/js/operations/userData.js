@@ -4,7 +4,7 @@ let isPassValid = false;
 
 // email validations
 function email(email, id) {
-    $.get("../../php/patients/getPatients.php?column=email&data=" + email, function (data, status) {
+    $.get("../../php/users/getUsers.php?column=email&data=" + email, function (data, status) {
         if (data != 'false') {
             isEmailValid = false;
             errorToggle(id, "Email already exits!", true);
@@ -60,27 +60,84 @@ function reg_user() {
             $('#register-spinner').fadeIn();
         });
 
+        var type =  $("input[name='user-type']:checked").val();
         var name = $('#name-input').val();
         var age = $('#age-input').val();
         var email = $('#email-input').val();
         var telephone = $('#telephone-input').val();
         var address = $('#address-input').val();
         var password = $('#password-input').val();
+        var gender =  $("input[name='gender']:checked").val();
 
-        $.post("../../php/patients/userRegistration.php",
+
+        $.post("../../php/users/userRegistration.php",
             {
                 name: name,
                 age: age,
+                gender: gender,
                 email: email,
                 telephone: telephone,
                 address: address,
-                password: password
+                password: password,
+                role: type
             },
 
             function (result) {
                 if (result == 1) {
+                    if(type == 2){
+                        $.confirm({
+                            theme: 'modern',
+                            icon: 'fa fa-check-circle',
+                            title: 'Registration done!',
+                            content: "Your data send for system admin of <b>Kenway medicals (pvt) Ltd</b>. <br>After they reviewed your data you can use the system.",
+                            draggable: true,
+                            animationBounce: 2.5,
+                            type: 'green',
+                            typeAnimated: true,
+                            buttons: {
+                                Delete: {
+                                    text: 'Done',
+                                    btnClass: 'btn-success',
+                                    action: function () {
+                                        $('#register-model').modal('hide');
+                                    }
+                                }
+                            }
+                        });
+                    }else{
+                        $.confirm({
+                            theme: 'modern',
+                            icon: 'fa fa-check-circle',
+                            title: 'Registration done!',
+                            content: "Please login your account with credentials!",
+                            draggable: true,
+                            animationBounce: 2.5,
+                            type: 'green',
+                            typeAnimated: true,
+                            buttons: {
+                                Delete: {
+                                    text: 'Login',
+                                    btnClass: 'btn-success',
+                                    action: function () {
+                                        $('#register-model').modal('hide');
+                                        $('#login-model').modal('show');
+                                        $('#register-spinner').hide();
+                                            $('#register-btn').show();
+                                    }
+                                },
+                                later: {
+                                    text: 'Later',
+                                    action: function () {
+                                        $('#register-model').modal('hide');
+                                        $('#register-spinner').hide();
+                                        $('#register-btn').show();
+                                    }
+                                }
+                            }
+                        });
+
+                    }
                     // ************************** redirect to dashboard here ***************************
-                    alert("Redirect to dashboard here!");
                 } else {
                     $.confirm({
                         theme: 'modern',

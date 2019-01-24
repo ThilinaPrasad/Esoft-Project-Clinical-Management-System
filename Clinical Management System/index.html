@@ -77,9 +77,26 @@
         </div>
         <div class="modal-body pl-5 pr-5">
             <form>
-                <div class="input-group mb-3">
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                      <span class="input-group-text bg-color-type-1 border-type-1" id="name"><i class="fa fa-users" aria-hidden="true"></i>
+                      </span>
+                </div>
+              <div class="radio-group">
+              <input type="radio" id="patient" name="user-type" value="3" checked>
+              <label for="patient">Patient</label>
+              &nbsp;&nbsp;&nbsp;
+              <input type="radio" id="doctor" name="user-type" value="2">
+              <label for="doctor">Doctor</label>
+                </div>
+
+              </div>
+
+
+              <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                      <span class="input-group-text bg-color-type-1 border-type-1" id="name"><i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                      <span class="input-group-text bg-color-type-1 border-type-1" id="type"><i class="fa fa-user-circle-o" aria-hidden="true"></i>
                       </span>
                     </div>
                     <input type="text" class="form-control input-type-1" placeholder="Name" id="name-input" aria-label="Name" aria-describedby="name" autofocus>
@@ -92,7 +109,22 @@
                       </div>
                       <input type="number" min="0" max="120" oninput="validity.valid||(value='');" id="age-input" class="form-control input-type-1" placeholder="Age" aria-label="Age" aria-describedby="age">
                     </div>
-                    
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                      <span class="input-group-text bg-color-type-1 border-type-1" id="gender"><i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                      </span>
+                </div>
+                <div class="radio-group">
+                  <input type="radio" id="male" name="gender" value="Male" checked>
+                  <label for="male">Male</label>
+                  &nbsp;&nbsp;&nbsp;
+                  <input type="radio" id="female" value="Female" name="gender">
+                  <label for="female">Female</label>
+                </div>
+
+              </div>
+
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
                           <span class="input-group-text bg-color-type-1 border-type-1" id="email"><i class="fa fa-envelope" aria-hidden="true"></i>
@@ -192,8 +224,7 @@
     <div class="container">
 
       <div id="logo" class="pull-left">
-        <h1><a href="#body" class="scrollto">Ken<span>way</span></a></h1>
-        <!-- <a href="#body"><img src="img/logo.png" alt="" title="" /></a>-->
+        <a href="#body"><img src="img/nav_logo.png" class="navbar-logo" alt="Kenway" title="Kenway medicals" /></a>
       </div>
 
       <nav id="nav-menu-container">
@@ -685,7 +716,7 @@
 
   <!-- Template Main Javascript File -->
   <script src="js/main.js"></script>
-  <script src="js/operations/registerUser.js"></script>
+  <script src="js/operations/userData.js"></script>
 
 </body>
 </html>
