@@ -12,12 +12,19 @@ $crud = new Crud();
 
 $name = $_POST['name'];
 $age = $_POST['age'];
+$gender = $_POST['gender'];
 $email = $_POST['email'];
 $telephone = $_POST['telephone'];
 $address = $_POST['address'];
+$role = $_POST['role'];
 $password = sha1($_POST['address']);
+$status = 1;
 
-$query = "INSERT INTO  users (name,age,email,telephone,address,password,role) VALUES ('$name','$age','$email','$telephone','$address','$password','3')";
+if($role=='2'){
+    $status = 0;
+}
+
+$query = "INSERT INTO  users (name,age,gender,email,telephone,address,password,role,status) VALUES ('$name','$age','$gender','$email','$telephone','$address','$password','$role','$status ')";
 $dbResponse = $crud->execute($query);
 
 if($dbResponse){

@@ -38,6 +38,11 @@
   .navbar .navbar-collapse.in {
     overflow: visible; }
 
+  .navbar-logo{
+    position: relative;
+    top: -18px;
+  }
+
 .ls-closed .sidebar {
   margin-left: -300px; }
 
