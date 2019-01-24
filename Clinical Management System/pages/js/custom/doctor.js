@@ -46,7 +46,6 @@ function addRemoveClass(x) {
     $("#home").removeClass("active");
     $("#patient").removeClass("active");
     $("#schedule").removeClass("active");
-    $("#reset").removeClass("active");
     $(x).addClass("active");
 }
 
@@ -54,8 +53,23 @@ function removeSection(){
     const dashboard = document.getElementById("dashboard");
     const schedule = document.getElementById("viewSchedule");
     const patients = document.getElementById("viewPatients");
+    const profile = document.getElementById("profile");
 
     dashboard.style.display = "none";
     schedule.style.display = "none";
     patients.style.display = "none";
+    profile.style.display = "none";
+}
+
+function viewProfile() {
+    $("#home").removeClass("active");
+    $("#patient").removeClass("active");
+    $("#schedule").removeClass("active");
+    removeSection();
+    const x = document.getElementById("profile");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
 }
