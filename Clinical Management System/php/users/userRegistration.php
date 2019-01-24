@@ -17,7 +17,7 @@ $telephone = $_POST['telephone'];
 $address = $_POST['address'];
 $password = sha1($_POST['address']);
 
-$query = "INSERT INTO  patient (name,age,email,telephone,address,password) VALUES ('$name','$age','$email','$telephone','$address','$password')";
+$query = "INSERT INTO  users (name,age,email,telephone,address,password,role) VALUES ('$name','$age','$email','$telephone','$address','$password','3')";
 $dbResponse = $crud->execute($query);
 
 if($dbResponse){

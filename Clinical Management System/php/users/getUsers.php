@@ -13,10 +13,10 @@ $query = "";
 
 switch ($column) {
     case 'email':
-        $query = "SELECT * FROM patient WHERE  $column  = '$data'";
+        $query = "SELECT * FROM users WHERE  $column  = '$data'";
         break;
     default:
-        $query = "SELECT * FROM patient";
+        $query = "SELECT * FROM users";
         break;
 }
 
