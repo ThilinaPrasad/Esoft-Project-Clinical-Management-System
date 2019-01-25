@@ -1,0 +1,23 @@
+#viewPatients{
+    display: none;
+}
+
+#viewSchedule{
+    display: none;
+}
+
+#profile{
+    display: none;
+}
+
+.details{
+    cursor: default !important;
+}
+
+.view-mode:after{
+    border: none!important;
+}
+
+#submitBtn{
+    display: none;
+}
