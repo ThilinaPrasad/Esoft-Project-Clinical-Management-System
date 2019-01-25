@@ -12,15 +12,5 @@
     display: none;
 }
 
-.details{
-    cursor: default !important;
-}
 
-.view-mode:after{
-    border: none!important;
-}
-
-#submitBtn{
-    display: none;
-}
 >>>>>>> 1555dc7e0fa010968c3856c7b4a182d541eb861c
