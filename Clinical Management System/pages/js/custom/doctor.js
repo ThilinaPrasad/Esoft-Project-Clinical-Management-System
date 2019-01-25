@@ -73,7 +73,7 @@ function viewProfile() {
         x.style.display = "none";
     }
 }
-
+/**/
 function editDetails(){
     $("#submitBtn").show();
     $(".details").attr("disabled", false);
