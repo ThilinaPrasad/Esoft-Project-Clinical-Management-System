@@ -9,3 +9,15 @@
 #profile{
     display: none;
 }
+
+.details{
+    cursor: default !important;
+}
+
+.view-mode:after{
+    border: none!important;
+}
+
+#submitBtn{
+    display: none;
+}
