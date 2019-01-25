@@ -101,3 +101,12 @@ function viewProfile() {
         x.style.display = "none";
     }
 }
+/**/
+function editDetails(){
+    $("#submitBtn").show();
+    $(".details").attr("disabled", false);
+    $(".details").blur();
+    $(".details").removeClass('details');
+    $(".view-mode").removeClass("view-mode");
+}
+
