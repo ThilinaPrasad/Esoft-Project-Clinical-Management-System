@@ -13,3 +13,7 @@
 #submitBtn{
     display: none;
 }
+
+tbody tr:hover{
+    cursor: pointer;
+}

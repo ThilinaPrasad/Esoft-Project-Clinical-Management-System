@@ -7590,6 +7590,10 @@ fieldset[disabled] .form-control {
         -ms-border-radius: 50%;
         border-radius: 50%;
         vertical-align: bottom !important; }
+
+      .sidebar .user-info .image img:hover{
+        cursor: pointer;
+      }
     .sidebar .user-info .info-container {
       cursor: default;
       display: block;
