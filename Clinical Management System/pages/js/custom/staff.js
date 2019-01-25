@@ -1,4 +1,0 @@
-function navActive(id) {
-    $()
-    $("#").hide();
-}
