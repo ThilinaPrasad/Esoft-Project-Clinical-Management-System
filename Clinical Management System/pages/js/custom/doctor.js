@@ -33,6 +33,29 @@ function viewSchedule(id){
     }
 }
 
+function viewAppointments(id){
+    addRemoveClass(id);
+    removeSection();
+    const x = document.getElementById("viewAppointments");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+
+function addSchedules(id){
+    addRemoveClass(id);
+    removeSection();
+    const x = document.getElementById("addSchedules");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+
+
 function showResetForm() {
     const x = document.getElementById("resetForm");
     if (x.style.display === "none") {
@@ -54,11 +77,16 @@ function removeSection(){
     const schedule = document.getElementById("viewSchedule");
     const patients = document.getElementById("viewPatients");
     const profile = document.getElementById("profile");
+    const appoinmnet = document.getElementById("viewAppointments");
+    const addSchedule = document.getElementById("addSchedules");
 
     dashboard.style.display = "none";
     schedule.style.display = "none";
     patients.style.display = "none";
     profile.style.display = "none";
+    appoinmnet.style.display = "none";
+    addSchedule.style.display = "none";
+
 }
 
 function viewProfile() {

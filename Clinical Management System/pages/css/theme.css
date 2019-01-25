@@ -42,3 +42,23 @@
   background-color: #fff; }
   .theme-teal .sidebar .legal .copyright a {
     color: #50d8af !important; }
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background:transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #50d8af;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #39c69c;
+}
