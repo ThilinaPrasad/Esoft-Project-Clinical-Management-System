@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d936a052-95a6-4e7a-b60d-6a93c7fb9f70" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/pages/css/custom/doctor.css" beforeDir="false" afterPath="$PROJECT_DIR$/pages/css/custom/doctor.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/js/custom/doctor.css" beforeDir="false" afterPath="$PROJECT_DIR$/pages/js/custom/doctor.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/js/custom/doctor.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/js/custom/doctor.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/js/custom/staff.js" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -76,29 +77,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/js/custom/doctor.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="109">
-              <caret line="49" column="51" selection-start-line="49" selection-start-column="51" selection-end-line="49" selection-end-column="51" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pages/css/custom/doctor.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/js/custom/doctor.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
-              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+            <state relative-caret-position="170">
+              <caret line="10" column="1" lean-forward="true" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -231,13 +214,6 @@
               <item name="pages" type="462c0819:PsiDirectoryNode" />
               <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="Clinical Management System" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Clinical Management System" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-              <item name="custom" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -294,7 +270,7 @@
       <workItem from="1548250748743" duration="170000" />
       <workItem from="1548257770556" duration="3561000" />
       <workItem from="1548306424946" duration="16777000" />
-      <workItem from="1548410733777" duration="13838000" />
+      <workItem from="1548410733777" duration="14499000" />
     </task>
     <task id="LOCAL-00001" summary="Register patients functionality">
       <created>1547115716830</created>
@@ -356,7 +332,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50983000" />
+    <option name="totallyTimeSpent" value="51644000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="752" extended-state="6" />
@@ -591,8 +567,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/css/custom/doctor.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+        <state relative-caret-position="170">
+          <caret line="10" column="1" lean-forward="true" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
         </state>
       </provider>
     </entry>
