@@ -443,6 +443,45 @@
         </div>
     </div>
 </section>
+
+<!-- Patiaent data model -->
+<div class="modal fade" id="patientDataModel" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-teal" style="padding: 15px;">
+                <h2 class="modal-title text-center" id="patientDataModelLabel">Patient Details</h2>
+            </div>
+            <div class="modal-body" style="padding-bottom: 0;">
+                <div class="body table-responsive">
+                    <table class="table text-center">
+                        <tbody>
+                        <tr>
+                            <td>Name</td>
+                            <td>Sadeepa Laksri</td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>test@123.com</td>
+                        </tr>
+                        <tr>
+                            <td>Address</td>
+                            <td>University of Moratuwa</td>
+                        </tr>
+                        <tr>
+                            <td>Telephone</td>
+                            <td>0912267288</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer" style="padding-top: 0;">
+                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <section class="content" id="viewPatients">
     <div class="container-fluid">
         <!-- Exportable Table -->
@@ -468,7 +507,7 @@
                                 </tr>
                                 </thead>
                                 <tfoot class="col-teal">
-                                <tr>
+                                <tr >
                                     <th>Name</th>
                                     <th>Position</th>
                                     <th>Office</th>
@@ -478,7 +517,7 @@
                                 </tr>
                                 </tfoot>
                                 <tbody>
-                                <tr>
+                                <tr onclick="showPatient(1);">
                                     <td>Tiger Nixon</td>
                                     <td>System Architect</td>
                                     <td>Edinburgh</td>

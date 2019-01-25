@@ -110,3 +110,6 @@ function editDetails(){
     $(".view-mode").removeClass("view-mode");
 }
 
+function showPatient(id) {
+    $('#patientDataModel').modal('show');
+}
