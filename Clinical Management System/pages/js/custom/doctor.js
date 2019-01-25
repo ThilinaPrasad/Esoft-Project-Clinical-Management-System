@@ -14,50 +14,30 @@ function viewHome(id){
 function viewPatient(id){
     addRemoveClass(id);
     removeSection();
-    const x = document.getElementById("viewPatients");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-    } else {
-        x.style.display = "none";
-    }
+    showSection("viewPatients");
 }
 
 function viewSchedule(id){
     addRemoveClass(id);
     removeSection();
-    const x = document.getElementById("viewSchedule");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-    } else {
-        x.style.display = "none";
-    }
+    showSection("viewSchedule");
 }
 
 function viewAppointments(id){
     addRemoveClass(id);
     removeSection();
-    const x = document.getElementById("viewAppointments");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-    } else {
-        x.style.display = "none";
-    }
+    showSection("viewAppointments");
 }
 
 function addSchedules(id){
     addRemoveClass(id);
     removeSection();
-    const x = document.getElementById("addSchedules");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-    } else {
-        x.style.display = "none";
-    }
+    showSection("addSchedules");
 }
 
 
-function showResetForm() {
-    const x = document.getElementById("resetForm");
+function showSection(section){
+    const x = document.getElementById(section);
     if (x.style.display === "none") {
         x.style.display = "block";
     } else {
@@ -103,10 +83,21 @@ function viewProfile() {
 }
 /**/
 function editDetails(){
-    $("#submitBtn").show();
-    $(".details").attr("disabled", false);
-    $(".details").blur();
-    $(".details").removeClass('details');
-    $(".view-mode").removeClass("view-mode");
+    if($("#editBtn").text() == "Edit"){
+        $("#submitBtn").show();
+        $(".profile-control").attr("disabled", false);
+        $(".profile-control").blur();
+        $(".profile-control").removeClass('details');
+        $(".profile-line").removeClass("view-mode");
+        $("#editBtn").text("View");
+    }else{
+        $("#submitBtn").hide();
+        $(".profile-control").attr("disabled", true);
+        $(".profile-control").focus();
+        $(".profile-control").addClass('details');
+        $(".profile-line").addClass("view-mode");
+        $("#editBtn").text("Edit");
+    }
+
 }
 
