@@ -1546,16 +1546,16 @@
                                 <img src="./images/user.png" alt="AdminBSB - Profile Image" />
                             </div>
                             <div class="content-area">
-                                <h3>Marc K. Hammond</h3>
+                                <h3>Sadeepa Laksri</h3>
                                 <p>Kenway Hospitals</p>
-                                <p>Patient</p>
+                                <p>Doctor</p>
                             </div>
                         </div>
                         <div class="profile-footer">
                             <ul>
                                 <li>
-                                    <span>Followers</span>
-                                    <span>1.234</span>
+                                    <span>Doctor_NO</span>
+                                    <span>1</span>
                                 </li>
                                 <li>
                                     <span>Following</span>
@@ -1566,7 +1566,8 @@
                                     <span>14.252</span>
                                 </li>
                             </ul>
-                            <button class="btn btn-primary btn-lg waves-effect btn-block">FOLLOW</button>
+                            <button class="btn btn-danger btn-sm waves-effect btn-block">Delete</button>
+                            <button class="btn bg-teal btn-sm waves-effect btn-block" onclick="editDetails()">Edit</button>
                         </div>
                     </div>
 
@@ -1584,49 +1585,40 @@
                                     <div role="tabpanel" class="tab-pane fade in active" id="profile_settings">
                                         <form class="form-horizontal">
                                             <div class="form-group">
-                                                <label for="NameSurname" class="col-sm-2 control-label">Name Surname</label>
+                                                <label for="Name" class="col-sm-2 control-label">Name</label>
                                                 <div class="col-sm-10">
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control" id="NameSurname" name="NameSurname" placeholder="Name Surname" value="Marc K. Hammond" required>
+                                                    <div class="form-line view-mode">
+                                                        <input type="text" class="form-control details" id="Name" name="Name" placeholder="Name" value="Sadeepa Laksri" disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="Address" class="col-sm-2 control-label">Address</label>
+                                                <div class="col-sm-10">
+                                                    <div class="form-line view-mode">
+                                                        <input type="text" class="form-control details" id="Address" name="Address" placeholder="Address" value="Veyangoda, Gampaha." disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="TelNo" class="col-sm-2 control-label">Mobile Number</label>
+                                                <div class="col-sm-10">
+                                                    <div class="form-line view-mode">
+                                                        <input type="number" class="form-control details" id="TelNo" name="TelNo" placeholder="Telephone Number" value="0716220786" disabled>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="Email" class="col-sm-2 control-label">Email</label>
                                                 <div class="col-sm-10">
-                                                    <div class="form-line">
-                                                        <input type="email" class="form-control" id="Email" name="Email" placeholder="Email" value="example@example.com" required>
+                                                    <div class="form-line view-mode">
+                                                        <input type="email" class="form-control details" id="Email" name="Email" placeholder="Email" value="example@example.com" disabled>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="InputExperience" class="col-sm-2 control-label">Experience</label>
-
-                                                <div class="col-sm-10">
-                                                    <div class="form-line">
-                                                        <textarea class="form-control" id="InputExperience" name="InputExperience" rows="3" placeholder="Experience"></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="InputSkills" class="col-sm-2 control-label">Skills</label>
-
-                                                <div class="col-sm-10">
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control" id="InputSkills" name="InputSkills" placeholder="Skills">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-2 col-sm-10">
-                                                    <input type="checkbox" id="terms_condition_check" class="chk-col-red filled-in" />
-                                                    <label for="terms_condition_check">I agree to the <a href="#">terms and conditions</a></label>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-offset-2 col-sm-10">
-                                                    <button type="submit" class="btn btn-danger">SUBMIT</button>
+                                                    <button type="submit" class="btn bg-teal waves-effect" id="submitBtn">Save Changes</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -1660,7 +1652,7 @@
 
                                             <div class="form-group">
                                                 <div class="col-sm-offset-3 col-sm-9">
-                                                    <button type="submit" class="btn btn-danger">SUBMIT</button>
+                                                    <button type="submit" class="btn bg-teal waves-effect">Change Password</button>
                                                 </div>
                                             </div>
                                         </form>
