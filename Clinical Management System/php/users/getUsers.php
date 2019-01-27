@@ -6,17 +6,17 @@
  * Time: 12:04 PM
  */
 require_once "../dbOps/crud.php";
-
+$table = $_GET["table"];
 $column = $_GET["column"];
-$data = $_GET["data"];
+$data = $_GET["value"];
 $query = "";
 
 switch ($column) {
     case 'email':
-        $query = "SELECT * FROM users WHERE  $column  = '$data'";
+        $query = "SELECT * FROM ".$table." WHERE  $column  = '$data'";
         break;
     default:
-        $query = "SELECT * FROM users";
+        $query = "SELECT * FROM ". $table;
         break;
 }
 
