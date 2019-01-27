@@ -1,12 +1,10 @@
-
-
 // Validations
 let isEmailValid = false;
 let isPassValid = false;
 
 // email validations
 function email(email, id) {
-    $.get("../../php/users/getUsers.php?table=user&column=email&value=" + email, function (data, status) {
+    $.get("../../php/common/getData.php?table=patient&column=email&value=" + email, function (data, status) {
         if (data != 'false') {
             isEmailValid = false;
             errorToggle(id, "Email already exits!", true);
