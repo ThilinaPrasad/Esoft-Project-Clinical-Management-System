@@ -103,7 +103,6 @@ function reg_user() {
             },
 
             function (result) {
-            console.log(result);
                 if (result == 1) {
                         $.confirm({
                             theme: 'modern',
@@ -167,4 +166,34 @@ function reg_user() {
         $("#register-btn").addClass("btn-type-1-error");
     }
 
+}
+
+function loginUser() {
+    let email = $("#login-email").val();
+    let password = $("#login-password").val();
+
+    $.get("../../php/users/login.php/?email="+email+"&password="+password, function (data, status) {
+        if (data != 'false') {
+            let responseData = JSON.parse(data);
+            switch(parseInt(responseData.type)) {
+                case 0:
+                    window.location.replace("/pages/patient.php");
+                    break;
+                case 1:
+                    window.location.replace("/pages/doctor.php");
+                    break;
+                case 2:
+                    window.location.replace("/pages/staff.php");
+                    break;
+                case 3:
+                    window.location.replace("/pages/admin.php");
+                    break;
+                default:
+                    window.location.replace("index.php");
+            }
+        }
+        else {
+            console.log("invalid credentials");
+        }
+    });
 }

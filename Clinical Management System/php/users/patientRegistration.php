@@ -27,7 +27,7 @@ $bloodType = $_POST['bloodType'];
 $weight = $_POST['weight'];
 $height = $_POST['height'];
 
-$password = sha1($_POST['password']);
+$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
 
 
