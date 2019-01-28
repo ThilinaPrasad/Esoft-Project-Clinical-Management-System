@@ -690,63 +690,63 @@ require_once("php/getDoctors.php");
                                                 <div class="form-group">
                                                     <label for="Name" class="col-sm-2 control-label">First Name</label>
                                                     <div class="col-sm-8">
-                                                        <div class="form-line">
-                                                            <input type="text" class="form-control details profile-control"
+                                                        <div class="form-line" id="add-doctor-fname-line">
+                                                            <input type="text" class="form-control"
                                                                    id="firstName"
                                                                    name="lastName" placeholder="First Name">
                                                         </div>
-                                                        <p class="error text-danger invalid-feedback text-left" id="fName-input-error"></p>
+                                                        <label class="error" style='display:none;' id="add-doctor-fname-error">This field is required.</label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="Name" class="col-sm-2 control-label">Last Name</label>
                                                     <div class="col-sm-8">
-                                                        <div class="form-line">
-                                                            <input type="text" class="form-control details profile-control"
+                                                        <div class="form-line" id="add-doctor-lname-line">
+                                                            <input type="text" class="form-control"
                                                                    id="lastName"
                                                                    name="lastName" placeholder="Last Name">
                                                         </div>
-                                                        <p class="error text-danger invalid-feedback text-left" id="lName-input-error"></p>
+                                                        <label class="error" style='display:none;' style='display:none;' id="add-doctor-lname-error">This field is required.</label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="gender" class="col-sm-2 control-label">Gender</label>
                                                     <div class="col-sm-8">
                                                         <div class="form-control">
-                                                            <input name="gender" type="radio" id="male" class="radio-col-teal" />
-                                                            <label for="male" class="active">Male</label>
+                                                            <input name="gender" type="radio" id="male" class="radio-col-teal" checked/>
+                                                            <label for="male">Male</label>
                                                             <input name="gender" type="radio" id="female" class="radio-col-teal" />
                                                             <label for="female">Female</label>
                                                         </div>
-                                                        <p class="error text-danger invalid-feedback text-left" id="gender-input-error"></p>
+                                                        <label class="error" style='display:none;'>This field is required.</label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="bday" class="col-sm-2 control-label">Birth Day</label>
                                                     <div class="col-sm-8">
-                                                        <div class="form-line">
-                                                            <input id="schedule_start_date"
+                                                        <div class="form-line" id="add-doctor-bday-line">
+                                                            <input id="bday"
                                                                    class="datepicker form-control"
                                                                    placeholder="Birth Day">
                                                         </div>
-                                                        <p class="error text-danger invalid-feedback text-left" id="bday-input-error"></p>
+                                                        <label class="error" style='display:none;' id="add-doctor-bday-error">This field is required.</label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="nic" class="col-sm-2 control-label">NIC</label>
                                                     <div class="col-sm-8">
-                                                        <div class="form-line">
-                                                            <input type="text" class="form-control details profile-control"
+                                                        <div class="form-line" id="add-doctor-nic-line">
+                                                            <input type="text" class="form-control"
                                                                    id="nic"
                                                                    name="nic" placeholder="NIC">
                                                         </div>
-                                                        <p class="error text-danger invalid-feedback text-left" id="nic-input-error"></p>
+                                                        <label class="error" style='display:none;' id="add-doctor-nic-error">This field is required.</label>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <div class="col-sm-offset-2 col-sm-6">
-                                                        <a href="#contact" class="btn bg-teal" data-toggle="tab" onclick="validateFirstForm('#contact')">Continue</a>
+                                                        <a href="#contact" class="btn bg-teal" data-toggle="tab" onclick="tabShift('#contact')">Continue</a>
                                                     </div>
                                                 </div>
 
@@ -755,62 +755,67 @@ require_once("php/getDoctors.php");
                                                 <div class="form-group">
                                                     <label for="street" class="col-sm-2 control-label">Street</label>
                                                     <div class="col-sm-8">
-                                                        <div class="form-line">
-                                                            <input type="text" class="form-control details profile-control"
+                                                        <div class="form-line" id="add-doctor-street-line">
+                                                            <input type="text" class="form-control"
                                                                    id="street"
                                                                    name="street" placeholder="Street">
                                                         </div>
+                                                        <label class="error" style='display:none;' id="add-doctor-street-error">This field is required.</label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="ZipCode" class="col-sm-2 control-label">Zip Code</label>
                                                     <div class="col-sm-8">
-                                                        <div class="form-line">
-                                                            <input type="number" class="form-control details profile-control"
+                                                        <div class="form-line" id="add-doctor-zipcode-line">
+                                                            <input type="number" class="form-control"
                                                                    id="ZipCode"
-                                                                   name="zipCode" placeholder="Zip Code"
-                                                                    >
+                                                                   name="zipCode" placeholder="Zip Code">
                                                         </div>
+                                                        <label class="error" style='display:none;' id="add-doctor-zipcode-error">This field is required.</label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="ZipCode" class="col-sm-2 control-label">City</label>
+                                                    <label for="city" class="col-sm-2 control-label">City</label>
                                                     <div class="col-sm-8">
-                                                        <div class="form-line">
-                                                            <input type="number" class="form-control details profile-control"
+                                                        <div class="form-line" id="add-doctor-city-line">
+                                                            <input type="text" class="form-control"
                                                                    id="city"
                                                                    name="city" placeholder="City">
                                                         </div>
+                                                        <label class="error" style='display:none;' id="add-doctor-city-error">This field is required.</label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="ZipCode" class="col-sm-2 control-label">Country</label>
                                                     <div class="col-sm-8">
-                                                        <div class="form-line">
-                                                            <input type="number" class="form-control details profile-control"
+                                                        <div class="form-line" id="add-doctor-country-line">
+                                                            <input type="number" class="form-control"
                                                                    id="country"
                                                                    name="country" placeholder="Country">
                                                         </div>
+                                                        <label class="error" style='display:none;' id="add-doctor-country-error">This field is required.</label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="email" class="col-sm-2 control-label">Email</label>
                                                     <div class="col-sm-8">
-                                                        <div class="form-line">
-                                                            <input type="email" class="form-control details profile-control"
+                                                        <div class="form-line" id="add-doctor-email-line">
+                                                            <input type="email" class="form-control"
                                                                    id="email"
                                                                    name="email" placeholder="Email">
                                                         </div>
+                                                        <label class="error" style='display:none;' id="add-doctor-email-error">This field is required.</label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="tele" class="col-sm-2 control-label">Mobile Number</label>
                                                     <div class="col-sm-8">
-                                                        <div class="form-line">
-                                                            <input type="number" class="form-control details profile-control"
+                                                        <div class="form-line" id="add-doctor-tele-line">
+                                                            <input type="number" class="form-control"
                                                                    id="tele"
                                                                    name="tele" placeholder="Telephone Number">
                                                         </div>
+                                                        <label class="error" style='display:none;' id="add-doctor-tele-error">This field is required.</label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -824,18 +829,31 @@ require_once("php/getDoctors.php");
                                                 <div class="form-group">
                                                     <label for="licence" class="col-sm-4 control-label">Medical Licence NO.</label>
                                                     <div class="col-sm-6">
-                                                        <div class="form-line">
-                                                            <input type="text" class="form-control details profile-control"
+                                                        <div class="form-line" id="add-doctor-medLicenceNo-line">
+                                                            <input type="text" class="form-control"
                                                                    id="licence"
                                                                    name="licence" placeholder="Medical Licence NO.">
                                                         </div>
+                                                        <label class="error" style='display:none;' id="add-doctor-medLicenceNo-error">This field is required.</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="speciality" class="col-sm-4 control-label">Speciality</label>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-line" id="add-doctor-speciality-line">
+                                                            <input type="text" class="form-control"
+                                                                   id="speciality"
+                                                                   name="speciality" placeholder="Speciality">
+                                                        </div>
+                                                        <label class="error" style='display:none;' id="add-doctor-speciality-error">This field is required.</label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-offset-4">
-                                                        <a href="#personal" class="btn bg-teal" data-toggle="tab" onclick="tabShift('#contact')">Back</a>
-                                                        <a href="#personal" class="btn bg-green" data-toggle="tab" onclick="">Confirm</a>
+                                                        <a href="#contact" class="btn bg-teal" data-toggle="tab" onclick="tabShift('#contact')">Back</a>
+                                                        <a href="#" class="btn bg-green waves-effect" data-toggle="tab" onclick="confirmRegister()">Confirm</a>
                                                     </div>
+                                                    <label class="error" style='display:none;'>This field is required.</label>
                                                 </div>
                                             </div>
                                         </div>
