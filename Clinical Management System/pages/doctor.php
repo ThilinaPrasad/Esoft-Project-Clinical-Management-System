@@ -1,5 +1,7 @@
 ﻿<?php
 require_once("php/getPatients.php");
+require_once("php/loginDataFetching.php");
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,6 +21,9 @@ require_once("php/getPatients.php");
 
     <!-- Bootstrap Core Css -->
     <link href="plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <link href="../lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
 
     <!-- Waves Effect Css -->
     <link href="plugins/node-waves/waves.css" rel="stylesheet"/>
@@ -49,6 +54,8 @@ require_once("php/getPatients.php");
     <!-- Bootstrap Select Css -->
     <link href="plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet"/>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+
     <link href="css/theme.css" rel="stylesheet"/>
 
     <!-- Custom Css -->
@@ -56,6 +63,7 @@ require_once("php/getPatients.php");
 </head>
 
 <body class="theme-teal">
+<input id="logged-user-id" value="<?php echo $loginResponse[0]['id'] ?>" hidden>
 <!-- Page Loader -->
 <div class="page-loader-wrapper">
     <div class="loader">
@@ -214,15 +222,15 @@ require_once("php/getPatients.php");
                      data-original-title="View Profile" width="48" height="48" alt="User" onclick="viewProfile();"/>
             </div>
             <div class="info-container">
-                <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
-                <div class="email">john.doe@example.com</div>
+                <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $loginResponse[0]['fname']." ".$loginResponse[0]['sname'] ?></div>
+                <div class="email"><?php echo $loginResponse[0]['email'] ?></div>
                 <div class="btn-group user-helper-dropdown">
                     <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                     <ul class="dropdown-menu pull-right">
                         <li><a href="javascript:void(0);" onclick="viewProfile()"><i class="material-icons">person</i>Profile</a>
                         </li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="javascript:void(0);"><i class="material-icons">input</i>Sign Out</a></li>
+                        <li><a href="javascript:void(0);" onclick="logOut();"><i class="material-icons">input</i>Sign Out</a></li>
                     </ul>
                 </div>
             </div>
@@ -460,6 +468,10 @@ require_once("php/getPatients.php");
                 <div class="body table-responsive">
                     <table class="table text-center">
                         <tbody>
+                        <tr hidden>
+                            <td>Patient id</td>
+                            <td id="view-patient-id"></td>
+                        </tr>
                         <tr>
                             <td>Full name</td>
                             <td id="view-patient-name"></td>
@@ -507,6 +519,7 @@ require_once("php/getPatients.php");
 
             <div class="modal-footer" style="padding-top: 0;">
                 <button type="button" class="btn btn-success waves-effect" onclick="showDiagnosis();">Add diagnosis</button>
+                <button type="button" class="btn btn-primary waves-effect" onclick="showPreviousDiagnisis($('#view-patient-id').text())">Previous diagnosis</button>
                 <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -586,6 +599,24 @@ require_once("php/getPatients.php");
 
             <div class="modal-footer" style="padding-top: 0;">
                 <button type="button" class="btn btn-success waves-effect" >Save Diagnosis</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Previous diagnosis model -->
+<div class="modal fade" id="previousDiagnosisModel" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-teal" style="padding: 15px;">
+                <h2 class="modal-title text-center" id="previousDiagnosisModelLabel">Previous Diagnosis Reports</h2>
+            </div>
+            <div class="modal-body" style="padding-bottom: 0;">
+                Add reports details here
+            </div>
+
+            <div class="modal-footer" style="padding-top: 0;">
                 <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -1136,30 +1167,26 @@ require_once("php/getPatients.php");
                             <img src="./images/doctor_profile_img.png" alt="AdminBSB - Profile Image"/>
                         </div>
                         <div class="content-area">
-                            <h3>Sadeepa Laksri</h3>
-                            <p>Kenway Hospitals</p>
-                            <p>Doctor</p>
+                            <h3><?php echo $loginResponse[0]['fname']." ".$loginResponse[0]['sname'] ?></h3>
+                            <p><?php echo $loginResponse[0]['medLicenceNo']?></p>
+                            <p>Speciality: <?php echo $loginResponse[0]['speciality']?></p>
                         </div>
                     </div>
                     <div class="profile-footer">
                         <ul>
                             <li>
-                                <span>Doctor_NO</span>
-                                <span>1</span>
+                                <span>Doctor Id</span>
+                                <span><?php echo $loginResponse[0]['id'] ?></span>
                             </li>
                             <li>
-                                <span>Following</span>
+                                <span>Patients</span>
                                 <span>1.201</span>
-                            </li>
-                            <li>
-                                <span>Friends</span>
-                                <span>14.252</span>
                             </li>
                         </ul>
                         <button class="btn bg-teal btn-sm waves-effect btn-block" onclick="editDetails()" value="Edit"
                                 id="editBtn">Edit
                         </button>
-                        <button class="btn btn-danger btn-sm waves-effect btn-block">Delete</button>
+                        <button class="btn btn-danger btn-sm waves-effect btn-block" onclick="deleteUser(<?php echo $loginResponse[0]['id'] ?>)">Delete</button>
                     </div>
                 </div>
 
@@ -1179,53 +1206,94 @@ require_once("php/getPatients.php");
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane fade in active" id="profile_settings">
                                     <form class="form-horizontal">
+
                                         <div class="form-group">
-                                            <label for="Name" class="col-sm-2 control-label">Name</label>
-                                            <div class="col-sm-10">
+                                            <label for="profile-fname" class="col-sm-2 control-label">Name</label>
+                                            <div class="col-sm-5">
                                                 <div class="form-line view-mode profile-line">
                                                     <input type="text" class="form-control details profile-control"
-                                                           id="Name"
-                                                           name="Name" placeholder="Name" value="Sadeepa Laksri"
-                                                           disabled>
+                                                           id="profile-fname"
+                                                           placeholder="First name"
+                                                           value="<?php echo $loginResponse[0]['fname']?>" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <div class="form-line view-mode profile-line">
+                                                    <input type="text" class="form-control details profile-control"
+                                                           id="profile-sname"
+                                                           placeholder="Surname"
+                                                           value="<?php echo $loginResponse[0]['sname']?>" disabled>
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="form-group">
-                                            <label for="Address" class="col-sm-2 control-label">Address</label>
-                                            <div class="col-sm-10">
+                                            <label for="profile-street" class="col-sm-2 control-label">Street/ZipCode</label>
+                                            <div class="col-sm-7">
                                                 <div class="form-line view-mode profile-line">
                                                     <input type="text" class="form-control details profile-control"
-                                                           id="Address"
-                                                           name="Address" placeholder="Address"
-                                                           value="Veyangoda, Gampaha." disabled>
+                                                           id="profile-street"
+                                                           placeholder="Street"
+                                                           value="<?php echo $loginResponse[0]['street']?>" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="form-line view-mode profile-line">
+                                                    <input type="text" class="form-control details profile-control"
+                                                           id="profile-zipcode"
+                                                           placeholder="ZipCode"
+                                                           value="<?php echo $loginResponse[0]['zipCode']?>" disabled>
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="form-group">
-                                            <label for="TelNo" class="col-sm-2 control-label">Mobile Number</label>
+                                            <label for="profile-city" class="col-sm-2 control-label">City/Country</label>
+                                            <div class="col-sm-5">
+                                                <div class="form-line view-mode profile-line">
+                                                    <input type="text" class="form-control details profile-control"
+                                                           id="profile-city"
+                                                           placeholder="City"
+                                                           value="<?php echo $loginResponse[0]['city']?>" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <div class="form-line view-mode profile-line">
+                                                    <input type="text" class="form-control details profile-control"
+                                                           id="profile-country"
+                                                           placeholder="Country"
+                                                           value="<?php echo $loginResponse[0]['country']?>" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="profile-telephone" class="col-sm-2 control-label">Mobile Number</label>
                                             <div class="col-sm-10">
                                                 <div class="form-line view-mode profile-line">
                                                     <input type="number" class="form-control details profile-control"
-                                                           id="TelNo"
-                                                           name="TelNo" placeholder="Telephone Number"
-                                                           value="0716220786" disabled>
+                                                           id="profile-telephone"
+                                                           name="profile-telephone" placeholder="Telephone Number"
+                                                           value="<?php echo $loginResponse[0]['telephone']?>" disabled>
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="form-group">
-                                            <label for="Email" class="col-sm-2 control-label">Email</label>
+                                            <label for="profile-email" class="col-sm-2 control-label">Email</label>
                                             <div class="col-sm-10">
-                                                <div class="form-line view-mode profile-line">
-                                                    <input type="email" class="form-control details profile-control"
-                                                           id="Email"
-                                                           name="Email" placeholder="Email" value="example@example.com"
+                                                <div class="form-line view-mode">
+                                                    <input type="email" class="form-control details "
+                                                           id="profile-email"
+                                                           name="profile-email" placeholder="Email" value="<?php echo $loginResponse[0]['email']?>"
                                                            disabled>
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="form-group">
                                             <div class="col-sm-offset-2 col-sm-10">
-                                                <button type="submit" class="btn bg-teal waves-effect" id="submitBtn">
+                                                <button class="btn bg-teal waves-effect" id="submitBtn" onclick="updateUser()">
                                                     Save Changes
                                                 </button>
                                             </div>
@@ -1338,6 +1406,7 @@ require_once("php/getPatients.php");
 <script src="plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 
 <script src="js/pages/ui/tooltips-popovers.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 
 <!-- Doctor js -->
 <script src="js/demo.js"></script>

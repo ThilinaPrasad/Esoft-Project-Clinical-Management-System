@@ -339,7 +339,7 @@
                                   class="fa fa-envelope" aria-hidden="true"></i>
                           </span>
                         </div>
-                        <input type="email" class="form-control input-type-1" placeholder="Email" aria-label="Email"
+                        <input type="email" id="login-email" class="form-control input-type-1" placeholder="Email" aria-label="Email"
                                aria-describedby="cred-email" autofocus>
                     </div>
 
@@ -350,11 +350,11 @@
                                 </span>
                         </div>
                         <input type="password" class="form-control input-type-1" placeholder="Password"
-                               aria-label="Password" aria-describedby="cred-passowrd">
+                               aria-label="Password" aria-describedby="cred-passowrd" id="login-password">
                     </div>
 
                     <center>
-                        <button type="button" class="btn btn-type-1">Login</button>
+                        <button type="button" class="btn btn-type-1" onclick="loginUser()">Login</button>
                     </center>
                 </form>
             </div>
