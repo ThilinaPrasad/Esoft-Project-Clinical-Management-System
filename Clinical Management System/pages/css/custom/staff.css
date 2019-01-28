@@ -1,0 +1,8 @@
+#addDoctor, #viewDoctors{
+    display: none;
+}
+
+.error{
+    display: none;
+    font-size: 10px;
+}

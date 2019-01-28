@@ -1,5 +1,6 @@
 ﻿<?php
 require_once("php/getPatients.php");
+require_once("php/getDoctors.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -8,7 +9,7 @@ require_once("php/getPatients.php");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Kenway | Doctor</title>
+    <title>Kenway | Staff</title>
     <!-- Favicon-->
     <link rel="shortcut icon" href="../favicon.ico">
 
@@ -25,6 +26,9 @@ require_once("php/getPatients.php");
 
     <!-- Doctor Css -->
     <link href="css/custom/doctor.css" rel="stylesheet">
+
+    <!-- Staff Css -->
+    <link href="css/custom/staff.css" rel="stylesheet">
 
     <!-- Animation Css -->
     <link href="plugins/animate-css/animate.css" rel="stylesheet"/>
@@ -49,6 +53,8 @@ require_once("php/getPatients.php");
     <!-- Bootstrap Select Css -->
     <link href="plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet"/>
 
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
     <link href="css/theme.css" rel="stylesheet"/>
 
     <!-- Custom Css -->
@@ -210,7 +216,7 @@ require_once("php/getPatients.php");
         <!-- User Info -->
         <div class="user-info doctor-info">
             <div class="image">
-                <img src="images/doctor_profile_img.png" data-toggle="tooltip" data-placement="right" title=""
+                <img src="images/staff-background.jpg" data-toggle="tooltip" data-placement="right" title=""
                      data-original-title="View Profile" width="48" height="48" alt="User" onclick="viewProfile();"/>
             </div>
             <div class="info-container">
@@ -251,11 +257,6 @@ require_once("php/getPatients.php");
                     </a>
                     <ul class="ml-menu">
                         <li>
-                            <a href="javascript:void(0);" onclick="addSchedules('#schedule')">
-                                <span>Add Schedules</span>
-                            </a>
-                        </li>
-                        <li>
                             <a href="javascript:void(0);" onclick="viewSchedule('#schedule')">
                                 <span>View Schedules</span>
                             </a>
@@ -263,6 +264,24 @@ require_once("php/getPatients.php");
                         <li>
                             <a href="javascript:void(0);" onclick="viewAppointments('#schedule')">
                                 <span>View Appointments</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li id="doctor">
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">perm_identity</i>
+                        <span>Doctors</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li>
+                            <a href="javascript:void(0);" onclick="addDoctors('#doctor')">
+                                <span>Add Doctors</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" onclick="viewDoctors('#doctor')">
+                                <span>View Doctors</span>
                             </a>
                         </li>
                     </ul>
@@ -449,6 +468,7 @@ require_once("php/getPatients.php");
     </div>
 </section>
 
+
 <!-- Patient data model -->
 <div class="modal fade" id="patientDataModel" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -506,87 +526,68 @@ require_once("php/getPatients.php");
             </div>
 
             <div class="modal-footer" style="padding-top: 0;">
-                <button type="button" class="btn btn-success waves-effect" onclick="showDiagnosis();">Add diagnosis</button>
-                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger waves-effect">Delete</button>
+                <button type="button" class="btn bg-teal waves-effect" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Patiaent diagnosis model -->
-<div class="modal fade" id="patientDiagnosisModel" tabindex="-1" role="dialog">
+<!-- Doctor data model -->
+<div class="modal fade" id="doctorDataModel" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-teal" style="padding: 15px;">
-                <h2 class="modal-title text-center" id="patientDiagnosisModelLabel">Create Diagnosis Report</h2>
+                <h2 class="modal-title text-center" id="doctorDataModelLabel">Patient Details</h2>
             </div>
             <div class="modal-body" style="padding-bottom: 0;">
-                <div class="body row table-responsive">
-                        <div class="col-md-12">
-                    <form class="form-horizontal">
-                        <input id="diagnosis-patient-id" type="text"
-                               disabled hidden>
-                        <div class="row clearfix m-b-10">
-                            <div class="col-lg-4 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                <label for="diagnosis-patient-name">Patient name</label>
-                            </div>
-                            <div class="col-lg-8 col-md-10 col-sm-8 col-xs-7">
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input id="diagnosis-patient-name" type="text"
-                                               class="form-control" disabled style="cursor: default;">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row clearfix m-b-10">
-                            <div class="col-lg-4 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                <label for="diagnosis-patient-age">Patient b'day(age)</label>
-                            </div>
-                            <div class="col-lg-8 col-md-10 col-sm-8 col-xs-7">
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input id="diagnosis-patient-age" type="text"
-                                               class="form-control" disabled style="cursor: default;">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row clearfix m-b-10">
-                            <div class="col-lg-4 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                <label for="diagnosis-patient-gender">Patient gender</label>
-                            </div>
-                            <div class="col-lg-8 col-md-10 col-sm-8 col-xs-7">
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input id="diagnosis-patient-gender" type="text"
-                                               class="form-control" disabled style="cursor: default;">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row clearfix m-b-30">
-                            <div class="col-lg-4 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                <label for="diagnosis-patient-name">Diagnosis description</label>
-                            </div>
-                            <div class="col-lg-8 col-md-10 col-sm-8 col-xs-7">
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <textarea rows="8" placeholder="Type diagnosis here..." class="form-control" id="patient-diagnosis-description" autofocus></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </form>
-                        </div>
+                <div class="body table-responsive">
+                    <table class="table text-center">
+                        <tbody>
+                        <tr>
+                            <td>Full name</td>
+                            <td id="view-doctor-name"></td>
+                        </tr>
+                        <tr>
+                            <td>Gender</td>
+                            <td id="view-doctor-gender"></td>
+                        </tr>
+                        <tr>
+                            <td>Birthday(age)</td>
+                            <td id="view-doctor-bday"></td>
+                        </tr>
+                        <tr>
+                            <td>Medical Licence NO</td>
+                            <td id="view-doctor-medLicenceNo"></td>
+                        </tr>
+                        <tr>
+                            <td>Speciality</td>
+                            <td id="view-doctor-speciality"></td>
+                        </tr>
+                        <tr>
+                            <td>NIC/Passport</td>
+                            <td id="view-doctor-nic"></td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td id="view-doctor-email"></td>
+                        </tr>
+                        <tr>
+                            <td>Telephone</td>
+                            <td id="view-doctor-telephone"></td>
+                        </tr>
+                        <tr>
+                            <td>Address</td>
+                            <td id="view-doctor-address"></td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
             <div class="modal-footer" style="padding-top: 0;">
-                <button type="button" class="btn btn-success waves-effect" >Save Diagnosis</button>
-                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger waves-effect">Delete</button>
+                <button type="button" class="btn bg-teal waves-effect" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -645,6 +646,257 @@ require_once("php/getPatients.php");
                                         "<td>" . $temp['telephone'] . "</td>" .
                                         /*"<td>".$temp['email']."</td>".
                                         "<td>".$temp['street'].", ".$temp['city'].", ".$temp['country'].", ".$temp['zipCode'].".</td>".*/
+
+                                        "</tr>";
+                                    echo $temp_html;
+                                }
+                                ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Exportable Table -->
+    </div>
+</section>
+
+<section class="content" id="addDoctor">
+
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-xs-12 col-sm-9">
+                <div class="card">
+                    <div class="header">
+                        <h2 class="font-bold col-teal">
+                            Add Doctor
+                        </h2>
+                    </div>
+                    <div class="body">
+                        <div>
+                            <div class="tab-content">
+                                    <form class="form-horizontal">
+                                        <!-- Nav tabs -->
+                                        <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                                            <li id = "personal_tab_ind" role="presentation" class="active col-md-4 text-center" style="margin-bottom: 0;"><a href="#personal" data-toggle="tab">Personal</a></li>
+                                            <li id = "contact_tab_ind" role="presentation" class="col-md-4 text-center"  style="margin-bottom: 0;"><a href="#contact" data-toggle="tab">Contact</a></li>
+                                            <li id = "professional_tab_ind" role="presentation" class="col-md-4 text-center"  style="margin-bottom: 0;"><a href="#professional" data-toggle="tab">Professional</a></li>
+                                        </ul>
+
+                                        <!-- Tab panes -->
+                                        <div class="tab-content">
+                                            <div role="tabpanel" class="tab-pane fade in active" id="personal">
+                                                <div class="form-group">
+                                                    <label for="Name" class="col-sm-2 control-label">First Name</label>
+                                                    <div class="col-sm-8">
+                                                        <div class="form-line">
+                                                            <input type="text" class="form-control details profile-control"
+                                                                   id="firstName"
+                                                                   name="lastName" placeholder="First Name">
+                                                        </div>
+                                                        <p class="error text-danger invalid-feedback text-left" id="fName-input-error"></p>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="Name" class="col-sm-2 control-label">Last Name</label>
+                                                    <div class="col-sm-8">
+                                                        <div class="form-line">
+                                                            <input type="text" class="form-control details profile-control"
+                                                                   id="lastName"
+                                                                   name="lastName" placeholder="Last Name">
+                                                        </div>
+                                                        <p class="error text-danger invalid-feedback text-left" id="lName-input-error"></p>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="gender" class="col-sm-2 control-label">Gender</label>
+                                                    <div class="col-sm-8">
+                                                        <div class="form-control">
+                                                            <input name="gender" type="radio" id="male" class="radio-col-teal" />
+                                                            <label for="male" class="active">Male</label>
+                                                            <input name="gender" type="radio" id="female" class="radio-col-teal" />
+                                                            <label for="female">Female</label>
+                                                        </div>
+                                                        <p class="error text-danger invalid-feedback text-left" id="gender-input-error"></p>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="bday" class="col-sm-2 control-label">Birth Day</label>
+                                                    <div class="col-sm-8">
+                                                        <div class="form-line">
+                                                            <input id="schedule_start_date"
+                                                                   class="datepicker form-control"
+                                                                   placeholder="Birth Day">
+                                                        </div>
+                                                        <p class="error text-danger invalid-feedback text-left" id="bday-input-error"></p>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="nic" class="col-sm-2 control-label">NIC</label>
+                                                    <div class="col-sm-8">
+                                                        <div class="form-line">
+                                                            <input type="text" class="form-control details profile-control"
+                                                                   id="nic"
+                                                                   name="nic" placeholder="NIC">
+                                                        </div>
+                                                        <p class="error text-danger invalid-feedback text-left" id="nic-input-error"></p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-2 col-sm-6">
+                                                        <a href="#contact" class="btn bg-teal" data-toggle="tab" onclick="tabShift('#contact')">Continue</a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane fade" id="contact">
+                                                <div class="form-group">
+                                                    <label for="street" class="col-sm-2 control-label">Street</label>
+                                                    <div class="col-sm-8">
+                                                        <div class="form-line">
+                                                            <input type="text" class="form-control details profile-control"
+                                                                   id="street"
+                                                                   name="street" placeholder="Street">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="ZipCode" class="col-sm-2 control-label">Zip Code</label>
+                                                    <div class="col-sm-8">
+                                                        <div class="form-line">
+                                                            <input type="number" class="form-control details profile-control"
+                                                                   id="ZipCode"
+                                                                   name="zipCode" placeholder="Zip Code"
+                                                                    >
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="ZipCode" class="col-sm-2 control-label">City</label>
+                                                    <div class="col-sm-8">
+                                                        <div class="form-line">
+                                                            <input type="number" class="form-control details profile-control"
+                                                                   id="city"
+                                                                   name="city" placeholder="City">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="ZipCode" class="col-sm-2 control-label">Country</label>
+                                                    <div class="col-sm-8">
+                                                        <div class="form-line">
+                                                            <input type="number" class="form-control details profile-control"
+                                                                   id="country"
+                                                                   name="country" placeholder="Country">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="email" class="col-sm-2 control-label">Email</label>
+                                                    <div class="col-sm-8">
+                                                        <div class="form-line">
+                                                            <input type="email" class="form-control details profile-control"
+                                                                   id="email"
+                                                                   name="email" placeholder="Email">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="tele" class="col-sm-2 control-label">Mobile Number</label>
+                                                    <div class="col-sm-8">
+                                                        <div class="form-line">
+                                                            <input type="number" class="form-control details profile-control"
+                                                                   id="tele"
+                                                                   name="tele" placeholder="Telephone Number">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-2">
+                                                        <a href="#personal" class="btn bg-teal" data-toggle="tab" onclick="tabShift('#personal')">Back</a>
+                                                        <a href="#professional" class="btn bg-green" data-toggle="tab" onclick="tabShift('#professional')">Continue</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane fade" id="professional">
+                                                <div class="form-group">
+                                                    <label for="licence" class="col-sm-4 control-label">Medical Licence NO.</label>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-line">
+                                                            <input type="text" class="form-control details profile-control"
+                                                                   id="licence"
+                                                                   name="licence" placeholder="Medical Licence NO.">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-4">
+                                                        <a href="#personal" class="btn bg-teal" data-toggle="tab" onclick="tabShift('#contact')">Back</a>
+                                                        <a href="#personal" class="btn bg-green" data-toggle="tab" onclick="">Confirm</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content" id="viewDoctors">
+    <div class="container-fluid">
+        <!-- Exportable Table -->
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h2 class="font-bold col-teal">
+                            View Doctor Details
+                        </h2>
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                <thead class="col-teal">
+                                <tr>
+                                    <th>Full Name</th>
+                                    <th>Gender</th>
+                                    <th>B'day (m/d/y)</th>
+                                    <th>Email</th>
+                                    <th>Medical Licence NO.</th>
+                                    <th>Speciality</th>
+                                    <th>Telephone</th>
+                                </tr>
+                                </thead>
+                                <tfoot class="col-teal">
+                                <tr>
+                                    <th>Full Name</th>
+                                    <th>Gender</th>
+                                    <th>B'day (m/d/y)</th>
+                                    <th>Email</th>
+                                    <th>Medical Licence NO.</th>
+                                    <th>Speciality</th>
+                                    <th>Telephone</th>
+                                </tr>
+                                </tfoot>
+                                <tbody id="viewPatients-table-body">
+                                <?php
+                                foreach ($allDoctors as $temp) {
+                                    $temp_html = "<tr onclick='showDoctor(" . $temp['id'] . ");'>" .
+                                        "<td>" . $temp['fname'] . " " . $temp['sname'] . "</td>" .
+                                        "<td>" . $temp['gender'] . "</td>" .
+                                        "<td>" . $temp['bday'] . "</td>" .
+                                        "<td>" . $temp['email'] . "</td>" .
+                                        "<td>" . $temp['medLicenceNo'] . "</td>" .
+                                        "<td>" . $temp['speciality'] . "</td>" .
+                                        "<td>" . $temp['telephone'] . "</td>" .
 
                                         "</tr>";
                                     echo $temp_html;
@@ -978,90 +1230,6 @@ require_once("php/getPatients.php");
     </div>
 </section>
 
-<section class="content" id="addSchedules">
-    <div class="container-fluid">
-        <div class="row clearfix">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="card" style="min-height: 80vh;">
-                    <div class="header">
-                        <h2 class="font-bold col-teal">
-                            Add Schedules
-                        </h2>
-                    </div>
-                    <div class="body row">
-                        <div class="col-md-10 col-md-offset-1">
-                            <form class="form-horizontal">
-                                <div class="row clearfix">
-                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                        <label for="schedule_start_date">Start date</label>
-                                    </div>
-                                    <div class="col-lg-6 col-md-10 col-sm-8 col-xs-7">
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <input id="schedule_start_date" type="text"
-                                                       class="datepicker form-control"
-                                                       placeholder="Please choose start date...">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row clearfix">
-                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                        <label for="start_time">Start time</label>
-                                    </div>
-                                    <div class="col-lg-6 col-md-10 col-sm-8 col-xs-7">
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <input type="text" id="start_time" class="timepicker form-control"
-                                                       placeholder="Please choose start time...">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row clearfix">
-                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                        <label for="end_date">End date</label>
-                                    </div>
-                                    <div class="col-lg-6 col-md-10 col-sm-8 col-xs-7">
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <input id="end_date" type="text" class="datepicker form-control"
-                                                       placeholder="Please choose end date...">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row clearfix">
-                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                        <label for="end_time">End time</label>
-                                    </div>
-                                    <div class="col-lg-6 col-md-10 col-sm-8 col-xs-7">
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <input type="text" id="end_time" class="timepicker form-control"
-                                                       placeholder="Please choose end time...">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row clearfix">
-                                    <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
-                                        <button type="button" class="btn btn-lg bg-teal m-t-15 waves-effect">Add
-                                            Schedule
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 <section class="content" id="viewSchedule">
     <div class="container-fluid">
         <div class="row clearfix">
@@ -1239,7 +1407,7 @@ require_once("php/getPatients.php");
                                             <div class="col-sm-9">
                                                 <div class="form-line">
                                                     <input type="password" class="form-control" id="OldPassword"
-                                                           name="OldPassword" placeholder="Old Password" required>
+                                                           name="OldPassword" placeholder="Old Password"  >
                                                 </div>
                                             </div>
                                         </div>
@@ -1248,7 +1416,7 @@ require_once("php/getPatients.php");
                                             <div class="col-sm-9">
                                                 <div class="form-line">
                                                     <input type="password" class="form-control" id="NewPassword"
-                                                           name="NewPassword" placeholder="New Password" required>
+                                                           name="NewPassword" placeholder="New Password"  >
                                                 </div>
                                             </div>
                                         </div>
@@ -1259,7 +1427,7 @@ require_once("php/getPatients.php");
                                                 <div class="form-line">
                                                     <input type="password" class="form-control" id="NewPasswordConfirm"
                                                            name="NewPasswordConfirm"
-                                                           placeholder="New Password (Confirm)" required>
+                                                           placeholder="New Password (Confirm)"  >
                                                 </div>
                                             </div>
                                         </div>
@@ -1341,9 +1509,10 @@ require_once("php/getPatients.php");
 
 <!-- Doctor js -->
 <script src="js/demo.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <!-- Demo Js -->
 <script src="js/custom/doctor.js"></script>
+<script src="js/custom/staff.js"></script>
 <script src="js/pages/forms/basic-form-elements.js"></script>
 
 </body>
