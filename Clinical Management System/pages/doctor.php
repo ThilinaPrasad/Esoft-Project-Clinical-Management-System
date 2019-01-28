@@ -585,9 +585,10 @@ require_once("php/loginDataFetching.php");
                             </div>
                             <div class="col-lg-8 col-md-10 col-sm-8 col-xs-7">
                                 <div class="form-group">
-                                    <div class="form-line">
+                                    <div class="form-line" id="patient-diagnosis-description-error-line">
                                         <textarea rows="8" placeholder="Type diagnosis here..." class="form-control" id="patient-diagnosis-description" autofocus></textarea>
                                     </div>
+                                    <label id="patient-diagnosis-description-error" class="error error-msg" style="display: none;" for="patient-diagnosis-description">This field is required.</label>
                                 </div>
                             </div>
                         </div>
@@ -598,7 +599,7 @@ require_once("php/loginDataFetching.php");
             </div>
 
             <div class="modal-footer" style="padding-top: 0;">
-                <button type="button" class="btn btn-success waves-effect" >Save Diagnosis</button>
+                <button type="button" class="btn btn-success waves-effect" onclick="addDiagnosis();">Save Diagnosis</button>
                 <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -612,8 +613,10 @@ require_once("php/loginDataFetching.php");
             <div class="modal-header bg-teal" style="padding: 15px;">
                 <h2 class="modal-title text-center" id="previousDiagnosisModelLabel">Previous Diagnosis Reports</h2>
             </div>
-            <div class="modal-body" style="padding-bottom: 0;">
-                Add reports details here
+            <div class="modal-body" style="padding-bottom: 0;height: 75vh;overflow-y: scroll;">
+                <div class="panel-group" id="pre-diagnosis-data" role="tablist" aria-multiselectable="true">
+
+                </div>
             </div>
 
             <div class="modal-footer" style="padding-top: 0;">
