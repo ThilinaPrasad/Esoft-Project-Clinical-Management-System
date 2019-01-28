@@ -1,5 +1,5 @@
 ﻿<?php
-    require_once ("php/getPatients.php");
+require_once("php/getPatients.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -504,12 +504,94 @@
                     </table>
                 </div>
             </div>
+
             <div class="modal-footer" style="padding-top: 0;">
-                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                <button type="button" class="btn btn-success waves-effect" onclick="showDiagnosis();">Add diagnosis</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Patiaent diagnosis model -->
+<div class="modal fade" id="patientDiagnosisModel" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-teal" style="padding: 15px;">
+                <h2 class="modal-title text-center" id="patientDiagnosisModelLabel">Create Diagnosis Report</h2>
+            </div>
+            <div class="modal-body" style="padding-bottom: 0;">
+                <div class="body row table-responsive">
+                        <div class="col-md-12">
+                    <form class="form-horizontal">
+                        <input id="diagnosis-patient-id" type="text"
+                               disabled hidden>
+                        <div class="row clearfix m-b-10">
+                            <div class="col-lg-4 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                <label for="diagnosis-patient-name">Patient name</label>
+                            </div>
+                            <div class="col-lg-8 col-md-10 col-sm-8 col-xs-7">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input id="diagnosis-patient-name" type="text"
+                                               class="form-control" disabled style="cursor: default;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix m-b-10">
+                            <div class="col-lg-4 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                <label for="diagnosis-patient-age">Patient b'day(age)</label>
+                            </div>
+                            <div class="col-lg-8 col-md-10 col-sm-8 col-xs-7">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input id="diagnosis-patient-age" type="text"
+                                               class="form-control" disabled style="cursor: default;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix m-b-10">
+                            <div class="col-lg-4 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                <label for="diagnosis-patient-gender">Patient gender</label>
+                            </div>
+                            <div class="col-lg-8 col-md-10 col-sm-8 col-xs-7">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input id="diagnosis-patient-gender" type="text"
+                                               class="form-control" disabled style="cursor: default;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row clearfix m-b-30">
+                            <div class="col-lg-4 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                <label for="diagnosis-patient-name">Diagnosis description</label>
+                            </div>
+                            <div class="col-lg-8 col-md-10 col-sm-8 col-xs-7">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <textarea rows="8" placeholder="Type diagnosis here..." class="form-control" id="patient-diagnosis-description" autofocus></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                        </div>
+                </div>
+            </div>
+
+            <div class="modal-footer" style="padding-top: 0;">
+                <button type="button" class="btn btn-success waves-effect" >Save Diagnosis</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <section class="content" id="viewPatients">
     <div class="container-fluid">
         <!-- Exportable Table -->
@@ -535,7 +617,6 @@
                                     <th>Telephone</th>
                                     <!--<th>Email</th>
                                     <th>Address</th>-->
-
                                 </tr>
                                 </thead>
                                 <tfoot class="col-teal">
@@ -549,27 +630,26 @@
                                     <th>Telephone</th>
                                     <!--<th>Email</th>
                                     <th>Address</th>-->
-
                                 </tr>
                                 </tfoot>
                                 <tbody id="viewPatients-table-body">
-                                    <?php
-                                        foreach ($dbResponse as $temp){
-                                            $temp_html = "<tr onclick='showPatient(".$temp['id'].");'>".
-                                                "<td>".$temp['fname']." ".$temp['sname']."</td>".
-                                                "<td>".$temp['gender']."</td>".
-                                                "<td>".$temp['bday']."</td>".
-                                                "<td>".$temp['bloodType']."</td>".
-                                                "<td>".$temp['weight']."</td>".
-                                                "<td>".$temp['height']."</td>".
-                                                "<td>".$temp['telephone']."</td>".
-                                                /*"<td>".$temp['email']."</td>".
-                                                "<td>".$temp['street'].", ".$temp['city'].", ".$temp['country'].", ".$temp['zipCode'].".</td>".*/
+                                <?php
+                                foreach ($dbResponse as $temp) {
+                                    $temp_html = "<tr onclick='showPatient(" . $temp['id'] . ");'>" .
+                                        "<td>" . $temp['fname'] . " " . $temp['sname'] . "</td>" .
+                                        "<td>" . $temp['gender'] . "</td>" .
+                                        "<td>" . $temp['bday'] . "</td>" .
+                                        "<td>" . $temp['bloodType'] . "</td>" .
+                                        "<td>" . $temp['weight'] . "</td>" .
+                                        "<td>" . $temp['height'] . "</td>" .
+                                        "<td>" . $temp['telephone'] . "</td>" .
+                                        /*"<td>".$temp['email']."</td>".
+                                        "<td>".$temp['street'].", ".$temp['city'].", ".$temp['country'].", ".$temp['zipCode'].".</td>".*/
 
-                                                "</tr>";
-                                            echo $temp_html;
-                                        }
-                                    ?>
+                                        "</tr>";
+                                    echo $temp_html;
+                                }
+                                ?>
                                 </tbody>
                             </table>
                         </div>

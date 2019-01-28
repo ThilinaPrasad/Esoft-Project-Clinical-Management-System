@@ -108,6 +108,12 @@ function showPatient(id) {
 
 }
 
+function showDiagnosis() {
+    $('#patientDataModel').modal('hide');
+    $('#patientDiagnosisModel').modal('show');
+
+}
+
 // *************** UI  Scripts ****************
 
 // ************** Data fetching scripts ***************
@@ -144,9 +150,13 @@ function getPatientById(id){
             let splited = temp[0].bday.split("/");
             let yrs = new Date(new Date() - new Date(splited[2],splited[0],splited[1]))/1000/60/60/24/365;
             let age_y = Math.round(yrs);
+            $("#diagnosis-patient-id").val(temp[0].id);
             $("#view-patient-name").text(temp[0].fname+" "+temp[0].sname);
+            $("#diagnosis-patient-name").val(temp[0].fname+" "+temp[0].sname);
             $("#view-patient-gender").text(temp[0].gender);
+            $("#diagnosis-patient-gender").val(temp[0].gender);
             $("#view-patient-bday").text(temp[0].bday +"  ("+age_y+" yrs)");
+            $("#diagnosis-patient-age").val(temp[0].bday +"  ("+age_y+" yrs)");
             $("#view-patient-bloodType").text(temp[0].bloodType);
             $("#view-patient-weight").text(temp[0].weight);
             $("#view-patient-height").text(temp[0].height);
@@ -154,6 +164,7 @@ function getPatientById(id){
             $("#view-patient-email").text(temp[0].email);
             $("#view-patient-telephone").text(temp[0].telephone);
             $("#view-patient-address").text(temp[0].street+", "+temp[0].city+", "+temp[0].country+", "+temp[0].zipCode);
+            $("#patient-diagnosis-description").val('');
         } else {
             console.log("Error");
         }
