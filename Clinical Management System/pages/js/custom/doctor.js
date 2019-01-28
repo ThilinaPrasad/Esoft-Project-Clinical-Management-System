@@ -4,12 +4,7 @@
 function viewHome(id) {
     addRemoveClass(id);
     removeSection();
-    const x = document.getElementById("dashboard");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-    } else {
-        x.style.display = "none";
-    }
+    showSection("dashboard");
 }
 
 function viewPatient(id) {
@@ -62,13 +57,13 @@ function removeSection() {
     const appoinmnet = document.getElementById("viewAppointments");
     const addSchedule = document.getElementById("addSchedules");
 
+
     dashboard.style.display = "none";
     schedule.style.display = "none";
     patients.style.display = "none";
     profile.style.display = "none";
     appoinmnet.style.display = "none";
     addSchedule.style.display = "none";
-
 }
 
 function viewProfile() {

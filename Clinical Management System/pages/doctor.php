@@ -457,7 +457,7 @@ require_once("php/loginDataFetching.php");
     </div>
 </section>
 
-<!-- Patiaent data model -->
+<!-- Patient data model -->
 <div class="modal fade" id="patientDataModel" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
