@@ -237,7 +237,51 @@ function showDiagnosis() {
 function showPreviousDiagnisis(id) {
     $('#patientDataModel').modal('hide');
     $('#previousDiagnosisModel').modal('show');
-    console.log(id);
+
+    $.get("php/getAllDiagnosis.php?patient_id="+id, function (data, status) {
+        if (data != 'false') {
+            data = JSON.parse(data);
+            console.log(data.length);
+            let temp_html = "";
+            for(let i=0;i<data.length;i++){
+                temp_html += '<div class="panel panel-primary">\n' +
+                    '                        <div class="panel-heading" role="tab" id="pre-dignosis-head-'+i+'">\n' +
+                    '                            <h4 class="panel-title">\n' +
+                    '                                <a class="collapsed text-center" role="button" data-toggle="collapse"\n' +
+                    '                                   data-parent="#pre-diagnosis-1" href="#pre-diagnosis-collapse-'+i+'" aria-expanded="false"\n' +
+                    '                                   aria-controls="pre-diagnosis-collapse-'+i+'">\n' +
+                    '                                    '+formatDate(new Date(data[i].date))+'\n' +
+                    '                                </a>\n' +
+                    '                            </h4>\n' +
+                    '                        </div>\n' +
+                    '                        <div id="pre-diagnosis-collapse-'+i+'" class="panel-collapse collapse" role="tabpanel"\n' +
+                    '                             aria-labelledby="pre-diagnosis-'+i+'">\n' +
+                    '                            <div class="panel-body">\n' +
+                    '                                <div class="list-group">\n' +
+                    '                                    <button type="button" class="list-group-item">\n' +
+                    '                                        <span class="pull-left">Date & Time</span> <span class="pull-right">'+formatDate(new Date(data[i].date))+'</span>\n' +
+                    '                                    </button>\n' +
+                    '                                    <button type="button" class="list-group-item">\n' +
+                    '                                        <span class="pull-left">Doctor</span> <span class="pull-right">'+data[i].fname+' '+data[i].sname+'</span>\n' +
+                    '                                    </button>\n' +
+                    '                                    <button type="button" class="list-group-item">\n' +
+                    '                                        <span class="pull-left">Diagnosis description</span> <span class="pull-right">'+data[i].description+'</span>\n' +
+                    '                                    </button>\n' +
+                    '                                </div>\n' +
+                    '\n' +
+                    '                            </div>\n' +
+                    '                        </div>\n' +
+                    '                    </div>\n';
+
+            }
+            $('#pre-diagnosis-data').html(temp_html);
+        }
+        else{
+            console.error('Error!');
+        }
+        });
+
+
 }
 
 // *************** UI  Scripts ****************
@@ -326,4 +370,108 @@ function logOut() {
             }
         }
     });
+}
+
+function addDiagnosis(){
+
+    let patient_id = $("#diagnosis-patient-id").val();
+    let doctor_id = $("#logged-user-id").val();
+    let description = $("#patient-diagnosis-description").val();
+    if(description.trim().length != 0) {
+/*
+    console.log(patient_id+" | "+doctor_id+" | "+description);
+*/
+    $.confirm({
+        theme: 'modern',
+        icon: 'fa fa-question-circle-o',
+        title: 'Confirm!',
+        content: "Do you want to save this diagnosis!",
+        draggable: true,
+        animationBounce: 2.5,
+        type: 'blue',
+        typeAnimated: true,
+        buttons: {
+            Delete: {
+                text: 'Yes',
+                btnClass: 'btn-primary',
+                action: function () {
+
+                        $.post("php/addDiagnosis.php",
+                            {
+                                patient_id: patient_id,
+                                doctor_id: doctor_id,
+                                description: description,
+                            },
+
+                            function (result) {
+                                if (result == 1) {
+                                    $.confirm({
+                                        theme: 'modern',
+                                        icon: 'fa fa-check-circle',
+                                        title: 'Success!',
+                                        content: "Diagnosis saved succssfully!",
+                                        draggable: true,
+                                        animationBounce: 2.5,
+                                        type: 'green',
+                                        typeAnimated: true,
+                                        buttons: {
+                                            Delete: {
+                                                text: 'Okay',
+                                                btnClass: 'btn-success',
+                                                action: function () {
+                                                    $('#patientDiagnosisModel').modal('hide');
+                                                    $("#patient-diagnosis-description-error").hide();
+                                                    $("#patient-diagnosis-description-error-line").removeClass('error');
+                                                }
+                                            },
+
+                                        }
+                                    });
+                                } else {
+                                    $.confirm({
+                                        theme: 'modern',
+                                        icon: 'fa fa-exclamation-circle',
+                                        title: 'Error !',
+                                        content: "Error happened. Please try again!",
+                                        draggable: true,
+                                        animationBounce: 2.5,
+                                        type: 'red',
+                                        typeAnimated: true,
+                                        buttons: {
+                                            Delete: {
+                                                text: 'Try Again',
+                                                btnClass: 'btn-danger',
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+
+                }
+            },
+            later: {
+                text: 'No',
+                action: function () {
+
+                }
+            }
+        }
+    });
+
+    }else{
+        $("#patient-diagnosis-description-error").show();
+        $("#patient-diagnosis-description-error-line").addClass('error');
+    }
+
+}
+
+function formatDate(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return date.getMonth()+1 + "-" + date.getDate() + "-" + date.getFullYear() + " | " + strTime;
 }
