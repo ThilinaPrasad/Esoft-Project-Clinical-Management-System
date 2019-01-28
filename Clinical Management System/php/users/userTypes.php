@@ -1,0 +1,7 @@
+<?php
+$PATIENT_TYPE = 0;
+$DOCTOR_TYPE = 1;
+$STAFF_TYPE = 2;
+$ADMIN_TYPE = 4;
+
+?>

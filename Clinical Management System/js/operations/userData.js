@@ -4,7 +4,7 @@ let isPassValid = false;
 
 // email validations
 function email(email, id) {
-    $.get("../../php/users/getUsers.php?column=email&data=" + email, function (data, status) {
+    $.get("../../php/common/getData.php?table=patient&column=email&value=" + email, function (data, status) {
         if (data != 'false') {
             isEmailValid = false;
             errorToggle(id, "Email already exits!", true);
@@ -56,55 +56,55 @@ function reg_user() {
         $("#register-btn").removeClass("btn-type-1-error");
         $("#register-btn").addClass("btn-type-1");
         $("#register-btn-input-error").hide();
-        $('#register-btn').fadeOut('fast', 'linear', function () {
+        $('#final-button-section').fadeOut('fast', 'linear', function () {
             $('#register-spinner').fadeIn();
         });
 
-        var type =  $("input[name='user-type']:checked").val();
-        var name = $('#name-input').val();
-        var age = $('#age-input').val();
+        var fname = $('#fname-input').val();
+        var sname = $('#sname-input').val();
+        var gender =  $("input[name='gender']:checked").val();
+        var bday = $('#birthday').val();
+        var nic = $('#nic-input').val();
+        var street = $('#street-address-input').val();
+        var zipCode = $('#zipcode-input').val();
+        var city = $('#city-input').val();
+        var country = $('#country-input').val();
         var email = $('#email-input').val();
         var telephone = $('#telephone-input').val();
-        var address = $('#address-input').val();
+
+        var bloodType = $( "#blood-type" ).val();
+        var weight = $( "#weight-input" ).val();
+        var height = $( "#height-input" ).val();
+
         var password = $('#password-input').val();
-        var gender =  $("input[name='gender']:checked").val();
 
+        /*console.log(fname+" | "+sname+" | "+gender+" | "+bday+" | "+nic+" | "+street+" | "+zipCode+" | "+city+" | "+country+" | "+email+" | "+telephone+" | "+
+        bloodType+" | "+weight+" | "+height+" | "+password);*/
 
-        $.post("../../php/users/userRegistration.php",
+        $.post("../../php/users/patientRegistration.php",
             {
-                name: name,
-                age: age,
+                fname: fname,
+                sname: sname,
                 gender: gender,
+                bday:bday,
+                nic: nic,
+                street: street,
+                zipCode: zipCode,
+                city: city,
+                country: country,
                 email: email,
                 telephone: telephone,
-                address: address,
+
+                bloodType: bloodType,
+                weight: weight,
+                height: height,
+
                 password: password,
-                role: type
             },
 
             function (result) {
+            console.log(result);
                 if (result == 1) {
-                    if(type == 2){
-                        $.confirm({
-                            theme: 'modern',
-                            icon: 'fa fa-check-circle',
-                            title: 'Registration done!',
-                            content: "Your data send for system admin of <b>Kenway medicals (pvt) Ltd</b>. <br>After they reviewed your data you can use the system.",
-                            draggable: true,
-                            animationBounce: 2.5,
-                            type: 'green',
-                            typeAnimated: true,
-                            buttons: {
-                                Delete: {
-                                    text: 'Done',
-                                    btnClass: 'btn-success',
-                                    action: function () {
-                                        $('#register-model').modal('hide');
-                                    }
-                                }
-                            }
-                        });
-                    }else{
                         $.confirm({
                             theme: 'modern',
                             icon: 'fa fa-check-circle',
@@ -122,7 +122,7 @@ function reg_user() {
                                         $('#register-model').modal('hide');
                                         $('#login-model').modal('show');
                                         $('#register-spinner').hide();
-                                            $('#register-btn').show();
+                                            $('#final-button-section').show();
                                     }
                                 },
                                 later: {
@@ -130,13 +130,11 @@ function reg_user() {
                                     action: function () {
                                         $('#register-model').modal('hide');
                                         $('#register-spinner').hide();
-                                        $('#register-btn').show();
+                                        $('#final-button-section').show();
                                     }
                                 }
                             }
                         });
-
-                    }
                     // ************************** redirect to dashboard here ***************************
                 } else {
                     $.confirm({
@@ -154,7 +152,7 @@ function reg_user() {
                                 btnClass: 'btn-danger',
                                 action: function () {
                                     $('#register-spinner').fadeOut('fast', 'linear', function () {
-                                        $('#register-btn').fadeIn();
+                                        $('#final-button-section').fadeIn();
                                     });
                                 }
                             }

@@ -4,8 +4,8 @@
     font-weight: bold;
     letter-spacing: 1px;
     display: inline-block;
-    padding: 10px 32px;
-    border-radius: 25px;
+    padding: 8px 22px;
+    border-radius: 24px;
     transition: 0.5s;
     margin: 10px;
     margin-bottom: 3px;
@@ -88,6 +88,20 @@
 
 .border-type-1{
   border: 2px solid #50d8af;
+}
+
+.gj-picker-bootstrap table tr td.selected.gj-cursor-pointer div{
+    background-color: #50d8af;
+}
+
+.gj-datepicker-bootstrap [role=right-icon] button {
+    border: 2px solid #50d8af;
+    color: #50d8af;
+}
+
+.gj-datepicker-bootstrap [role=right-icon] button:hover {
+    border: 2px solid #50d8af;
+    color: #50d8af;
 }
 
 .border-type-1-error{

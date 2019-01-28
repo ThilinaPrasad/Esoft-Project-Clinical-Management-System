@@ -7,18 +7,17 @@
  */
 require_once "../dbOps/crud.php";
 
+$table = $_GET["table"];
 $column = $_GET["column"];
-$data = $_GET["data"];
+$data = $_GET["value"];
 $query = "";
 
-switch ($column) {
-    case 'email':
-        $query = "SELECT * FROM users WHERE  $column  = '$data'";
-        break;
-    default:
-        $query = "SELECT * FROM users";
-        break;
+if ($column!='') {
+    $query = "SELECT * FROM user NATURAL RIGHT OUTER JOIN " . $table . " WHERE  $column  = '$data'";
 }
+ else{
+        $query = "SELECT * FROM user NATURAL RIGHT OUTER JOIN " . $table;
+    }
 
 $crud = new Crud();
 $dbResponse = $crud -> getData($query);
