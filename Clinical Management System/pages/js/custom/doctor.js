@@ -1,8 +1,8 @@
 //************* Formating Date pickers ******************//
-$('#schedule_start_date').bootstrapMaterialDatePicker({ format : 'MM/DD/YYYY' , time: false,minDate : new Date()});
-$('#schedule_start_time').bootstrapMaterialDatePicker({ format : 'HH:mm' , date: false,minDate : new Date()});
-$('#schedule_end_date').bootstrapMaterialDatePicker({ format : 'MM/DD/YYYY' , time: false,minDate : new Date()});
-$('#schedule_end_time').bootstrapMaterialDatePicker({ format : 'HH:mm' , date: false,minDate : new Date()});
+$('#schedule_start_date').bootstrapMaterialDatePicker({format: 'MM/DD/YYYY', time: false, minDate: new Date()});
+$('#schedule_start_time').bootstrapMaterialDatePicker({format: 'HH:mm', date: false, minDate: new Date()});
+$('#schedule_end_date').bootstrapMaterialDatePicker({format: 'MM/DD/YYYY', time: false, minDate: new Date()});
+$('#schedule_end_time').bootstrapMaterialDatePicker({format: 'HH:mm', date: false, minDate: new Date()});
 //************* Formating Date pickers ******************//
 
 <!-- Navigation Functions -->
@@ -157,7 +157,7 @@ function updateUser() {
 
                     }
                 });
-            }else{
+            } else {
                 $.confirm({
                     theme: 'modern',
                     icon: 'fa fa-exclamation-circle',
@@ -179,7 +179,7 @@ function updateUser() {
 
 }
 
-function deleteUser(id){
+function deleteUser(id) {
     $.confirm({
         theme: 'modern',
         icon: 'fa fa-trash-o',
@@ -194,12 +194,12 @@ function deleteUser(id){
                 text: 'Delete',
                 btnClass: 'btn-danger',
                 action: function () {
-                    $.get("php/deleteUser.php?id="+id, function (data, status) {
-                        if(data==1){
+                    $.get("php/deleteUser.php?id=" + id, function (data, status) {
+                        if (data == 1) {
                             $.get("php/logout.php", function (data, status) {
                                 window.location.replace('../index.php');
                             });
-                        }else{
+                        } else {
                             $.confirm({
                                 theme: 'modern',
                                 icon: 'fa fa-exclamation-circle',
@@ -246,34 +246,34 @@ function showPreviousDiagnisis(id) {
     $('#patientDataModel').modal('hide');
     $('#previousDiagnosisModel').modal('show');
 
-    $.get("php/getAllDiagnosis.php?patient_id="+id, function (data, status) {
+    $.get("php/getAllDiagnosis.php?patient_id=" + id, function (data, status) {
         if (data != 'false') {
             data = JSON.parse(data);
             console.log(data.length);
             let temp_html = "";
-            for(let i=0;i<data.length;i++){
+            for (let i = 0; i < data.length; i++) {
                 temp_html += '<div class="panel panel-primary">\n' +
-                    '                        <div class="panel-heading" role="tab" id="pre-dignosis-head-'+i+'">\n' +
+                    '                        <div class="panel-heading" role="tab" id="pre-dignosis-head-' + i + '">\n' +
                     '                            <h4 class="panel-title">\n' +
                     '                                <a class="collapsed text-center" role="button" data-toggle="collapse"\n' +
-                    '                                   data-parent="#pre-diagnosis-1" href="#pre-diagnosis-collapse-'+i+'" aria-expanded="false"\n' +
-                    '                                   aria-controls="pre-diagnosis-collapse-'+i+'">\n' +
-                    '                                    '+formatDate(new Date(data[i].date))+'\n' +
+                    '                                   data-parent="#pre-diagnosis-1" href="#pre-diagnosis-collapse-' + i + '" aria-expanded="false"\n' +
+                    '                                   aria-controls="pre-diagnosis-collapse-' + i + '">\n' +
+                    '                                    ' + formatDate(new Date(data[i].date)) + '\n' +
                     '                                </a>\n' +
                     '                            </h4>\n' +
                     '                        </div>\n' +
-                    '                        <div id="pre-diagnosis-collapse-'+i+'" class="panel-collapse collapse" role="tabpanel"\n' +
-                    '                             aria-labelledby="pre-diagnosis-'+i+'">\n' +
+                    '                        <div id="pre-diagnosis-collapse-' + i + '" class="panel-collapse collapse" role="tabpanel"\n' +
+                    '                             aria-labelledby="pre-diagnosis-' + i + '">\n' +
                     '                            <div class="panel-body">\n' +
                     '                                <div class="list-group">\n' +
                     '                                    <button type="button" class="list-group-item">\n' +
-                    '                                        <span class="pull-left">Date & Time</span> <span class="pull-right">'+formatDate(new Date(data[i].date))+'</span>\n' +
+                    '                                        <span class="pull-left">Date & Time</span> <span class="pull-right">' + formatDate(new Date(data[i].date)) + '</span>\n' +
                     '                                    </button>\n' +
                     '                                    <button type="button" class="list-group-item">\n' +
-                    '                                        <span class="pull-left">Doctor</span> <span class="pull-right">'+data[i].fname+' '+data[i].sname+'</span>\n' +
+                    '                                        <span class="pull-left">Doctor</span> <span class="pull-right">' + data[i].fname + ' ' + data[i].sname + '</span>\n' +
                     '                                    </button>\n' +
                     '                                    <button type="button" class="list-group-item">\n' +
-                    '                                        <span class="pull-left">Diagnosis description</span> <span class="pull-right">'+data[i].description+'</span>\n' +
+                    '                                        <span class="pull-left">Diagnosis description</span> <span class="pull-right">' + data[i].description + '</span>\n' +
                     '                                    </button>\n' +
                     '                                </div>\n' +
                     '\n' +
@@ -283,11 +283,10 @@ function showPreviousDiagnisis(id) {
 
             }
             $('#pre-diagnosis-data').html(temp_html);
-        }
-        else{
+        } else {
             console.error('Error!');
         }
-        });
+    });
 
 
 }
@@ -381,29 +380,29 @@ function logOut() {
     });
 }
 
-function addDiagnosis(){
+function addDiagnosis() {
 
     let patient_id = $("#diagnosis-patient-id").val();
     let doctor_id = $("#logged-user-id").val();
     let description = $("#patient-diagnosis-description").val();
-    if(description.trim().length != 0) {
-/*
-    console.log(patient_id+" | "+doctor_id+" | "+description);
-*/
-    $.confirm({
-        theme: 'modern',
-        icon: 'fa fa-question-circle-o',
-        title: 'Confirm!',
-        content: "Do you want to save this diagnosis!",
-        draggable: true,
-        animationBounce: 2.5,
-        type: 'blue',
-        typeAnimated: true,
-        buttons: {
-            Delete: {
-                text: 'Yes',
-                btnClass: 'btn-primary',
-                action: function () {
+    if (description.trim().length != 0) {
+        /*
+            console.log(patient_id+" | "+doctor_id+" | "+description);
+        */
+        $.confirm({
+            theme: 'modern',
+            icon: 'fa fa-question-circle-o',
+            title: 'Confirm!',
+            content: "Do you want to save this diagnosis!",
+            draggable: true,
+            animationBounce: 2.5,
+            type: 'blue',
+            typeAnimated: true,
+            buttons: {
+                Delete: {
+                    text: 'Yes',
+                    btnClass: 'btn-primary',
+                    action: function () {
 
                         $.post("php/addDiagnosis.php",
                             {
@@ -456,18 +455,18 @@ function addDiagnosis(){
                                 }
                             });
 
-                }
-            },
-            later: {
-                text: 'No',
-                action: function () {
+                    }
+                },
+                later: {
+                    text: 'No',
+                    action: function () {
 
+                    }
                 }
             }
-        }
-    });
+        });
 
-    }else{
+    } else {
         $("#patient-diagnosis-description-error").show();
         $("#patient-diagnosis-description-error-line").addClass('error');
     }
@@ -480,19 +479,19 @@ function formatDate(date) {
     var ampm = hours >= 12 ? 'PM' : 'AM';
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0'+minutes : minutes;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
     var strTime = hours + ':' + minutes + ' ' + ampm;
-    return date.getMonth()+1 + "/" + date.getDate() + "/" + date.getFullYear() + " | " + strTime;
+    return date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear() + " | " + strTime;
 }
 
 function saveSchedule() {
     let start_date = $('#schedule_start_date').val();
-    let start_time =$('#schedule_start_time').val();
-    let end_date =$('#schedule_end_date').val();
-    let end_time =$('#schedule_end_time').val();
+    let start_time = $('#schedule_start_time').val();
+    let end_date = $('#schedule_end_date').val();
+    let end_time = $('#schedule_end_time').val();
     let doctor_id = $('#logged-user-id').val();
 
-    if(start_date.trim().length != 0 && start_time.trim().length != 0 && end_date.trim().length != 0 && end_time.trim().length != 0) {
+    if (start_date.trim().length != 0 && start_time.trim().length != 0 && end_date.trim().length != 0 && end_time.trim().length != 0) {
         /*
             console.log(patient_id+" | "+doctor_id+" | "+description);
         */
@@ -536,12 +535,12 @@ function saveSchedule() {
                                             Delete: {
                                                 text: 'Done',
                                                 btnClass: 'btn-success',
-                                                action: function() {
+                                                action: function () {
                                                     $('#schedule_start_date').val('');
                                                     $('#schedule_start_time').val('');
                                                     $('#schedule_end_date').val('');
                                                     $('#schedule_end_time').val('');
-                                    }
+                                                }
                                             },
 
                                         }
@@ -577,29 +576,42 @@ function saveSchedule() {
             }
         });
 
-    }else{
+    } else {
         $("#add-schedule-error").show();
     }
 }
 
-function getAllSchedules(){
+function getAllSchedules() {
     let id = $("#logged-user-id").val();
     let temp_html = '';
-    $.get("php/getSchedules.php?doctor_id="+id, function (data, status) {
+    $.get("php/getSchedules.php?doctor_id=" + id, function (data, status) {
         if (data != 'false') {
             data = JSON.parse(data);
-            for(let i=0;i<data.length;i++) {
+            let currentTime = new Date();
+            for (let i = 0; i < data.length; i++) {
                 let temp = data[i];
+                let start = new Date(temp.start_date + ' ' + temp.start_time);
+                let end = new Date(temp.end_date + ' ' + temp.end_time);
+                let scheduleStatus = '<span class="label label-info">Upcoming</span>';
+                if (start>currentTime){
+                    scheduleStatus = '<span class="label label-info">Upcoming</span>';
+                }
+                else if(start<=currentTime && end>=currentTime){
+                    scheduleStatus = '<span class="label label-success">Ongoing&nbsp;</span>';
+                }else if(end<currentTime){
+                    scheduleStatus = '<span class="label label-warning">&nbsp;Passed&nbsp;</span>';
+                }
                 temp_html += '<tr class="schedule-row">' +
                     '<td>' + temp.start_date + '</td>' +
                     '<td>' + temp.start_time + '</td>' +
                     '<td>' + temp.end_date + '</td>' +
                     '<td>' + temp.end_time + '</td>' +
+                    '<td >' + scheduleStatus + '</td>' +
                     '<td>' + formatDate(new Date(temp.createdDate)) + '</td>' +
 
                     '</tr>';
             }
-        }else{
+        } else {
             temp_html += '<tr class="schedule-row text-center">No shcedules found</tr>';
         }
         $("#view-schedule-body").html(temp_html);

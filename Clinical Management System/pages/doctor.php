@@ -1132,6 +1132,7 @@ require_once("php/loginDataFetching.php");
                                     <th class="text-center col-teal">Start Time</th>
                                     <th class="text-center col-teal">End Date</th>
                                     <th class="text-center col-teal">End Time</th>
+                                    <th class="text-center col-teal">Status</th>
                                     <th class="text-center col-teal">Created Date | Time</th>
 
                                 </tr>
