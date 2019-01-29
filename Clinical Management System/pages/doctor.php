@@ -222,7 +222,8 @@ require_once("php/loginDataFetching.php");
                      data-original-title="View Profile" width="48" height="48" alt="User" onclick="viewProfile();"/>
             </div>
             <div class="info-container">
-                <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $loginResponse[0]['fname']." ".$loginResponse[0]['sname'] ?></div>
+                <div class="name" data-toggle="dropdown" aria-haspopup="true"
+                     aria-expanded="false"><?php echo $loginResponse[0]['fname'] . " " . $loginResponse[0]['sname'] ?></div>
                 <div class="email"><?php echo $loginResponse[0]['email'] ?></div>
                 <div class="btn-group user-helper-dropdown">
                     <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
@@ -230,7 +231,8 @@ require_once("php/loginDataFetching.php");
                         <li><a href="javascript:void(0);" onclick="viewProfile()"><i class="material-icons">person</i>Profile</a>
                         </li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="javascript:void(0);" onclick="logOut();"><i class="material-icons">input</i>Sign Out</a></li>
+                        <li><a href="javascript:void(0);" onclick="logOut();"><i class="material-icons">input</i>Sign
+                                Out</a></li>
                     </ul>
                 </div>
             </div>
@@ -518,8 +520,11 @@ require_once("php/loginDataFetching.php");
             </div>
 
             <div class="modal-footer" style="padding-top: 0;">
-                <button type="button" class="btn btn-success waves-effect" onclick="showDiagnosis();">Add diagnosis</button>
-                <button type="button" class="btn btn-primary waves-effect" onclick="showPreviousDiagnisis($('#view-patient-id').text())">Previous diagnosis</button>
+                <button type="button" class="btn btn-success waves-effect" onclick="showDiagnosis();">Add diagnosis
+                </button>
+                <button type="button" class="btn btn-primary waves-effect"
+                        onclick="showPreviousDiagnisis($('#view-patient-id').text())">Previous diagnosis
+                </button>
                 <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -535,71 +540,75 @@ require_once("php/loginDataFetching.php");
             </div>
             <div class="modal-body" style="padding-bottom: 0;">
                 <div class="body row table-responsive">
-                        <div class="col-md-12">
-                    <form class="form-horizontal">
-                        <input id="diagnosis-patient-id" type="text"
-                               disabled hidden>
-                        <div class="row clearfix m-b-10">
-                            <div class="col-lg-4 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                <label for="diagnosis-patient-name">Patient name</label>
-                            </div>
-                            <div class="col-lg-8 col-md-10 col-sm-8 col-xs-7">
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input id="diagnosis-patient-name" type="text"
-                                               class="form-control" disabled style="cursor: default;">
+                    <div class="col-md-12">
+                        <form class="form-horizontal">
+                            <input id="diagnosis-patient-id" type="text"
+                                   disabled hidden>
+                            <div class="row clearfix m-b-10">
+                                <div class="col-lg-4 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                    <label for="diagnosis-patient-name">Patient name</label>
+                                </div>
+                                <div class="col-lg-8 col-md-10 col-sm-8 col-xs-7">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input id="diagnosis-patient-name" type="text"
+                                                   class="form-control" disabled style="cursor: default;">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row clearfix m-b-10">
-                            <div class="col-lg-4 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                <label for="diagnosis-patient-age">Patient b'day(age)</label>
-                            </div>
-                            <div class="col-lg-8 col-md-10 col-sm-8 col-xs-7">
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input id="diagnosis-patient-age" type="text"
-                                               class="form-control" disabled style="cursor: default;">
+                            <div class="row clearfix m-b-10">
+                                <div class="col-lg-4 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                    <label for="diagnosis-patient-age">Patient b'day(age)</label>
+                                </div>
+                                <div class="col-lg-8 col-md-10 col-sm-8 col-xs-7">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input id="diagnosis-patient-age" type="text"
+                                                   class="form-control" disabled style="cursor: default;">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row clearfix m-b-10">
-                            <div class="col-lg-4 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                <label for="diagnosis-patient-gender">Patient gender</label>
-                            </div>
-                            <div class="col-lg-8 col-md-10 col-sm-8 col-xs-7">
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input id="diagnosis-patient-gender" type="text"
-                                               class="form-control" disabled style="cursor: default;">
+                            <div class="row clearfix m-b-10">
+                                <div class="col-lg-4 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                    <label for="diagnosis-patient-gender">Patient gender</label>
+                                </div>
+                                <div class="col-lg-8 col-md-10 col-sm-8 col-xs-7">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input id="diagnosis-patient-gender" type="text"
+                                                   class="form-control" disabled style="cursor: default;">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="row clearfix m-b-30">
-                            <div class="col-lg-4 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                <label for="diagnosis-patient-name">Diagnosis description</label>
-                            </div>
-                            <div class="col-lg-8 col-md-10 col-sm-8 col-xs-7">
-                                <div class="form-group">
-                                    <div class="form-line" id="patient-diagnosis-description-error-line">
-                                        <textarea rows="8" placeholder="Type diagnosis here..." class="form-control" id="patient-diagnosis-description" autofocus></textarea>
+                            <div class="row clearfix m-b-30">
+                                <div class="col-lg-4 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                    <label for="diagnosis-patient-name">Diagnosis description</label>
+                                </div>
+                                <div class="col-lg-8 col-md-10 col-sm-8 col-xs-7">
+                                    <div class="form-group">
+                                        <div class="form-line" id="patient-diagnosis-description-error-line">
+                                            <textarea rows="8" placeholder="Type diagnosis here..." class="form-control"
+                                                      id="patient-diagnosis-description" autofocus></textarea>
+                                        </div>
+                                        <label id="patient-diagnosis-description-error" class="error error-msg"
+                                               style="display: none;" for="patient-diagnosis-description">This field is
+                                            required.</label>
                                     </div>
-                                    <label id="patient-diagnosis-description-error" class="error error-msg" style="display: none;" for="patient-diagnosis-description">This field is required.</label>
                                 </div>
                             </div>
-                        </div>
 
-                    </form>
-                        </div>
+                        </form>
+                    </div>
                 </div>
             </div>
 
             <div class="modal-footer" style="padding-top: 0;">
-                <button type="button" class="btn btn-success waves-effect" onclick="addDiagnosis();">Save Diagnosis</button>
+                <button type="button" class="btn btn-success waves-effect" onclick="addDiagnosis();">Save Diagnosis
+                </button>
                 <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -1046,7 +1055,8 @@ require_once("php/loginDataFetching.php");
                                     <div class="col-lg-6 col-md-10 col-sm-8 col-xs-7">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="text" id="schedule_start_time" class="timepicker form-control"
+                                                <input type="text" id="schedule_start_time"
+                                                       class="timepicker form-control"
                                                        placeholder="Please choose start time...">
                                             </div>
                                         </div>
@@ -1060,7 +1070,8 @@ require_once("php/loginDataFetching.php");
                                     <div class="col-lg-6 col-md-10 col-sm-8 col-xs-7">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input id="schedule_end_date" type="text" class="datepicker form-control"
+                                                <input id="schedule_end_date" type="text"
+                                                       class="datepicker form-control"
                                                        placeholder="Please choose end date...">
                                             </div>
                                         </div>
@@ -1073,7 +1084,8 @@ require_once("php/loginDataFetching.php");
                                     <div class="col-lg-6 col-md-10 col-sm-8 col-xs-7">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="text" id="schedule_end_time" class="timepicker form-control"
+                                                <input type="text" id="schedule_end_time"
+                                                       class="timepicker form-control"
                                                        placeholder="Please choose end time...">
                                             </div>
                                         </div>
@@ -1082,11 +1094,15 @@ require_once("php/loginDataFetching.php");
                                 <hr>
                                 <div class="row clearfix">
                                     <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
-                                        <button type="button" class="btn btn-lg bg-teal m-t-15 waves-effect" onclick="saveSchedule();">Add
+                                        <button type="button" class="btn btn-lg bg-teal m-t-15 waves-effect"
+                                                onclick="saveSchedule();">Add
                                             Schedule
                                         </button>
                                     </div>
-                                    <label id="add-schedule-error" class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5 error error-msg text-danger" style="display: none;font-size: 12px;font-weight: normal;" >Please fill all fields before submitting!</label>
+                                    <label id="add-schedule-error"
+                                           class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5 error error-msg text-danger"
+                                           style="display: none;font-size: 12px;font-weight: normal;">Please fill all
+                                        fields before submitting!</label>
                                 </div>
                             </form>
                         </div>
@@ -1116,39 +1132,12 @@ require_once("php/loginDataFetching.php");
                                     <th class="text-center col-teal">Start Time</th>
                                     <th class="text-center col-teal">End Date</th>
                                     <th class="text-center col-teal">End Time</th>
+                                    <th class="text-center col-teal">Created Date | Time</th>
+
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr class="schedule-row">
-                                    <td>01/12/2018</td>
-                                    <td>25:53</td>
-                                    <td>01/12/2018</td>
-                                    <td>25:53</td>
-                                </tr>
-                                <tr>
-                                    <td>01/12/2018</td>
-                                    <td>25:53</td>
-                                    <td>01/12/2018</td>
-                                    <td>25:53</td>
-                                </tr>
-                                <tr>
-                                    <td>01/12/2018</td>
-                                    <td>25:53</td>
-                                    <td>01/12/2018</td>
-                                    <td>25:53</td>
-                                </tr>
-                                <tr>
-                                    <td>01/12/2018</td>
-                                    <td>25:53</td>
-                                    <td>01/12/2018</td>
-                                    <td>25:53</td>
-                                </tr>
-                                <tr>
-                                    <td>01/12/2018</td>
-                                    <td>25:53</td>
-                                    <td>01/12/2018</td>
-                                    <td>25:53</td>
-                                </tr>
+                                <tbody id="view-schedule-body">
+
                                 </tbody>
                             </table>
                         </div>
@@ -1171,9 +1160,9 @@ require_once("php/loginDataFetching.php");
                             <img src="./images/doctor_profile_img.png" alt="AdminBSB - Profile Image"/>
                         </div>
                         <div class="content-area">
-                            <h3><?php echo $loginResponse[0]['fname']." ".$loginResponse[0]['sname'] ?></h3>
-                            <p><?php echo $loginResponse[0]['medLicenceNo']?></p>
-                            <p>Speciality: <?php echo $loginResponse[0]['speciality']?></p>
+                            <h3><?php echo $loginResponse[0]['fname'] . " " . $loginResponse[0]['sname'] ?></h3>
+                            <p><?php echo $loginResponse[0]['medLicenceNo'] ?></p>
+                            <p>Speciality: <?php echo $loginResponse[0]['speciality'] ?></p>
                         </div>
                     </div>
                     <div class="profile-footer">
@@ -1190,7 +1179,9 @@ require_once("php/loginDataFetching.php");
                         <button class="btn bg-teal btn-sm waves-effect btn-block" onclick="editDetails()" value="Edit"
                                 id="editBtn">Edit
                         </button>
-                        <button class="btn btn-danger btn-sm waves-effect btn-block" onclick="deleteUser(<?php echo $loginResponse[0]['id'] ?>)">Delete</button>
+                        <button class="btn btn-danger btn-sm waves-effect btn-block"
+                                onclick="deleteUser(<?php echo $loginResponse[0]['id'] ?>)">Delete
+                        </button>
                     </div>
                 </div>
 
@@ -1218,7 +1209,7 @@ require_once("php/loginDataFetching.php");
                                                     <input type="text" class="form-control details profile-control"
                                                            id="profile-fname"
                                                            placeholder="First name"
-                                                           value="<?php echo $loginResponse[0]['fname']?>" disabled>
+                                                           value="<?php echo $loginResponse[0]['fname'] ?>" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-sm-5">
@@ -1226,19 +1217,20 @@ require_once("php/loginDataFetching.php");
                                                     <input type="text" class="form-control details profile-control"
                                                            id="profile-sname"
                                                            placeholder="Surname"
-                                                           value="<?php echo $loginResponse[0]['sname']?>" disabled>
+                                                           value="<?php echo $loginResponse[0]['sname'] ?>" disabled>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="profile-street" class="col-sm-2 control-label">Street/ZipCode</label>
+                                            <label for="profile-street"
+                                                   class="col-sm-2 control-label">Street/ZipCode</label>
                                             <div class="col-sm-7">
                                                 <div class="form-line view-mode profile-line">
                                                     <input type="text" class="form-control details profile-control"
                                                            id="profile-street"
                                                            placeholder="Street"
-                                                           value="<?php echo $loginResponse[0]['street']?>" disabled>
+                                                           value="<?php echo $loginResponse[0]['street'] ?>" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-sm-3">
@@ -1246,19 +1238,20 @@ require_once("php/loginDataFetching.php");
                                                     <input type="text" class="form-control details profile-control"
                                                            id="profile-zipcode"
                                                            placeholder="ZipCode"
-                                                           value="<?php echo $loginResponse[0]['zipCode']?>" disabled>
+                                                           value="<?php echo $loginResponse[0]['zipCode'] ?>" disabled>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="profile-city" class="col-sm-2 control-label">City/Country</label>
+                                            <label for="profile-city"
+                                                   class="col-sm-2 control-label">City/Country</label>
                                             <div class="col-sm-5">
                                                 <div class="form-line view-mode profile-line">
                                                     <input type="text" class="form-control details profile-control"
                                                            id="profile-city"
                                                            placeholder="City"
-                                                           value="<?php echo $loginResponse[0]['city']?>" disabled>
+                                                           value="<?php echo $loginResponse[0]['city'] ?>" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-sm-5">
@@ -1266,19 +1259,21 @@ require_once("php/loginDataFetching.php");
                                                     <input type="text" class="form-control details profile-control"
                                                            id="profile-country"
                                                            placeholder="Country"
-                                                           value="<?php echo $loginResponse[0]['country']?>" disabled>
+                                                           value="<?php echo $loginResponse[0]['country'] ?>" disabled>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="profile-telephone" class="col-sm-2 control-label">Mobile Number</label>
+                                            <label for="profile-telephone" class="col-sm-2 control-label">Mobile
+                                                Number</label>
                                             <div class="col-sm-10">
                                                 <div class="form-line view-mode profile-line">
                                                     <input type="tel" class="form-control details profile-control"
                                                            id="profile-telephone"
                                                            name="profile-telephone" placeholder="Telephone Number"
-                                                           value="<?php echo $loginResponse[0]['telephone']?>" disabled>
+                                                           value="<?php echo $loginResponse[0]['telephone'] ?>"
+                                                           disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -1289,7 +1284,8 @@ require_once("php/loginDataFetching.php");
                                                 <div class="form-line view-mode">
                                                     <input type="email" class="form-control details "
                                                            id="profile-email"
-                                                           name="profile-email" placeholder="Email" value="<?php echo $loginResponse[0]['email']?>"
+                                                           name="profile-email" placeholder="Email"
+                                                           value="<?php echo $loginResponse[0]['email'] ?>"
                                                            disabled>
                                                 </div>
                                             </div>
@@ -1297,7 +1293,8 @@ require_once("php/loginDataFetching.php");
 
                                         <div class="form-group">
                                             <div class="col-sm-offset-2 col-sm-10">
-                                                <button class="btn bg-teal waves-effect" id="submitBtn" onclick="updateUser()">
+                                                <button class="btn bg-teal waves-effect" id="submitBtn"
+                                                        onclick="updateUser()">
                                                     Save Changes
                                                 </button>
                                             </div>

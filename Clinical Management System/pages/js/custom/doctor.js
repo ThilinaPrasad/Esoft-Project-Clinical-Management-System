@@ -25,6 +25,7 @@ function viewSchedule(id) {
     addRemoveClass(id);
     removeSection();
     showSection("viewSchedule");
+    getAllSchedules();
 }
 
 function viewAppointments(id) {
@@ -481,7 +482,7 @@ function formatDate(date) {
     hours = hours ? hours : 12; // the hour '0' should be '12'
     minutes = minutes < 10 ? '0'+minutes : minutes;
     var strTime = hours + ':' + minutes + ' ' + ampm;
-    return date.getMonth()+1 + "-" + date.getDate() + "-" + date.getFullYear() + " | " + strTime;
+    return date.getMonth()+1 + "/" + date.getDate() + "/" + date.getFullYear() + " | " + strTime;
 }
 
 function saveSchedule() {
@@ -579,4 +580,28 @@ function saveSchedule() {
     }else{
         $("#add-schedule-error").show();
     }
+}
+
+function getAllSchedules(){
+    let id = $("#logged-user-id").val();
+    let temp_html = '';
+    $.get("php/getSchedules.php?doctor_id="+id, function (data, status) {
+        if (data != 'false') {
+            data = JSON.parse(data);
+            for(let i=0;i<data.length;i++) {
+                let temp = data[i];
+                temp_html += '<tr class="schedule-row">' +
+                    '<td>' + temp.start_date + '</td>' +
+                    '<td>' + temp.start_time + '</td>' +
+                    '<td>' + temp.end_date + '</td>' +
+                    '<td>' + temp.end_time + '</td>' +
+                    '<td>' + formatDate(new Date(temp.createdDate)) + '</td>' +
+
+                    '</tr>';
+            }
+        }else{
+            temp_html += '<tr class="schedule-row text-center">No shcedules found</tr>';
+        }
+        $("#view-schedule-body").html(temp_html);
+    });
 }
