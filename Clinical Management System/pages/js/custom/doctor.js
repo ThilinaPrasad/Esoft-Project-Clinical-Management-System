@@ -1,3 +1,10 @@
+//************* Formating Date pickers ******************//
+$('#schedule_start_date').bootstrapMaterialDatePicker({ format : 'MM/DD/YYYY' , time: false,minDate : new Date()});
+$('#schedule_start_time').bootstrapMaterialDatePicker({ format : 'HH:mm' , date: false,minDate : new Date()});
+$('#schedule_end_date').bootstrapMaterialDatePicker({ format : 'MM/DD/YYYY' , time: false,minDate : new Date()});
+$('#schedule_end_time').bootstrapMaterialDatePicker({ format : 'HH:mm' , date: false,minDate : new Date()});
+//************* Formating Date pickers ******************//
+
 <!-- Navigation Functions -->
 
 // *************** UI  Scripts ****************
@@ -475,4 +482,101 @@ function formatDate(date) {
     minutes = minutes < 10 ? '0'+minutes : minutes;
     var strTime = hours + ':' + minutes + ' ' + ampm;
     return date.getMonth()+1 + "-" + date.getDate() + "-" + date.getFullYear() + " | " + strTime;
+}
+
+function saveSchedule() {
+    let start_date = $('#schedule_start_date').val();
+    let start_time =$('#schedule_start_time').val();
+    let end_date =$('#schedule_end_date').val();
+    let end_time =$('#schedule_end_time').val();
+    let doctor_id = $('#logged-user-id').val();
+
+    if(start_date.trim().length != 0 && start_time.trim().length != 0 && end_date.trim().length != 0 && end_time.trim().length != 0) {
+        /*
+            console.log(patient_id+" | "+doctor_id+" | "+description);
+        */
+        $.confirm({
+            theme: 'modern',
+            icon: 'fa fa-question-circle-o',
+            title: 'Confirm!',
+            content: "Do you want to save this schedule!",
+            draggable: true,
+            animationBounce: 2.5,
+            type: 'blue',
+            typeAnimated: true,
+            buttons: {
+                Delete: {
+                    text: 'Yes',
+                    btnClass: 'btn-primary',
+                    action: function () {
+
+                        $.post("php/addSchedule.php",
+                            {
+                                doctor_id: doctor_id,
+                                start_date: start_date,
+                                start_time: start_time,
+                                end_date: end_date,
+                                end_time: end_time,
+
+                            },
+
+                            function (result) {
+                                if (result == 1) {
+                                    $.confirm({
+                                        theme: 'modern',
+                                        icon: 'fa fa-check-circle',
+                                        title: 'Success!',
+                                        content: "Schedule saved succssfully!",
+                                        draggable: true,
+                                        animationBounce: 2.5,
+                                        type: 'green',
+                                        typeAnimated: true,
+                                        buttons: {
+                                            Delete: {
+                                                text: 'Done',
+                                                btnClass: 'btn-success',
+                                                action: function() {
+                                                    $('#schedule_start_date').val('');
+                                                    $('#schedule_start_time').val('');
+                                                    $('#schedule_end_date').val('');
+                                                    $('#schedule_end_time').val('');
+                                    }
+                                            },
+
+                                        }
+                                    });
+                                } else {
+                                    $.confirm({
+                                        theme: 'modern',
+                                        icon: 'fa fa-exclamation-circle',
+                                        title: 'Error !',
+                                        content: "Error happened. Please try again!",
+                                        draggable: true,
+                                        animationBounce: 2.5,
+                                        type: 'red',
+                                        typeAnimated: true,
+                                        buttons: {
+                                            Delete: {
+                                                text: 'Try Again',
+                                                btnClass: 'btn-danger',
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+
+                    }
+                },
+                later: {
+                    text: 'No',
+                    action: function () {
+
+                    }
+                }
+            }
+        });
+
+    }else{
+        $("#add-schedule-error").show();
+    }
 }

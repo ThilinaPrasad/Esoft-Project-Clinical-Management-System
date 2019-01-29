@@ -1041,12 +1041,12 @@ require_once("php/loginDataFetching.php");
                                 </div>
                                 <div class="row clearfix">
                                     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                        <label for="start_time">Start time</label>
+                                        <label for="schedule_start_time">Start time</label>
                                     </div>
                                     <div class="col-lg-6 col-md-10 col-sm-8 col-xs-7">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="text" id="start_time" class="timepicker form-control"
+                                                <input type="text" id="schedule_start_time" class="timepicker form-control"
                                                        placeholder="Please choose start time...">
                                             </div>
                                         </div>
@@ -1055,12 +1055,12 @@ require_once("php/loginDataFetching.php");
                                 <hr>
                                 <div class="row clearfix">
                                     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                        <label for="end_date">End date</label>
+                                        <label for="schedule_end_date">End date</label>
                                     </div>
                                     <div class="col-lg-6 col-md-10 col-sm-8 col-xs-7">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input id="end_date" type="text" class="datepicker form-control"
+                                                <input id="schedule_end_date" type="text" class="datepicker form-control"
                                                        placeholder="Please choose end date...">
                                             </div>
                                         </div>
@@ -1068,12 +1068,12 @@ require_once("php/loginDataFetching.php");
                                 </div>
                                 <div class="row clearfix">
                                     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                        <label for="end_time">End time</label>
+                                        <label for="schedule_end_time">End time</label>
                                     </div>
                                     <div class="col-lg-6 col-md-10 col-sm-8 col-xs-7">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="text" id="end_time" class="timepicker form-control"
+                                                <input type="text" id="schedule_end_time" class="timepicker form-control"
                                                        placeholder="Please choose end time...">
                                             </div>
                                         </div>
@@ -1082,10 +1082,11 @@ require_once("php/loginDataFetching.php");
                                 <hr>
                                 <div class="row clearfix">
                                     <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
-                                        <button type="button" class="btn btn-lg bg-teal m-t-15 waves-effect">Add
+                                        <button type="button" class="btn btn-lg bg-teal m-t-15 waves-effect" onclick="saveSchedule();">Add
                                             Schedule
                                         </button>
                                     </div>
+                                    <label id="add-schedule-error" class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5 error error-msg text-danger" style="display: none;font-size: 12px;font-weight: normal;" >Please fill all fields before submitting!</label>
                                 </div>
                             </form>
                         </div>
