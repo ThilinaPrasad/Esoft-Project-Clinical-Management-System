@@ -336,6 +336,7 @@ function getPatientById(id) {
             $("#view-patient-telephone").text(temp[0].telephone);
             $("#view-patient-address").text(temp[0].street + ", " + temp[0].city + ", " + temp[0].country + ", " + temp[0].zipCode);
             $("#patient-diagnosis-description").val('');
+            $("#view-patient-id").text(id);  //get patient id from modal to delete the record
         } else {
             console.log("Error");
         }

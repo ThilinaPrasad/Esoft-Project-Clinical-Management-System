@@ -11,13 +11,19 @@ $table = $_GET["table"];
 $column = $_GET["column"];
 $data = $_GET["value"];
 $query = "";
-
-if ($column!='') {
-    $query = "SELECT * FROM user NATURAL RIGHT OUTER JOIN " . $table . " WHERE  $column  = '$data'";
-}
- else{
+if($table!='user') {
+    if ($column != '') {
+        $query = "SELECT * FROM user NATURAL RIGHT OUTER JOIN " . $table . " WHERE  $column  = '$data'";
+    } else {
         $query = "SELECT * FROM user NATURAL RIGHT OUTER JOIN " . $table;
     }
+}else{
+    if ($column != '') {
+        $query = "SELECT * FROM user WHERE  $column  = '$data'";
+    } else {
+        $query = "SELECT * FROM user ";
+    }
+}
 
 $crud = new Crud();
 $dbResponse = $crud -> getData($query);

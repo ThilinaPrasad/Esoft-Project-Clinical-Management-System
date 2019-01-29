@@ -1274,7 +1274,7 @@ require_once("php/loginDataFetching.php");
                                             <label for="profile-telephone" class="col-sm-2 control-label">Mobile Number</label>
                                             <div class="col-sm-10">
                                                 <div class="form-line view-mode profile-line">
-                                                    <input type="number" class="form-control details profile-control"
+                                                    <input type="tel" class="form-control details profile-control"
                                                            id="profile-telephone"
                                                            name="profile-telephone" placeholder="Telephone Number"
                                                            value="<?php echo $loginResponse[0]['telephone']?>" disabled>
