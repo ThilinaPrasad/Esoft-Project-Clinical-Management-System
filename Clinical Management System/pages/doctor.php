@@ -270,7 +270,7 @@ require_once("php/loginDataFetching.php");
                                 <span>View Schedules</span>
                             </a>
                         </li>
-                    
+
                     </ul>
                 </li>
 
@@ -819,33 +819,7 @@ require_once("php/loginDataFetching.php");
                 <div class="modal-body" style="padding-bottom: 0;min-height: 70vh;">
                     <div class="body table-responsive">
                         <div class="panel-group" id="schedule-appointments" role="tablist" aria-multiselectable="true">
-                            <!--panel-->
-                            <div class="panel panel-success">
-                                <div class="panel-heading" role="tab" id="appointment-1">
-                                    <h4 class="panel-title">
-                                        <a class="collapsed text-center" role="button" data-toggle="collapse"
-                                           data-parent="#appointment-1" href="#appointment-1-collapse" aria-expanded="false"
-                                           aria-controls="twh_collapse_1">
-                                            11.30 A.M | 25 January 2019
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="appointment-1-collapse" class="panel-collapse collapse" role="tabpanel"
-                                     aria-labelledby="appointment-1">
-                                    <div class="panel-body">
-                                        <div class="list-group">
-                                            <button type="button" class="list-group-item">
-                                                <span class="pull-left">Appointment No</span> <span class="pull-right">01</span>
-                                            </button>
-                                            <button type="button" class="list-group-item">
-                                                <span class="pull-left">Patient</span> <span class="pull-right">D.G. Sumanapala</span>
-                                            </button>
-                                        </div>
 
-                                    </div>
-                                </div>
-                            </div>
-                            <!--panel-->
                         </div>
                     </div>
                 </div>
@@ -876,9 +850,8 @@ require_once("php/loginDataFetching.php");
                                     <th class="text-center col-teal">End Date</th>
                                     <th class="text-center col-teal">End Time</th>
                                     <th class="text-center col-teal">Status</th>
-                                    <th class="text-center col-teal">Appointments<br><span class="label bg-deep-orange">Booked</span><span class="label bg-light-green">Remaining</span></th>
+                                    <th class="text-center col-teal">Appointments Allowed</span></th>
                                     <th class="text-center col-teal">Created Date | Time</th>
-
                                 </tr>
                                 </thead>
                                 <tbody id="view-schedule-body">
@@ -1051,37 +1024,40 @@ require_once("php/loginDataFetching.php");
                                         <div class="form-group">
                                             <label for="OldPassword" class="col-sm-3 control-label">Old Password</label>
                                             <div class="col-sm-9">
-                                                <div class="form-line">
+                                                <div class="form-line" id="old-pass-error-line">
                                                     <input type="password" class="form-control" id="OldPassword"
-                                                           name="OldPassword" placeholder="Old Password" required>
+                                                           name="OldPassword" placeholder="Old Password" oninput="oldPassVerify(this.value)" required>
                                                 </div>
+                                                <label id="old-pass-error" style="display: none;" class="error error-msg" for="OldPassword">Password mismatched!</label>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="NewPassword" class="col-sm-3 control-label">New Password</label>
                                             <div class="col-sm-9">
-                                                <div class="form-line">
-                                                    <input type="password" class="form-control" id="NewPassword"
-                                                           name="NewPassword" placeholder="New Password" required>
+                                                <div class="form-line" id="profile-pass-1">
+                                                    <input type="password" class="form-control" id="profile-new-pass"
+                                                           name="profile-new-pass" placeholder="New Password" required oninput="passwordCharVerify(this.value)">
                                                 </div>
+                                                <label id="profile-pass-1-error"  style="display: none;" class="error error-msg" for="profile-new-pass"></label>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="NewPasswordConfirm" class="col-sm-3 control-label">New Password
                                                 (Confirm)</label>
                                             <div class="col-sm-9">
-                                                <div class="form-line">
-                                                    <input type="password" class="form-control" id="NewPasswordConfirm"
-                                                           name="NewPasswordConfirm"
-                                                           placeholder="New Password (Confirm)" required>
+                                                <div class="form-line" id="profile-pass-2">
+                                                    <input type="password" class="form-control" id="profile-new-pass-cmf"
+                                                           name="profile-new-pass-cmf"
+                                                           placeholder="New Password (Confirm)" required oninput="cmfPassCmpare(this.value);">
                                                 </div>
+                                                <label id="profile-pass-2-error"  style="display: none;" class="error error-msg" for="profile-new-pass">Password mismatched with entered new password!</label>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="col-sm-offset-3 col-sm-9">
-                                                <button type="submit" class="btn bg-teal waves-effect">Change Password
-                                                </button>
+                                                <a class="btn bg-teal waves-effect" onclick="updatePassword()">Change Password
+                                                </a>
                                             </div>
                                         </div>
                                     </form>

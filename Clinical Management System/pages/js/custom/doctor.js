@@ -1,7 +1,13 @@
 //************* Formating Date pickers ******************//
-$('#schedule_start_date').bootstrapMaterialDatePicker({format: 'MM/DD/YYYY', time: false, minDate: new Date()});
-$('#schedule_start_time').bootstrapMaterialDatePicker({format: 'HH:mm', date: false, minDate: new Date()});
 $('#schedule_end_date').bootstrapMaterialDatePicker({format: 'MM/DD/YYYY', time: false, minDate: new Date()});
+$('#schedule_start_date').bootstrapMaterialDatePicker({
+    format: 'MM/DD/YYYY',
+    time: false,
+    minDate: new Date()
+}).on('change', function (e, date) {
+    $("#schedule_end_date").bootstrapMaterialDatePicker('setMinDate', date);
+});
+$('#schedule_start_time').bootstrapMaterialDatePicker({format: 'HH:mm', date: false, minDate: new Date()});
 $('#schedule_end_time').bootstrapMaterialDatePicker({format: 'HH:mm', date: false, minDate: new Date()});
 //************* Formating Date pickers ******************//
 
@@ -266,7 +272,7 @@ function showPreviousDiagnisis(id) {
                     '                                        <span class="pull-left">Doctor</span> <span class="pull-right">' + data[i].fname + ' ' + data[i].sname + '</span>\n' +
                     '                                    </button>\n' +
                     '                                    <button type="button" class="list-group-item">\n' +
-                    '                                        <span class="pull-left">Diagnosis description</span> <span class="pull-right">' + data[i].description + '</span>\n' +
+                    '                                        <span class="pull-left"><b>Diagnosis description</b></span> <span class="pull-right">' + data[i].description + '</span>\n' +
                     '                                    </button>\n' +
                     '                                </div>\n' +
                     '\n' +
@@ -588,21 +594,20 @@ function getAllSchedules() {
                 let start = new Date(temp.start_date + ' ' + temp.start_time);
                 let end = new Date(temp.end_date + ' ' + temp.end_time);
                 let scheduleStatus = '<span class="label label-info">Upcoming</span>';
-                if (start>currentTime){
+                if (start > currentTime) {
                     scheduleStatus = '<span class="label label-info">Upcoming</span>';
-                }
-                else if(start<=currentTime && end>=currentTime){
+                } else if (start <= currentTime && end >= currentTime) {
                     scheduleStatus = '<span class="label label-success">Ongoing&nbsp;</span>';
-                }else if(end<currentTime){
+                } else if (end < currentTime) {
                     scheduleStatus = '<span class="label label-warning">&nbsp;Passed&nbsp;</span>';
                 }
-                temp_html += '<tr class="schedule-row" onclick="viewScheduleModal('+temp.id+')">' +
+                temp_html += '<tr class="schedule-row" onclick="viewScheduleModal(' + temp.id + ')">' +
                     '<td>' + temp.start_date + '</td>' +
                     '<td>' + temp.start_time + '</td>' +
                     '<td>' + temp.end_date + '</td>' +
                     '<td>' + temp.end_time + '</td>' +
                     '<td >' + scheduleStatus + '</td>' +
-                    '<td ><span class="label bg-deep-orange">'+temp.appointments+'</span><span class="label bg-light-green">'+temp.appointments+'</span></td>' +
+                    '<td >' + temp.appointments + '</td>' +
                     '<td>' + formatDate(new Date(temp.createdDate)) + '</td>' +
                     '</tr>';
             }
@@ -615,8 +620,171 @@ function getAllSchedules() {
 
 function viewScheduleModal(id) {
     $("#viewScheduleModel").modal('show');
+    getAppointmentsBySchedule(id);
 }
 
-function deleteSchedule(id){
+function getAppointmentsBySchedule(schedule_id) {
+    let temp_html = "";
+    $.get("php/getAppointmentsBySchId.php?schedule_id=" + schedule_id, function (data, status) {
+        if (data != 'false') {
+            if (data.length != 0) {
+                data = JSON.parse(data);
+                for (let i = 0; i < data.length; i++) {
+                    let temp = data[i];
+                    temp_html += '<div class="panel panel-success">\n' +
+                        '                                <div class="panel-heading" role="tab" id="appointment-' + temp.app_id + '">\n' +
+                        '                                    <h4 class="panel-title">\n' +
+                        '                                        <a class="collapsed text-center" role="button" data-toggle="collapse"\n' +
+                        '                                           data-parent="#appointment-' + temp.app_id + '" href="#appointment-' + temp.app_id + '-collapse" aria-expanded="false"\n' +
+                        '                                           >\n' +
+                        'Appointment : ' + temp.appointment_no +
+                        '                                        </a>\n' +
+                        '                                    </h4>\n' +
+                        '                                </div>\n' +
+                        '                                <div id="appointment-' + temp.app_id + '-collapse" class="panel-collapse collapse" role="tabpanel"\n' +
+                        '                                     aria-labelledby="appointment-1">\n' +
+                        '                                    <div class="panel-body">\n' +
+                        '                                        <div class="list-group">\n' +
+                        '                                            <button type="button" class="list-group-item">\n' +
+                        '                                                <span class="pull-left">Appointment No</span> <span class="pull-right">' + temp.appointment_no + '</span>\n' +
+                        '                                            </button>\n' +
+                        '                                            <button type="button" class="list-group-item">\n' +
+                        '                                                <span class="pull-left">Patient</span> <span class="pull-right">' + temp.fname + ' ' + data.sname + '</span>\n' +
+                        '                                            </button>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +
+                        '                                </div>\n' +
+                        '                            </div>\n';
+                }
+            } else {
+                temp_html += '<div class="panel bg-grey">\n' +
+                    '                                <div class="panel-heading" role="tab" id="appointment-no">\n' +
+                    '                                    <h4 class="panel-title">\n' +
+                    '                                        <a class="collapsed text-center" role="button" data-toggle="collapse"\n' +
+                    '                                           data-parent="#appointment-no" href="#appointment-no-collapse" aria-expanded="false"\n' +
+                    '                                           >\n' +
+                    'No Appointments' +
+                    '                                        </a>\n' +
+                    '                                    </h4>\n' +
+                    '                                </div></div>';
+            }
+            $("#schedule-appointments").html(temp_html);
+
+        } else {
+            console.error("ERROR HAPPENED!");
+        }
+    });
+}
+
+
+let isPassValid_1 = false;
+let isPassValid_2 = false;
+let isPassValid_3 = false;
+
+function oldPassVerify(pass) {
+    let id = $("#logged-user-id").val();
+    $.get("php/forgotPassValidation.php?user_id=" + id + "&pass=" + pass, function (data, status) {
+        if (data) {
+            $("#old-pass-error").hide();
+            $("#old-pass-error-line").removeClass('error');
+            isPassValid_1 = true;
+        } else {
+            $("#old-pass-error").show();
+            $("#old-pass-error-line").addClass('error');
+            isPassValid_1 = false;
+        }
+    });
+}
+
+function passwordCharVerify(val) {
+    cmfPassCmpare($("#profile-new-pass-cmf").val());
+    if (val.length >= 8 && val.length <= 16) {
+        $("#profile-pass-1-error").hide();
+        $("#profile-pass-1").removeClass('error');
+        isPassValid_2 = true;
+    } else {
+        $("#profile-pass-1").addClass('error');
+        $("#profile-pass-1-error").text('Need to have 8-16 characters.');
+        $("#profile-pass-1-error").show();
+        isPassValid_2 = false;
+    }
+}
+
+function cmfPassCmpare(val) {
+    let pass = $("#profile-new-pass").val();
+    if (val.length != 0 && pass != val) {
+        $("#profile-pass-2-error").show();
+        $("#profile-pass-2").addClass('error');
+        isPassValid_3 = false;
+    } else {
+        $("#profile-pass-2-error").hide();
+        $("#profile-pass-2").removeClass('error');
+        isPassValid_3 = true;
+    }
+}
+
+function updatePassword() {
+    if (isPassValid_1 && isPassValid_2 && isPassValid_3) {
+        $.confirm({
+            theme: 'modern',
+            icon: 'fa fa-key',
+            title: 'Confirm!',
+            content: "Do you want to change password?",
+            draggable: true,
+            animationBounce: 2.5,
+            type: 'red',
+            typeAnimated: true,
+            buttons: {
+                yes: {
+                    text: 'Yes',
+                    btnClass: 'btn-danger',
+                    action: function () {
+                        let pass = $("#profile-new-pass").val();
+                        let id = $("#logged-user-id").val();
+
+                        $.post("php/updatePass.php",
+                            {
+                                id: id,
+                                password: pass,
+                            },
+                            function (result) {
+                                if (result == 1) {
+                                    $.confirm({
+                                        theme: 'modern',
+                                        icon: 'fa fa-check-circle',
+                                        title: 'Success!',
+                                        content: "Password changed successfully!",
+                                        draggable: true,
+                                        animationBounce: 2.5,
+                                        type: 'green',
+                                        typeAnimated: true,
+                                        buttons: {
+                                            Delete: {
+                                                text: 'Done',
+                                                btnClass: 'btn-success',
+
+                                            },
+
+                                        }
+                                    });
+                                }else{
+                                    console.error("ERROR HAPPENED!");
+                                }
+                            });
+                    }
+                },
+                later: {
+                    text: 'No',
+                    action: function () {
+
+                    }
+                }
+            }
+        });
+
+
+
+
+    }
 
 }
