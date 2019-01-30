@@ -173,7 +173,9 @@ function loginUser() {
     let password = $("#login-password").val();
 
     $.get("../../php/users/login.php/?email="+email+"&password="+password, function (data, status) {
-        if (data != 'false') {
+
+        if (data.length!=0 && data != 'false') {
+            $("#invalid-cred-error").hide();
             let responseData = JSON.parse(data);
             switch(parseInt(responseData.type)) {
                 case 0:
@@ -193,7 +195,7 @@ function loginUser() {
             }
         }
         else {
-            console.log("invalid credentials");
+            $("#invalid-cred-error").show();
         }
     });
 }

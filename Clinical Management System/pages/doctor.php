@@ -1034,28 +1034,30 @@ require_once("php/loginDataFetching.php");
                                         <div class="form-group">
                                             <label for="NewPassword" class="col-sm-3 control-label">New Password</label>
                                             <div class="col-sm-9">
-                                                <div class="form-line">
-                                                    <input type="password" class="form-control" id="NewPassword"
-                                                           name="NewPassword" placeholder="New Password" required>
+                                                <div class="form-line" id="profile-pass-1">
+                                                    <input type="password" class="form-control" id="profile-new-pass"
+                                                           name="profile-new-pass" placeholder="New Password" required oninput="passwordCharVerify(this.value)">
                                                 </div>
+                                                <label id="profile-pass-1-error"  style="display: none;" class="error error-msg" for="profile-new-pass"></label>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="NewPasswordConfirm" class="col-sm-3 control-label">New Password
                                                 (Confirm)</label>
                                             <div class="col-sm-9">
-                                                <div class="form-line">
-                                                    <input type="password" class="form-control" id="NewPasswordConfirm"
-                                                           name="NewPasswordConfirm"
-                                                           placeholder="New Password (Confirm)" required>
+                                                <div class="form-line" id="profile-pass-2">
+                                                    <input type="password" class="form-control" id="profile-new-pass-cmf"
+                                                           name="profile-new-pass-cmf"
+                                                           placeholder="New Password (Confirm)" required oninput="cmfPassCmpare(this.value);">
                                                 </div>
+                                                <label id="profile-pass-2-error"  style="display: none;" class="error error-msg" for="profile-new-pass">Password mismatched with entered new password!</label>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="col-sm-offset-3 col-sm-9">
-                                                <button type="submit" class="btn bg-teal waves-effect">Change Password
-                                                </button>
+                                                <a class="btn bg-teal waves-effect" onclick="updatePassword()">Change Password
+                                                </a>
                                             </div>
                                         </div>
                                     </form>

@@ -332,7 +332,7 @@
             </div>
             <div class="modal-body pl-5 pr-5">
                 <form>
-
+                    <p class="error text-danger invalid-feedback text-center" style="font-size:12px;" id="invalid-cred-error">Invalid Credentials!</p>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                           <span class="input-group-text bg-color-type-1 border-type-1" id="cred-email"><i

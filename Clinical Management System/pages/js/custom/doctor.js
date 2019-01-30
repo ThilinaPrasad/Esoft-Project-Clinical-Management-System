@@ -607,7 +607,7 @@ function getAllSchedules() {
                     '<td>' + temp.end_date + '</td>' +
                     '<td>' + temp.end_time + '</td>' +
                     '<td >' + scheduleStatus + '</td>' +
-                    '<td >'+temp.appointments+'</td>' +
+                    '<td >' + temp.appointments + '</td>' +
                     '<td>' + formatDate(new Date(temp.createdDate)) + '</td>' +
                     '</tr>';
             }
@@ -627,7 +627,7 @@ function getAppointmentsBySchedule(schedule_id) {
     let temp_html = "";
     $.get("php/getAppointmentsBySchId.php?schedule_id=" + schedule_id, function (data, status) {
         if (data != 'false') {
-            if(data.length != 0) {
+            if (data.length != 0) {
                 data = JSON.parse(data);
                 for (let i = 0; i < data.length; i++) {
                     let temp = data[i];
@@ -656,14 +656,14 @@ function getAppointmentsBySchedule(schedule_id) {
                         '                                </div>\n' +
                         '                            </div>\n';
                 }
-            }else{
+            } else {
                 temp_html += '<div class="panel bg-grey">\n' +
                     '                                <div class="panel-heading" role="tab" id="appointment-no">\n' +
                     '                                    <h4 class="panel-title">\n' +
                     '                                        <a class="collapsed text-center" role="button" data-toggle="collapse"\n' +
                     '                                           data-parent="#appointment-no" href="#appointment-no-collapse" aria-expanded="false"\n' +
                     '                                           >\n' +
-                    'No Appointments'+
+                    'No Appointments' +
                     '                                        </a>\n' +
                     '                                    </h4>\n' +
                     '                                </div></div>';
@@ -676,15 +676,115 @@ function getAppointmentsBySchedule(schedule_id) {
     });
 }
 
-function oldPassVerify(pass){
+
+let isPassValid_1 = false;
+let isPassValid_2 = false;
+let isPassValid_3 = false;
+
+function oldPassVerify(pass) {
     let id = $("#logged-user-id").val();
-    $.get("php/forgotPassValidation.php?user_id=" + id+"&pass="+pass, function (data, status) {
-        if(data){
+    $.get("php/forgotPassValidation.php?user_id=" + id + "&pass=" + pass, function (data, status) {
+        if (data) {
             $("#old-pass-error").hide();
             $("#old-pass-error-line").removeClass('error');
-        }else{
+            isPassValid_1 = true;
+        } else {
             $("#old-pass-error").show();
             $("#old-pass-error-line").addClass('error');
+            isPassValid_1 = false;
         }
     });
+}
+
+function passwordCharVerify(val) {
+    cmfPassCmpare($("#profile-new-pass-cmf").val());
+    if (val.length >= 8 && val.length <= 16) {
+        $("#profile-pass-1-error").hide();
+        $("#profile-pass-1").removeClass('error');
+        isPassValid_2 = true;
+    } else {
+        $("#profile-pass-1").addClass('error');
+        $("#profile-pass-1-error").text('Need to have 8-16 characters.');
+        $("#profile-pass-1-error").show();
+        isPassValid_2 = false;
+    }
+}
+
+function cmfPassCmpare(val) {
+    let pass = $("#profile-new-pass").val();
+    if (val.length != 0 && pass != val) {
+        $("#profile-pass-2-error").show();
+        $("#profile-pass-2").addClass('error');
+        isPassValid_3 = false;
+    } else {
+        $("#profile-pass-2-error").hide();
+        $("#profile-pass-2").removeClass('error');
+        isPassValid_3 = true;
+    }
+}
+
+function updatePassword() {
+    if (isPassValid_1 && isPassValid_2 && isPassValid_3) {
+        $.confirm({
+            theme: 'modern',
+            icon: 'fa fa-key',
+            title: 'Confirm!',
+            content: "Do you want to change password?",
+            draggable: true,
+            animationBounce: 2.5,
+            type: 'red',
+            typeAnimated: true,
+            buttons: {
+                yes: {
+                    text: 'Yes',
+                    btnClass: 'btn-danger',
+                    action: function () {
+                        let pass = $("#profile-new-pass").val();
+                        let id = $("#logged-user-id").val();
+
+                        $.post("php/updatePass.php",
+                            {
+                                id: id,
+                                password: pass,
+                            },
+                            function (result) {
+                                if (result == 1) {
+                                    $.confirm({
+                                        theme: 'modern',
+                                        icon: 'fa fa-check-circle',
+                                        title: 'Success!',
+                                        content: "Password changed successfully!",
+                                        draggable: true,
+                                        animationBounce: 2.5,
+                                        type: 'green',
+                                        typeAnimated: true,
+                                        buttons: {
+                                            Delete: {
+                                                text: 'Done',
+                                                btnClass: 'btn-success',
+
+                                            },
+
+                                        }
+                                    });
+                                }else{
+                                    console.error("ERROR HAPPENED!");
+                                }
+                            });
+                    }
+                },
+                later: {
+                    text: 'No',
+                    action: function () {
+
+                    }
+                }
+            }
+        });
+
+
+
+
+    }
+
 }
