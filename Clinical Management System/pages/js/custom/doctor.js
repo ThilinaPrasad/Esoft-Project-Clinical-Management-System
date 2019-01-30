@@ -612,9 +612,11 @@ function getAllSchedules() {
                     '</tr>';
             }
         } else {
+
             temp_html += '<tr class="schedule-row text-center" ><td colspan="7">No schedules found</td></tr>';
+
+            $("#view-schedule-body").html(temp_html);
         }
-        $("#view-schedule-body").html(temp_html);
     });
 }
 

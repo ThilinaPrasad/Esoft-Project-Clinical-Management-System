@@ -1,3 +1,7 @@
+<?php
+require_once("php/common/getDoctors.php");
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -392,6 +396,44 @@
     </div>
 </div>
 <!--Login model-->
+<!--doc model-->
+<div class="modal fade" id="all-doc-model" tabindex="-1" role="dialog" aria-labelledby="login-model-label"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content doctor-model">
+            <div class="modal-header text-center modal-header-type-1">
+                <h5 class="modal-title white-text text-center">Our Doctors</h5>
+                <button type="button" class="close hover-white-text" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="max-height:70vh;overflow-y: scroll;">
+                <table class="table text-center table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">Doctor Name</th>
+                        <th scope="col">Speciality</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    foreach ($allDoctors as $temp) {
+                        $temp_html = "<tr>" .
+                            "<td>" . $temp['fname'] . " " . $temp['sname'] . "</td>" .
+                            "<td>" . $temp['speciality'] . "</td>" .
+                            "</tr>";
+                        echo $temp_html;
+                    }
+                    ?>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Doc model-->
 <!--==========================
   Header
 ============================-->
@@ -425,8 +467,8 @@
     <div class="intro-content">
         <h2>WE HERE TO PROVIDE<br><span>SERVICE</span></h2>
         <div>
-            <a href="#" class="btn-get-started ">Channel A Doctor</a>
-            <a href="#" class="btn-projects ">View All Doctors</a>
+            <a href="#" class="btn-get-started" data-toggle="modal" data-target="#login-model">Channel A Doctor</a>
+            <a href="#" class="btn-projects " data-toggle="modal" data-target="#all-doc-model">View All Doctors</a>
         </div>
     </div>
 
