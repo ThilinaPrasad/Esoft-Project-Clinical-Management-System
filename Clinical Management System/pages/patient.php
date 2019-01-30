@@ -507,8 +507,8 @@ require_once("php/loginDataFetching.php");
                         </div>
                         <div class="content-area">
                             <h3><?php echo $loginResponse[0]['fname'] . " " . $loginResponse[0]['sname'] ?></h3>
-                            <p><?php echo $loginResponse[0]['medLicenceNo'] ?></p>
-                            <p>Speciality: <?php echo $loginResponse[0]['speciality'] ?></p>
+                            <p><?php echo $loginResponse[0]['bloodType'] ?></p>
+                            <p>Speciality: <?php echo $loginResponse[0]['weight'] ?></p>
                         </div>
                     </div>
                     <div class="profile-footer">
