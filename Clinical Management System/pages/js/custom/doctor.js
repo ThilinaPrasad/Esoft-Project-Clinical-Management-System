@@ -28,11 +28,6 @@ function viewSchedule(id) {
     getAllSchedules();
 }
 
-function viewAppointments(id) {
-    addRemoveClass(id);
-    removeSection();
-    showSection("viewAppointments");
-}
 
 function addSchedules(id) {
     addRemoveClass(id);
@@ -62,7 +57,6 @@ function removeSection() {
     const schedule = document.getElementById("viewSchedule");
     const patients = document.getElementById("viewPatients");
     const profile = document.getElementById("profile");
-    const appoinmnet = document.getElementById("viewAppointments");
     const addSchedule = document.getElementById("addSchedules");
 
 
@@ -70,7 +64,6 @@ function removeSection() {
     schedule.style.display = "none";
     patients.style.display = "none";
     profile.style.display = "none";
-    appoinmnet.style.display = "none";
     addSchedule.style.display = "none";
 }
 
@@ -490,6 +483,7 @@ function saveSchedule() {
     let end_date = $('#schedule_end_date').val();
     let end_time = $('#schedule_end_time').val();
     let doctor_id = $('#logged-user-id').val();
+    let scheduleAppointments = $("#schedule_appointments").val();
 
     if (start_date.trim().length != 0 && start_time.trim().length != 0 && end_date.trim().length != 0 && end_time.trim().length != 0) {
         /*
@@ -517,6 +511,7 @@ function saveSchedule() {
                                 start_time: start_time,
                                 end_date: end_date,
                                 end_time: end_time,
+                                appointments: scheduleAppointments,
 
                             },
 
@@ -601,14 +596,14 @@ function getAllSchedules() {
                 }else if(end<currentTime){
                     scheduleStatus = '<span class="label label-warning">&nbsp;Passed&nbsp;</span>';
                 }
-                temp_html += '<tr class="schedule-row">' +
+                temp_html += '<tr class="schedule-row" onclick="viewScheduleModal('+temp.id+')">' +
                     '<td>' + temp.start_date + '</td>' +
                     '<td>' + temp.start_time + '</td>' +
                     '<td>' + temp.end_date + '</td>' +
                     '<td>' + temp.end_time + '</td>' +
                     '<td >' + scheduleStatus + '</td>' +
+                    '<td ><span class="label bg-deep-orange">'+temp.appointments+'</span><span class="label bg-light-green">'+temp.appointments+'</span></td>' +
                     '<td>' + formatDate(new Date(temp.createdDate)) + '</td>' +
-
                     '</tr>';
             }
         } else {
@@ -616,4 +611,12 @@ function getAllSchedules() {
         }
         $("#view-schedule-body").html(temp_html);
     });
+}
+
+function viewScheduleModal(id) {
+    $("#viewScheduleModel").modal('show');
+}
+
+function deleteSchedule(id){
+
 }

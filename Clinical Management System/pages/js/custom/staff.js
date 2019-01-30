@@ -1,4 +1,4 @@
-$('#bday').bootstrapMaterialDatePicker({ format : 'MM/DD/YYYY' , time: false});
+$('#bday').bootstrapMaterialDatePicker({ format : 'MM/DD/YYYY' , time: false, maxDate: new Date()});
 function addDoctors(id){
     addRemoveClass(id);
     removeSection();
