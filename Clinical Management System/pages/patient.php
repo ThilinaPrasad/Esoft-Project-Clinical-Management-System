@@ -1,7 +1,5 @@
 ﻿<?php
-require_once("php/getPatients.php");
 require_once("php/loginDataFetching.php");
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -30,6 +28,7 @@ require_once("php/loginDataFetching.php");
 
     <!-- Doctor Css -->
     <link href="css/custom/doctor.css" rel="stylesheet">
+    <link href="css/custom/patient.css" rel="stylesheet">
 
     <!-- Animation Css -->
     <link href="plugins/animate-css/animate.css" rel="stylesheet"/>
@@ -248,7 +247,7 @@ require_once("php/loginDataFetching.php");
                         <span>Home</span>
                     </a>
                 </li>
-                <li id="patient" onclick="viewSchedule('#patient')">
+                <li id="schedule" onclick="viewSchedule('#schedule')">
                     <a href="#">
                         <i class="material-icons">schedule</i>
                         <span>View Doctor Schedule</span>
@@ -435,99 +434,7 @@ require_once("php/loginDataFetching.php");
     </div>
 </section>
 
-<!-- Patient data model -->
-<div class="modal fade" id="patientDataModel" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-teal" style="padding: 15px;">
-                <h2 class="modal-title text-center" id="patientDataModelLabel">Patient Details</h2>
-            </div>
-            <div class="modal-body" style="padding-bottom: 0;">
-                <div class="body table-responsive">
-                    <table class="table text-center">
-                        <tbody>
-                        <tr hidden>
-                            <td>Patient id</td>
-                            <td id="view-patient-id"></td>
-                        </tr>
-                        <tr>
-                            <td>Full name</td>
-                            <td id="view-patient-name"></td>
-                        </tr>
-                        <tr>
-                            <td>Gender</td>
-                            <td id="view-patient-gender"></td>
-                        </tr>
-                        <tr>
-                            <td>Birthday(age)</td>
-                            <td id="view-patient-bday"></td>
-                        </tr>
-                        <tr>
-                            <td>Blood Group</td>
-                            <td id="view-patient-bloodType"></td>
-                        </tr>
-                        <tr>
-                            <td>Weight(kg)</td>
-                            <td id="view-patient-weight"></td>
-                        </tr>
-                        <tr>
-                            <td>Height(cm)</td>
-                            <td id="view-patient-height"></td>
-                        </tr>
-                        <tr>
-                            <td>NIC/Passport</td>
-                            <td id="view-patient-nic"></td>
-                        </tr>
-                        <tr>
-                            <td>Email</td>
-                            <td id="view-patient-email"></td>
-                        </tr>
-                        <tr>
-                            <td>Telephone</td>
-                            <td id="view-patient-telephone"></td>
-                        </tr>
-                        <tr>
-                            <td>Address</td>
-                            <td id="view-patient-address"></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="modal-footer" style="padding-top: 0;">
-                <button type="button" class="btn btn-success waves-effect" onclick="showDiagnosis();">Add diagnosis
-                </button>
-                <button type="button" class="btn btn-primary waves-effect"
-                        onclick="showPreviousDiagnisis($('#view-patient-id').text())">Previous diagnosis
-                </button>
-                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Previous diagnosis model -->
-<div class="modal fade" id="previousDiagnosisModel" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-teal" style="padding: 15px;">
-                <h2 class="modal-title text-center" id="previousDiagnosisModelLabel">Previous Diagnosis Reports</h2>
-            </div>
-            <div class="modal-body" style="padding-bottom: 0;height: 75vh;overflow-y: scroll;">
-                <div class="panel-group" id="pre-diagnosis-data" role="tablist" aria-multiselectable="true">
-
-                </div>
-            </div>
-
-            <div class="modal-footer" style="padding-top: 0;">
-                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<section class="content" id="viewPatients">
+<section class="content" id="viewSchedule">
     <div class="container-fluid">
         <!-- Exportable Table -->
         <div class="row clearfix">
@@ -539,52 +446,44 @@ require_once("php/loginDataFetching.php");
                         </h2>
                     </div>
                     <div class="body">
+                        <div class="row clearfix">
+                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                <label for="searchInput"><i class="material-icons">search</i></label>
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" id="searchInput" class="form-control" onkeyup="search()" placeholder="Search by Doctor name">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="table-responsive">
-                            <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                            <table class="table table-bordered table-striped table-hover text-center" id="scheduleTable">
                                 <thead class="col-teal">
                                 <tr>
-                                    <th>Full Name</th>
-                                    <th>Gender</th>
-                                    <th>B'day (m/d/y)</th>
-                                    <th>Blood group</th>
-                                    <th>Weight(kg)</th>
-                                    <th>Height(cm)</th>
-                                    <th>Telephone</th>
-                                    <!--<th>Email</th>
-                                    <th>Address</th>-->
+                                    <th class="text-center col-teal">Doctor</th>
+                                    <th class="text-center col-teal">Start Date</th>
+                                    <th class="text-center col-teal">Start Time</th>
+                                    <th class="text-center col-teal">End Date</th>
+                                    <th class="text-center col-teal">End Time</th>
+                                    <th class="text-center col-teal">Status</th>
+                                    <th class="text-center col-teal">Appointments<br>(Remaining)</span></th>
                                 </tr>
                                 </thead>
                                 <tfoot class="col-teal">
                                 <tr>
-                                    <th>Full Name</th>
-                                    <th>Gender</th>
-                                    <th>B'day (m/d/y)</th>
-                                    <th>Blood group</th>
-                                    <th>Weight(kg)</th>
-                                    <th>Height(cm)</th>
-                                    <th>Telephone</th>
-                                    <!--<th>Email</th>
-                                    <th>Address</th>-->
+                                    <th class="text-center col-teal">Doctor</th>
+                                    <th class="text-center col-teal">Start Date</th>
+                                    <th class="text-center col-teal">Start Time</th>
+                                    <th class="text-center col-teal">End Date</th>
+                                    <th class="text-center col-teal">End Time</th>
+                                    <th class="text-center col-teal">Status</th>
+                                    <th class="text-center col-teal">Appointments<br>(Remaining)</th>
                                 </tr>
                                 </tfoot>
-                                <tbody id="viewPatients-table-body">
-                                <?php
-                                foreach ($dbResponse as $temp) {
-                                    $temp_html = "<tr onclick='showPatient(" . $temp['id'] . ");'>" .
-                                        "<td>" . $temp['fname'] . " " . $temp['sname'] . "</td>" .
-                                        "<td>" . $temp['gender'] . "</td>" .
-                                        "<td>" . $temp['bday'] . "</td>" .
-                                        "<td>" . $temp['bloodType'] . "</td>" .
-                                        "<td>" . $temp['weight'] . "</td>" .
-                                        "<td>" . $temp['height'] . "</td>" .
-                                        "<td>" . $temp['telephone'] . "</td>" .
-                                        /*"<td>".$temp['email']."</td>".
-                                        "<td>".$temp['street'].", ".$temp['city'].", ".$temp['country'].", ".$temp['zipCode'].".</td>".*/
+                                <tbody id="view-schedule-body">
 
-                                        "</tr>";
-                                    echo $temp_html;
-                                }
-                                ?>
                                 </tbody>
                             </table>
                         </div>
@@ -860,7 +759,7 @@ require_once("php/loginDataFetching.php");
 <script src="js/demo.js"></script>
 
 <!-- Demo Js -->
-<script src="js/custom/doctor.js"></script>
+<script src="js/custom/patient.js"></script>
 <script src="js/pages/forms/basic-form-elements.js"></script>
 
 </body>

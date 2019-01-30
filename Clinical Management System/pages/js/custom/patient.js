@@ -17,29 +17,9 @@ function viewHome(id) {
 function viewSchedule(id) {
     addRemoveClass(id);
     removeSection();
-    //getAllPatient();
-    showSection("viewPatients");
-}
-
-function viewSchedule(id) {
-    addRemoveClass(id);
-    removeSection();
     showSection("viewSchedule");
     getAllSchedules();
 }
-
-function viewAppointments(id) {
-    addRemoveClass(id);
-    removeSection();
-    showSection("viewAppointments");
-}
-
-function addSchedules(id) {
-    addRemoveClass(id);
-    removeSection();
-    showSection("addSchedules");
-}
-
 
 function showSection(section) {
     const x = document.getElementById(section);
@@ -52,7 +32,6 @@ function showSection(section) {
 
 function addRemoveClass(x) {
     $("#home").removeClass("active");
-    $("#patient").removeClass("active");
     $("#schedule").removeClass("active");
     $(x).addClass("active");
 }
@@ -60,18 +39,11 @@ function addRemoveClass(x) {
 function removeSection() {
     const dashboard = document.getElementById("dashboard");
     const schedule = document.getElementById("viewSchedule");
-    const patients = document.getElementById("viewPatients");
     const profile = document.getElementById("profile");
-    const appoinmnet = document.getElementById("viewAppointments");
-    const addSchedule = document.getElementById("addSchedules");
-
 
     dashboard.style.display = "none";
     schedule.style.display = "none";
-    patients.style.display = "none";
     profile.style.display = "none";
-    appoinmnet.style.display = "none";
-    addSchedule.style.display = "none";
 }
 
 function viewProfile() {
@@ -230,67 +202,6 @@ function deleteUser(id) {
     });
 }
 
-function showPatient(id) {
-    $('#patientDataModel').modal('show');
-    getPatientById(id);
-
-}
-
-function showDiagnosis() {
-    $('#patientDataModel').modal('hide');
-    $('#patientDiagnosisModel').modal('show');
-
-}
-
-function showPreviousDiagnisis(id) {
-    $('#patientDataModel').modal('hide');
-    $('#previousDiagnosisModel').modal('show');
-
-    $.get("php/getAllDiagnosis.php?patient_id=" + id, function (data, status) {
-        if (data != 'false') {
-            data = JSON.parse(data);
-            console.log(data.length);
-            let temp_html = "";
-            for (let i = 0; i < data.length; i++) {
-                temp_html += '<div class="panel panel-primary">\n' +
-                    '                        <div class="panel-heading" role="tab" id="pre-dignosis-head-' + i + '">\n' +
-                    '                            <h4 class="panel-title">\n' +
-                    '                                <a class="collapsed text-center" role="button" data-toggle="collapse"\n' +
-                    '                                   data-parent="#pre-diagnosis-1" href="#pre-diagnosis-collapse-' + i + '" aria-expanded="false"\n' +
-                    '                                   aria-controls="pre-diagnosis-collapse-' + i + '">\n' +
-                    '                                    ' + formatDate(new Date(data[i].date)) + '\n' +
-                    '                                </a>\n' +
-                    '                            </h4>\n' +
-                    '                        </div>\n' +
-                    '                        <div id="pre-diagnosis-collapse-' + i + '" class="panel-collapse collapse" role="tabpanel"\n' +
-                    '                             aria-labelledby="pre-diagnosis-' + i + '">\n' +
-                    '                            <div class="panel-body">\n' +
-                    '                                <div class="list-group">\n' +
-                    '                                    <button type="button" class="list-group-item">\n' +
-                    '                                        <span class="pull-left">Date & Time</span> <span class="pull-right">' + formatDate(new Date(data[i].date)) + '</span>\n' +
-                    '                                    </button>\n' +
-                    '                                    <button type="button" class="list-group-item">\n' +
-                    '                                        <span class="pull-left">Doctor</span> <span class="pull-right">' + data[i].fname + ' ' + data[i].sname + '</span>\n' +
-                    '                                    </button>\n' +
-                    '                                    <button type="button" class="list-group-item">\n' +
-                    '                                        <span class="pull-left">Diagnosis description</span> <span class="pull-right">' + data[i].description + '</span>\n' +
-                    '                                    </button>\n' +
-                    '                                </div>\n' +
-                    '\n' +
-                    '                            </div>\n' +
-                    '                        </div>\n' +
-                    '                    </div>\n';
-
-            }
-            $('#pre-diagnosis-data').html(temp_html);
-        } else {
-            console.error('Error!');
-        }
-    });
-
-
-}
-
 // *************** UI  Scripts ****************
 
 // ************** Data fetching scripts ***************
@@ -380,99 +291,6 @@ function logOut() {
     });
 }
 
-function addDiagnosis() {
-
-    let patient_id = $("#diagnosis-patient-id").val();
-    let doctor_id = $("#logged-user-id").val();
-    let description = $("#patient-diagnosis-description").val();
-    if (description.trim().length != 0) {
-        /*
-            console.log(patient_id+" | "+doctor_id+" | "+description);
-        */
-        $.confirm({
-            theme: 'modern',
-            icon: 'fa fa-question-circle-o',
-            title: 'Confirm!',
-            content: "Do you want to save this diagnosis!",
-            draggable: true,
-            animationBounce: 2.5,
-            type: 'blue',
-            typeAnimated: true,
-            buttons: {
-                Delete: {
-                    text: 'Yes',
-                    btnClass: 'btn-primary',
-                    action: function () {
-
-                        $.post("php/addDiagnosis.php",
-                            {
-                                patient_id: patient_id,
-                                doctor_id: doctor_id,
-                                description: description,
-                            },
-
-                            function (result) {
-                                if (result == 1) {
-                                    $.confirm({
-                                        theme: 'modern',
-                                        icon: 'fa fa-check-circle',
-                                        title: 'Success!',
-                                        content: "Diagnosis saved succssfully!",
-                                        draggable: true,
-                                        animationBounce: 2.5,
-                                        type: 'green',
-                                        typeAnimated: true,
-                                        buttons: {
-                                            Delete: {
-                                                text: 'Okay',
-                                                btnClass: 'btn-success',
-                                                action: function () {
-                                                    $('#patientDiagnosisModel').modal('hide');
-                                                    $("#patient-diagnosis-description-error").hide();
-                                                    $("#patient-diagnosis-description-error-line").removeClass('error');
-                                                }
-                                            },
-
-                                        }
-                                    });
-                                } else {
-                                    $.confirm({
-                                        theme: 'modern',
-                                        icon: 'fa fa-exclamation-circle',
-                                        title: 'Error !',
-                                        content: "Error happened. Please try again!",
-                                        draggable: true,
-                                        animationBounce: 2.5,
-                                        type: 'red',
-                                        typeAnimated: true,
-                                        buttons: {
-                                            Delete: {
-                                                text: 'Try Again',
-                                                btnClass: 'btn-danger',
-                                            }
-                                        }
-                                    });
-                                }
-                            });
-
-                    }
-                },
-                later: {
-                    text: 'No',
-                    action: function () {
-
-                    }
-                }
-            }
-        });
-
-    } else {
-        $("#patient-diagnosis-description-error").show();
-        $("#patient-diagnosis-description-error-line").addClass('error');
-    }
-
-}
-
 function formatDate(date) {
     var hours = date.getHours();
     var minutes = date.getMinutes();
@@ -484,107 +302,9 @@ function formatDate(date) {
     return date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear() + " | " + strTime;
 }
 
-function saveSchedule() {
-    let start_date = $('#schedule_start_date').val();
-    let start_time = $('#schedule_start_time').val();
-    let end_date = $('#schedule_end_date').val();
-    let end_time = $('#schedule_end_time').val();
-    let doctor_id = $('#logged-user-id').val();
-
-    if (start_date.trim().length != 0 && start_time.trim().length != 0 && end_date.trim().length != 0 && end_time.trim().length != 0) {
-        /*
-            console.log(patient_id+" | "+doctor_id+" | "+description);
-        */
-        $.confirm({
-            theme: 'modern',
-            icon: 'fa fa-question-circle-o',
-            title: 'Confirm!',
-            content: "Do you want to save this schedule!",
-            draggable: true,
-            animationBounce: 2.5,
-            type: 'blue',
-            typeAnimated: true,
-            buttons: {
-                Delete: {
-                    text: 'Yes',
-                    btnClass: 'btn-primary',
-                    action: function () {
-
-                        $.post("php/addSchedule.php",
-                            {
-                                doctor_id: doctor_id,
-                                start_date: start_date,
-                                start_time: start_time,
-                                end_date: end_date,
-                                end_time: end_time,
-
-                            },
-
-                            function (result) {
-                                if (result == 1) {
-                                    $.confirm({
-                                        theme: 'modern',
-                                        icon: 'fa fa-check-circle',
-                                        title: 'Success!',
-                                        content: "Schedule saved succssfully!",
-                                        draggable: true,
-                                        animationBounce: 2.5,
-                                        type: 'green',
-                                        typeAnimated: true,
-                                        buttons: {
-                                            Delete: {
-                                                text: 'Done',
-                                                btnClass: 'btn-success',
-                                                action: function () {
-                                                    $('#schedule_start_date').val('');
-                                                    $('#schedule_start_time').val('');
-                                                    $('#schedule_end_date').val('');
-                                                    $('#schedule_end_time').val('');
-                                                }
-                                            },
-
-                                        }
-                                    });
-                                } else {
-                                    $.confirm({
-                                        theme: 'modern',
-                                        icon: 'fa fa-exclamation-circle',
-                                        title: 'Error !',
-                                        content: "Error happened. Please try again!",
-                                        draggable: true,
-                                        animationBounce: 2.5,
-                                        type: 'red',
-                                        typeAnimated: true,
-                                        buttons: {
-                                            Delete: {
-                                                text: 'Try Again',
-                                                btnClass: 'btn-danger',
-                                            }
-                                        }
-                                    });
-                                }
-                            });
-
-                    }
-                },
-                later: {
-                    text: 'No',
-                    action: function () {
-
-                    }
-                }
-            }
-        });
-
-    } else {
-        $("#add-schedule-error").show();
-    }
-}
-
 function getAllSchedules() {
-    let id = $("#logged-user-id").val();
     let temp_html = '';
-    $.get("php/getSchedules.php?doctor_id=" + id, function (data, status) {
+    $.get("php/getAllSchedules.php", function (data, status) {
         if (data != 'false') {
             data = JSON.parse(data);
             let currentTime = new Date();
@@ -593,27 +313,136 @@ function getAllSchedules() {
                 let start = new Date(temp.start_date + ' ' + temp.start_time);
                 let end = new Date(temp.end_date + ' ' + temp.end_time);
                 let scheduleStatus = '<span class="label label-info">Upcoming</span>';
+                let status = '';
                 if (start>currentTime){
                     scheduleStatus = '<span class="label label-info">Upcoming</span>';
+                    status = "Upcoming";
                 }
                 else if(start<=currentTime && end>=currentTime){
                     scheduleStatus = '<span class="label label-success">Ongoing&nbsp;</span>';
-                }else if(end<currentTime){
-                    scheduleStatus = '<span class="label label-warning">&nbsp;Passed&nbsp;</span>';
+                    status = "Ongoing";
                 }
-                temp_html += '<tr class="schedule-row">' +
-                    '<td>' + temp.start_date + '</td>' +
-                    '<td>' + temp.start_time + '</td>' +
-                    '<td>' + temp.end_date + '</td>' +
-                    '<td>' + temp.end_time + '</td>' +
-                    '<td >' + scheduleStatus + '</td>' +
-                    '<td>' + formatDate(new Date(temp.createdDate)) + '</td>' +
-
-                    '</tr>';
+                if(status==="Upcoming" || status==="Ongoing"){
+                    temp_html += '<tr class="schedule-row">' +
+                        '<td>' + temp.fname + ' ' + temp.sname + '</td>' +
+                        '<td>' + temp.start_date + '</td>' +
+                        '<td>' + temp.start_time + '</td>' +
+                        '<td>' + temp.end_date + '</td>' +
+                        '<td>' + temp.end_time + '</td>' +
+                        '<td >' + scheduleStatus + '</td>' +
+                        '<td>' + temp.appointments + '</td>' +
+                        '<td><button onclick="makeAppointment('+temp.schedule_id+','+temp.appointments+')" class="bg-teal btn-xs waves-effect"> ' +
+                        ' <i class="material-icons">verified_user</i></button></td>' +
+                        '</tr>';
+                }
             }
         } else {
-            temp_html += '<tr class="schedule-row text-center">No shcedules found</tr>';
+            temp_html += '<tr class="schedule-row text-center">No schedules found</tr>';
         }
         $("#view-schedule-body").html(temp_html);
     });
+}
+
+function makeAppointment(schedule_id, appointments){
+    let patient_id = $("#logged-user-id").val();
+    console.log(patient_id);
+    $.get("php/getScheduleCount.php?schedule_id=" + schedule_id + "&patient_id=" + patient_id , function (data, status) {
+        if (data != 'false') {
+            data = JSON.parse(data);
+            if(data[0].schedule_count<appointments){
+                $.post("php/makeAppointment.php",
+                    {
+                        app_no: data[0].schedule_count + 1,
+                        schedule_id: schedule_id,
+                        patient_id: patient_id,
+                    },
+                    function (result) {
+                        console.log(result);
+                        if (result == true) {
+                            $.confirm({
+                                theme: 'modern',
+                                icon: 'fa fa-trash-o',
+                                title: 'Appointment!',
+                                content: "Do you want to make an appointment?",
+                                draggable: true,
+                                animationBounce: 2.5,
+                                type: 'green',
+                                typeAnimated: true,
+                                buttons: {
+                                    Delete: {
+                                        text: 'Delete',
+                                        btnClass: 'btn-success',
+                                        action: function () {
+                                        }
+                                    },
+                                    later: {
+                                        text: 'cancel',
+                                        action: function () {
+
+                                        }
+                                    }
+                                }
+                            });
+                        } else {
+                            $.confirm({
+                                theme: 'modern',
+                                icon: 'fa fa-exclamation-circle',
+                                title: 'Error !',
+                                content: "Error happened. Please try again!",
+                                draggable: true,
+                                animationBounce: 2.5,
+                                type: 'red',
+                                typeAnimated: true,
+                                buttons: {
+                                    Delete: {
+                                        text: 'Try Again',
+                                        btnClass: 'btn-danger',
+                                    }
+                                }
+                            });
+                        }
+                    });
+            }else{
+                $.confirm({
+                    theme: 'modern',
+                    icon: 'fa fa-exclamation-circle',
+                    title: 'Error !',
+                    content: "Appointments are full",
+                    draggable: true,
+                    animationBounce: 2.5,
+                    type: 'red',
+                    typeAnimated: true,
+                    buttons: {
+                        Delete: {
+                            text: 'Ok',
+                            btnClass: 'btn-danger',
+                        }
+                    }
+                });
+            }
+        } else {
+        }
+    });
+}
+
+function search() {
+    // Declare variables
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("searchInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("scheduleTable");
+    tr = table.getElementsByTagName("tr");
+
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
 }

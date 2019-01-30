@@ -607,7 +607,7 @@ function getAllSchedules() {
                     '</tr>';
             }
         } else {
-            temp_html += '<tr class="schedule-row text-center">No shcedules found</tr>';
+            temp_html += '<tr class="schedule-row text-center">No schedules found</tr>';
         }
         $("#view-schedule-body").html(temp_html);
     });
