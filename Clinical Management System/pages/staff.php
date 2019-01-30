@@ -747,7 +747,7 @@ require_once("php/loginDataFetching.php");
 
                                                 <div class="form-group">
                                                     <div class="col-sm-offset-2 col-sm-6">
-                                                        <a href="#contact" class="btn bg-teal" data-toggle="tab" onclick="tabShift('#contact')">Continue</a>
+                                                        <a href="#contact" class="btn btn-success" data-toggle="tab" onclick="tabShift('#contact')">Continue</a>
                                                     </div>
                                                 </div>
 
