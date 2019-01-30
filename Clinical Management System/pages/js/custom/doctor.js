@@ -586,7 +586,7 @@ function getAllSchedules() {
     let id = $("#logged-user-id").val();
     let temp_html = '';
     $.get("php/getSchedules.php?doctor_id=" + id, function (data, status) {
-        if (data != 'false') {
+        if (data.length!=0 && data != 'false') {
             data = JSON.parse(data);
             let currentTime = new Date();
             for (let i = 0; i < data.length; i++) {
@@ -612,7 +612,7 @@ function getAllSchedules() {
                     '</tr>';
             }
         } else {
-            temp_html += '<tr class="schedule-row text-center">No shcedules found</tr>';
+            temp_html += '<tr class="schedule-row text-center" ><td colspan="7">No schedules found</td></tr>';
         }
         $("#view-schedule-body").html(temp_html);
     });
