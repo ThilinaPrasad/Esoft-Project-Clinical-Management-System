@@ -332,7 +332,7 @@ function getAllSchedules() {
                         '<td >' + scheduleStatus + '</td>' +
                         '<td>' + temp.appointments + '</td>' +
                         '<td><button onclick="makeAppointment('+temp.schedule_id+','+temp.appointments+')" class="bg-teal btn-xs waves-effect"> ' +
-                        ' <i class="material-icons">verified_user</i></button></td>' +
+                        ' <i class="material-icons">verified_user</i>Make Appointment</button></td>' +
                         '</tr>';
                 }
             }
@@ -345,63 +345,81 @@ function getAllSchedules() {
 
 function makeAppointment(schedule_id, appointments){
     let patient_id = $("#logged-user-id").val();
-    console.log(patient_id);
     $.get("php/getScheduleCount.php?schedule_id=" + schedule_id + "&patient_id=" + patient_id , function (data, status) {
         if (data != 'false') {
             data = JSON.parse(data);
-            if(data[0].schedule_count<appointments){
-                $.post("php/makeAppointment.php",
-                    {
-                        app_no: data[0].schedule_count + 1,
-                        schedule_id: schedule_id,
-                        patient_id: patient_id,
-                    },
-                    function (result) {
-                        console.log(result);
-                        if (result == true) {
-                            $.confirm({
-                                theme: 'modern',
-                                icon: 'fa fa-trash-o',
-                                title: 'Appointment!',
-                                content: "Do you want to make an appointment?",
-                                draggable: true,
-                                animationBounce: 2.5,
-                                type: 'green',
-                                typeAnimated: true,
-                                buttons: {
-                                    Delete: {
-                                        text: 'Delete',
-                                        btnClass: 'btn-success',
-                                        action: function () {
-                                        }
-                                    },
-                                    later: {
-                                        text: 'cancel',
-                                        action: function () {
-
-                                        }
-                                    }
-                                }
-                            });
-                        } else {
-                            $.confirm({
-                                theme: 'modern',
-                                icon: 'fa fa-exclamation-circle',
-                                title: 'Error !',
-                                content: "Error happened. Please try again!",
-                                draggable: true,
-                                animationBounce: 2.5,
-                                type: 'red',
-                                typeAnimated: true,
-                                buttons: {
-                                    Delete: {
-                                        text: 'Try Again',
-                                        btnClass: 'btn-danger',
-                                    }
-                                }
-                            });
+            app_no = parseInt(data[0].schedule_count);
+            if(app_no<appointments){
+                $.confirm({
+                    theme: 'modern',
+                    icon: 'fa fa-question',
+                    title: 'Appointment!',
+                    content: "Do you want to make an appointment?",
+                    draggable: true,
+                    animationBounce: 2.5,
+                    type: 'blue',
+                    typeAnimated: true,
+                    buttons: {
+                        Delete: {
+                            text: 'Make',
+                            btnClass: 'btn-primary',
+                            action: function () {
+                                makePayment(app_no);
+                                // $.post("php/makeAppointment.php",
+                                //     {
+                                //         app_no: app_no + 1,
+                                //         schedule_id: schedule_id,
+                                //         patient_id: patient_id,
+                                //     },
+                                //     function (result) {
+                                //         console.log(result);
+                                //         if (result == true) {
+                                //             $.confirm({
+                                //                 theme: 'modern',
+                                //                 icon: 'fa fa-check',
+                                //                 title: 'Success!',
+                                //                 content: "Successfully make an appointment",
+                                //                 draggable: true,
+                                //                 animationBounce: 2.5,
+                                //                 type: 'green',
+                                //                 typeAnimated: true,
+                                //                 buttons: {
+                                //                     Delete: {
+                                //                         text: 'Ok',
+                                //                         btnClass: 'btn-success',
+                                //                         action: function () {
+                                //                         }
+                                //                     }
+                                //                 }
+                                //             });
+                                //         } else {
+                                //             $.confirm({
+                                //                 theme: 'modern',
+                                //                 icon: 'fa fa-exclamation-circle',
+                                //                 title: 'Error !',
+                                //                 content: "Error happened. Please try again!",
+                                //                 draggable: true,
+                                //                 animationBounce: 2.5,
+                                //                 type: 'red',
+                                //                 typeAnimated: true,
+                                //                 buttons: {
+                                //                     Delete: {
+                                //                         text: 'Try Again',
+                                //                         btnClass: 'btn-danger',
+                                //                     }
+                                //                 }
+                                //             });
+                                //         }
+                                //     });
+                            }
+                        },
+                        later: {
+                            text: 'cancel',
+                            action: function () {
+                            }
                         }
-                    });
+                    }
+                });
             }else{
                 $.confirm({
                     theme: 'modern',
@@ -423,6 +441,15 @@ function makeAppointment(schedule_id, appointments){
         } else {
         }
     });
+}
+
+function makePayment(app_no) {
+    $("#app-no").val(app_no+1);
+    $('#paymentModal').modal('show');
+}
+
+function pay(){
+
 }
 
 function search() {

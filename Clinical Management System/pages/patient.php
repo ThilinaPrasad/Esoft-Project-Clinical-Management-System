@@ -442,7 +442,7 @@ require_once("php/loginDataFetching.php");
                 <div class="card">
                     <div class="header">
                         <h2 class="font-bold col-teal">
-                            View Patient Details
+                            View Doctor Schedule
                         </h2>
                     </div>
                     <div class="body">
@@ -494,6 +494,58 @@ require_once("php/loginDataFetching.php");
         <!-- #END# Exportable Table -->
     </div>
 </section>
+
+<!-- Make payment modal -->
+<div class="modal fade" id="paymentModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-teal" style="padding: 15px;">
+                <h2 class="modal-title text-center" id="patientDiagnosisModelLabel">Payment Process</h2>
+            </div>
+            <div class="modal-body" style="padding-bottom: 0;">
+                <div class="body row table-responsive">
+                    <div class="col-md-12">
+                        <form class="form-horizontal">
+                            <div class="row clearfix m-b-10">
+                                <div class="col-lg-4 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                    <label for="app-no">Appointment Number</label>
+                                </div>
+                                <div class="col-lg-8 col-md-10 col-sm-8 col-xs-7">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input id="app-no" type="text"
+                                                   class="form-control" disabled style="cursor: default;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix m-b-10">
+                                <div class="col-lg-4 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                    <label for="diagnosis-patient-age">Payment Value (USD)</label>
+                                </div>
+                                <div class="col-lg-8 col-md-10 col-sm-8 col-xs-7">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input id="app-payment" type="text" value="10"
+                                                   class="form-control" disabled style="cursor: default;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            <div class="modal-footer" style="padding-top: 0;">
+                <button type="button" class="btn btn-success waves-effect" onclick="pay();">Pay
+                </button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <section class="content" id="profile">
     <div class="container-fluid">
