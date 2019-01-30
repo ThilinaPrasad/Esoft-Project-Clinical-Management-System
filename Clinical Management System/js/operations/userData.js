@@ -178,16 +178,16 @@ function loginUser() {
             $("#invalid-cred-error").hide();
             let responseData = JSON.parse(data);
             switch(parseInt(responseData.type)) {
-                case 0:
+                case 1:
                     window.location.replace("/pages/patient.php");
                     break;
-                case 1:
+                case 2:
                     window.location.replace("/pages/doctor.php");
                     break;
-                case 2:
+                case 3:
                     window.location.replace("/pages/staff.php");
                     break;
-                case 3:
+                case 4:
                     window.location.replace("/pages/admin.php");
                     break;
                 default:
