@@ -331,7 +331,7 @@ function getAllSchedules() {
                         '<td>' + temp.end_time + '</td>' +
                         '<td >' + scheduleStatus + '</td>' +
                         '<td>' + temp.appointments + '</td>' +
-                        '<td><button onclick="makeAppointment('+temp.schedule_id+','+temp.appointments+')" class="bg-teal btn-xs waves-effect"> ' +
+                        '<td><button style="border-radius: 30px;" onclick="makeAppointment('+temp.schedule_id+','+temp.appointments+')" class="bg-teal btn-xs waves-effect"> ' +
                         ' <i class="material-icons">verified_user</i>Make Appointment</button></td>' +
                         '</tr>';
                 }
@@ -345,6 +345,7 @@ function getAllSchedules() {
 
 function makeAppointment(schedule_id, appointments){
     let patient_id = $("#logged-user-id").val();
+    $("#schedule-id").val(schedule_id);
     $.get("php/getScheduleCount.php?schedule_id=" + schedule_id + "&patient_id=" + patient_id , function (data, status) {
         if (data != 'false') {
             data = JSON.parse(data);
@@ -364,53 +365,7 @@ function makeAppointment(schedule_id, appointments){
                             text: 'Make',
                             btnClass: 'btn-primary',
                             action: function () {
-                                makePayment(app_no);
-                                // $.post("php/makeAppointment.php",
-                                //     {
-                                //         app_no: app_no + 1,
-                                //         schedule_id: schedule_id,
-                                //         patient_id: patient_id,
-                                //     },
-                                //     function (result) {
-                                //         console.log(result);
-                                //         if (result == true) {
-                                //             $.confirm({
-                                //                 theme: 'modern',
-                                //                 icon: 'fa fa-check',
-                                //                 title: 'Success!',
-                                //                 content: "Successfully make an appointment",
-                                //                 draggable: true,
-                                //                 animationBounce: 2.5,
-                                //                 type: 'green',
-                                //                 typeAnimated: true,
-                                //                 buttons: {
-                                //                     Delete: {
-                                //                         text: 'Ok',
-                                //                         btnClass: 'btn-success',
-                                //                         action: function () {
-                                //                         }
-                                //                     }
-                                //                 }
-                                //             });
-                                //         } else {
-                                //             $.confirm({
-                                //                 theme: 'modern',
-                                //                 icon: 'fa fa-exclamation-circle',
-                                //                 title: 'Error !',
-                                //                 content: "Error happened. Please try again!",
-                                //                 draggable: true,
-                                //                 animationBounce: 2.5,
-                                //                 type: 'red',
-                                //                 typeAnimated: true,
-                                //                 buttons: {
-                                //                     Delete: {
-                                //                         text: 'Try Again',
-                                //                         btnClass: 'btn-danger',
-                                //                     }
-                                //                 }
-                                //             });
-                                //         }
-                                //     });
+                                makePayment(app_no+1);
                             }
                         },
                         later: {
@@ -424,16 +379,16 @@ function makeAppointment(schedule_id, appointments){
                 $.confirm({
                     theme: 'modern',
                     icon: 'fa fa-exclamation-circle',
-                    title: 'Error !',
-                    content: "Appointments are full",
+                    title: "Can't execute!",
+                    content: "Schedule is full",
                     draggable: true,
                     animationBounce: 2.5,
-                    type: 'red',
+                    type: 'blue',
                     typeAnimated: true,
                     buttons: {
                         Delete: {
                             text: 'Ok',
-                            btnClass: 'btn-danger',
+                            btnClass: 'btn-primary',
                         }
                     }
                 });
@@ -444,9 +399,84 @@ function makeAppointment(schedule_id, appointments){
 }
 
 function makePayment(app_no) {
-    $("#app-no").val(app_no+1);
+    $("#app-no").val(app_no);
     $('#paymentModal').modal('show');
 }
+
+paypal.Button.render({
+    // Configure environment
+    env: 'sandbox',
+    client: {
+        sandbox: 'ARffoSJdU9d0Mf6jmue33M_oIalbSgeZLCe8-26kUnRc4Lxym8NCHFYPBz7GZ2_x9bAjEZykySG7NOJ2',
+        production: 'AR0dDJ-JfKIB6cd6QOejV_SrDout7PF69hT4gNfjzUbSaqgEoHmoMFJhbBSS7-dLXB5yQrHf-E_oVL41'
+    },
+    // Customize button (optional)
+    locale: 'en_US',
+    style: {
+        size: 'small',
+        color: 'gold',
+        shape: 'pill',
+    },
+
+    // Enable Pay Now checkout flow (optional)
+    commit: true,
+
+    // Set up a payment
+    payment: function(data, actions) {
+        return actions.payment.create({
+            transactions: [{
+                amount: {
+                    total: '10',
+                    currency: 'USD'
+                }
+            }]
+        });
+    },
+    // Execute the payment
+    onAuthorize: function(data, actions) {
+        return actions.payment.execute().then(function() {
+            // Show a confirmation message to the buyer
+            let patient_id = $("#logged-user-id").val();
+            let schedule_id = $("#schedule-id").val();
+            let app_no = parseInt($("#app-no").val());
+            $.post("php/makeAppointment.php",
+                {
+                    app_no: app_no,
+                    schedule_id: schedule_id,
+                    patient_id: patient_id,
+                });
+            $.get("php/getAppId.php?schedule_id="+schedule_id+"&appointment_no="+app_no, function (data, status){
+                data = JSON.parse(data);
+                $.post("php/makePayment.php",
+                    {
+                        payment: 10,
+                        app_id: data[0].id,
+                    });
+            });
+
+            $.confirm({
+                theme: 'modern',
+                icon: 'fa fa-check',
+                title: 'Success!',
+                content: "Your payment is successful!<br>Your appointment made successfully!",
+                draggable: true,
+                animationBounce: 2.5,
+                type: 'green',
+                typeAnimated: true,
+                buttons: {
+                    Delete: {
+                        text: 'Ok',
+                        btnClass: 'btn-success',
+                        action: function () {
+                            $('#paymentModal').modal('hide');
+                        }
+                    }
+                }
+            });
+        });
+    }
+}, '#paypal-button');
+
 
 function search() {
     // Declare variables
@@ -468,4 +498,116 @@ function search() {
             }
         }
     }
+}
+
+let isPassValid_1 = false;
+let isPassValid_2 = false;
+let isPassValid_3 = false;
+
+function oldPassVerify(pass) {
+    let id = $("#logged-user-id").val();
+    $.get("php/forgotPassValidation.php?user_id=" + id + "&pass=" + pass, function (data, status) {
+        if (data) {
+            $("#old-pass-error").hide();
+            $("#old-pass-error-line").removeClass('error');
+            isPassValid_1 = true;
+        } else {
+            $("#old-pass-error").show();
+            $("#old-pass-error-line").addClass('error');
+            isPassValid_1 = false;
+        }
+    });
+}
+
+function passwordCharVerify(val) {
+    cmfPassCmpare($("#profile-new-pass-cmf").val());
+    if (val.length >= 8 && val.length <= 16) {
+        $("#profile-pass-1-error").hide();
+        $("#profile-pass-1").removeClass('error');
+        isPassValid_2 = true;
+    } else {
+        $("#profile-pass-1").addClass('error');
+        $("#profile-pass-1-error").text('Need to have 8-16 characters.');
+        $("#profile-pass-1-error").show();
+        isPassValid_2 = false;
+    }
+}
+
+function cmfPassCmpare(val) {
+    let pass = $("#profile-new-pass").val();
+    if (val.length != 0 && pass != val) {
+        $("#profile-pass-2-error").show();
+        $("#profile-pass-2").addClass('error');
+        isPassValid_3 = false;
+    } else {
+        $("#profile-pass-2-error").hide();
+        $("#profile-pass-2").removeClass('error');
+        isPassValid_3 = true;
+    }
+}
+
+function updatePassword() {
+    if (isPassValid_1 && isPassValid_2 && isPassValid_3) {
+        $.confirm({
+            theme: 'modern',
+            icon: 'fa fa-key',
+            title: 'Confirm!',
+            content: "Do you want to change password?",
+            draggable: true,
+            animationBounce: 2.5,
+            type: 'red',
+            typeAnimated: true,
+            buttons: {
+                yes: {
+                    text: 'Yes',
+                    btnClass: 'btn-danger',
+                    action: function () {
+                        let pass = $("#profile-new-pass").val();
+                        let id = $("#logged-user-id").val();
+
+                        $.post("php/updatePass.php",
+                            {
+                                id: id,
+                                password: pass,
+                            },
+                            function (result) {
+                                if (result == 1) {
+                                    $.confirm({
+                                        theme: 'modern',
+                                        icon: 'fa fa-check-circle',
+                                        title: 'Success!',
+                                        content: "Password changed successfully!",
+                                        draggable: true,
+                                        animationBounce: 2.5,
+                                        type: 'green',
+                                        typeAnimated: true,
+                                        buttons: {
+                                            Delete: {
+                                                text: 'Done',
+                                                btnClass: 'btn-success',
+
+                                            },
+
+                                        }
+                                    });
+                                }else{
+                                    console.error("ERROR HAPPENED!");
+                                }
+                            });
+                    }
+                },
+                later: {
+                    text: 'No',
+                    action: function () {
+
+                    }
+                }
+            }
+        });
+
+
+
+
+    }
+
 }
