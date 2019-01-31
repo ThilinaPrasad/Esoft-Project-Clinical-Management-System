@@ -33,6 +33,9 @@ require_once("php/loginDataFetching.php");
     <!-- Staff Css -->
     <link href="css/custom/staff.css" rel="stylesheet">
 
+    <!-- Admin Css -->
+    <link href="css/custom/admin.css" rel="stylesheet">
+
     <!-- Animation Css -->
     <link href="plugins/animate-css/animate.css" rel="stylesheet"/>
 
