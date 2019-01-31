@@ -331,8 +331,8 @@ function getAllSchedules() {
                         '<td>' + temp.end_time + '</td>' +
                         '<td >' + scheduleStatus + '</td>' +
                         '<td>' + temp.appointments + '</td>' +
-                        '<td><button style="border-radius: 30px;" onclick="makeAppointment('+temp.schedule_id+','+temp.appointments+')" class="bg-teal btn-xs waves-effect"> ' +
-                        ' <i class="material-icons">verified_user</i>Make Appointment</button></td>' +
+                        '<td><button style="border-radius: 30px;" onclick="makeAppointment('+temp.schedule_id+','+temp.appointments+')" class="btn btn-success btn-sm waves-effect"> ' +
+                        'Make Appointment</button></td>' +
                         '</tr>';
                 }
             }
