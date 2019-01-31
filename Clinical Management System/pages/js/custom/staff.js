@@ -112,51 +112,51 @@ function confirmRegister(){
     if($("#firstName").val() == ''){
         $("#add-doctor-fname-line").addClass("error");
         $("#add-doctor-fname-error").show();
-        this.isValid = false;
+        isValid = false;
     }if($("#lastName").val() == ''){
         $("#add-doctor-lname-line").addClass("error");
         $("#add-doctor-lname-error").show();
-        this.isValid = false;
+        isValid = false;
     }if($("#bday").val() == ''){
         $("#add-doctor-bday-line").addClass("error");
         $("#add-doctor-bday-error").show();
-        this.isValid = false;
+        isValid = false;
     }if($("#nic").val() == ''){
         $("#add-doctor-nic-line").addClass("error");
         $("#add-doctor-nic-error").show();
-        this.isValid = false;
+        isValid = false;
     }if($("#street").val() == ''){
         $("#add-doctor-street-line").addClass("error");
         $("#add-doctor-street-error").show();
-        this.isValid = false;
+        isValid = false;
     }if($("#ZipCode").val() == ''){
         $("#add-doctor-zipcode-line").addClass("error");
         $("#add-doctor-zipcode-error").show();
-        this.isValid = false;
+        isValid = false;
     }if($("#city").val() == ''){
         $("#add-doctor-city-line").addClass("error");
         $("#add-doctor-city-error").show();
-        this.isValid = false;
+        isValid = false;
     }if($("#country").val() == ''){
         $("#add-doctor-country-line").addClass("error");
         $("#add-doctor-country-error").show();
-        this.isValid = false;
+        isValid = false;
     }if($("#email").val() == ''){
         $("#add-doctor-email-line").addClass("error");
         $("#add-doctor-email-error").show();
-        this.isValid = false;
+        isValid = false;
     }if($("#tele").val() == ''){
         $("#add-doctor-tele-line").addClass("error");
         $("#add-doctor-tele-error").show();
-        this.isValid = false;
+        isValid = false;
     }if($("#licence").val() == ''){
         $("#add-doctor-medLicenceNo-line").addClass("error");
         $("#add-doctor-medLicenceNo-error").show();
-        this.isValid = false;
+        isValid = false;
     }if($("#speciality").val() == ''){
         $("#add-doctor-speciality-line").addClass("error");
         $("#add-doctor-speciality-error").show();
-        this.isValid = false;
+        isValid = false;
     }
     if(isValid && isEmailValid) {
         console.log("Valid");
