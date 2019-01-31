@@ -24,6 +24,7 @@ function addRemoveClass(x) {
     $("#schedule").removeClass("active");
     $("#doctor").removeClass("active");
     $("#staff").removeClass("active");
+    $("#payment").removeClass("active");
     $(x).addClass("active");
 }
 
