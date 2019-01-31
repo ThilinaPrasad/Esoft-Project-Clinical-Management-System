@@ -252,23 +252,11 @@ require_once("php/loginDataFetching.php");
                         <span>View Patients</span>
                     </a>
                 </li>
-                <li id="schedule">
-                    <a href="javascript:void(0);" class="menu-toggle">
+                <li id="schedule" onclick="viewSchedule('#schedule')">
+                    <a href="#">
                         <i class="material-icons">schedule</i>
-                        <span>Schedules & Appointments</span>
+                        <span>View Schedule</span>
                     </a>
-                    <ul class="ml-menu">
-                        <li>
-                            <a href="javascript:void(0);" onclick="viewSchedule('#schedule')">
-                                <span>View Schedules</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);" onclick="viewAppointments('#schedule')">
-                                <span>View Appointments</span>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
                 <li id="doctor">
                     <a href="javascript:void(0);" class="menu-toggle">
@@ -543,7 +531,7 @@ require_once("php/loginDataFetching.php");
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-teal" style="padding: 15px;">
-                <h2 class="modal-title text-center" id="doctorDataModelLabel">Patient Details</h2>
+                <h2 class="modal-title text-center" id="doctorDataModelLabel">Doctor Details</h2>
             </div>
             <div class="modal-body" style="padding-bottom: 0;">
                 <div class="body table-responsive">
@@ -932,383 +920,64 @@ require_once("php/loginDataFetching.php");
     </div>
 </section>
 
-<section class="content" id="viewAppointments">
-    <div class="container-fluid">
-        <div class="row clearfix">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="card" style="min-height: 80vh;">
-                    <div class="header">
-                        <h2 class="font-bold col-teal">
-                            View Appointments
-                        </h2>
-                    </div>
-                    <div class="body row">
-                        <!--This week schedules-->
-                        <div class="col-md-4">
-                            <!-collapse panel group-->
-                            <div class="col-xs-12 ol-sm-12 col-md-12 col-lg-12">
-                                <h5 class="text-center">This week</h5>
-                                <div class="panel-group" id="twh" role="tablist" aria-multiselectable="true">
-                                    <!--panel-->
-                                    <div class="panel panel-success">
-                                        <div class="panel-heading" role="tab" id="twh_1">
-                                            <h4 class="panel-title">
-                                                <a class="collapsed text-center" role="button" data-toggle="collapse"
-                                                   data-parent="#twh" href="#twh_collapse_1" aria-expanded="false"
-                                                   aria-controls="twh_collapse_1">
-                                                    11.30 A.M | 25 January 2019
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="twh_collapse_1" class="panel-collapse collapse" role="tabpanel"
-                                             aria-labelledby="twh_1">
-                                            <div class="panel-body">
-                                                <div class="list-group">
-                                                    <button type="button" class="list-group-item">
-                                                        <span class="pull-left">Date</span> <span class="pull-right">25 January 2019</span>
-                                                    </button>
-                                                    <button type="button" class="list-group-item">
-                                                        <span class="pull-left">Time</span> <span class="pull-right">11.30 A.M</span>
-                                                    </button>
-                                                    <button type="button" class="list-group-item">
-                                                        <span class="pull-left">Patient</span> <span class="pull-right">D.G. Sumanapala</span>
-                                                    </button>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--panel-->
-                                    <!--panel-->
-                                    <div class="panel panel-success">
-                                        <div class="panel-heading" role="tab" id="twh_2">
-                                            <h4 class="panel-title">
-                                                <a class="collapsed text-center" role="button" data-toggle="collapse"
-                                                   href="#twh_collapse_2" aria-expanded="false"
-                                                   aria-controls="twh_collapse_2">
-                                                    11.30 A.M | 25 January 2019
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="twh_collapse_2" class="panel-collapse collapse" role="tabpanel"
-                                             aria-labelledby="twh_1">
-                                            <div class="panel-body">
-                                                <div class="list-group">
-                                                    <button type="button" class="list-group-item">
-                                                        <span class="pull-left">Date</span> <span class="pull-right">25 January 2019</span>
-                                                    </button>
-                                                    <button type="button" class="list-group-item">
-                                                        <span class="pull-left">Time</span> <span class="pull-right">11.30 A.M</span>
-                                                    </button>
-                                                    <button type="button" class="list-group-item">
-                                                        <span class="pull-left">Patient</span> <span class="pull-right">D.G. Sumanapala</span>
-                                                    </button>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--panel-->
-                                    <!--panel-->
-                                    <div class="panel panel-success">
-                                        <div class="panel-heading" role="tab" id="twh_3">
-                                            <h4 class="panel-title">
-                                                <a class="collapsed text-center" role="button" data-toggle="collapse"
-                                                   href="#twh_collapse_3" aria-expanded="false"
-                                                   aria-controls="twh_collapse_3">
-                                                    11.30 A.M | 25 January 2019
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="twh_collapse_3" class="panel-collapse collapse" role="tabpanel"
-                                             aria-labelledby="twh_1">
-                                            <div class="panel-body">
-                                                <div class="list-group">
-                                                    <button type="button" class="list-group-item">
-                                                        <span class="pull-left">Date</span> <span class="pull-right">25 January 2019</span>
-                                                    </button>
-                                                    <button type="button" class="list-group-item">
-                                                        <span class="pull-left">Time</span> <span class="pull-right">11.30 A.M</span>
-                                                    </button>
-                                                    <button type="button" class="list-group-item">
-                                                        <span class="pull-left">Patient</span> <span class="pull-right">D.G. Sumanapala</span>
-                                                    </button>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--panel-->
-                                </div>
-                            </div>
-                            <!-collapse panel group-->
-                        </div>
-                        <!--next Week schedule-->
-                        <div class="col-md-4">
-                            <!-collapse panel group-->
-                            <div class="col-xs-12 ol-sm-12 col-md-12 col-lg-12">
-                                <h5 class="text-center">Next week</h5>
-                                <div class="panel-group" id="nwh" role="tablist" aria-multiselectable="true">
-                                    <!--panel-->
-                                    <div class="panel panel-primary">
-                                        <div class="panel-heading" role="tab" id="nwh_1">
-                                            <h4 class="panel-title">
-                                                <a class="collapsed text-center" role="button" data-toggle="collapse"
-                                                   data-parent="#nwh" href="#nwh_collapse_1" aria-expanded="false"
-                                                   aria-controls="nwh_collapse_1">
-                                                    11.30 A.M | 25 January 2019
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="nwh_collapse_1" class="panel-collapse collapse" role="tabpanel"
-                                             aria-labelledby="nwh_1">
-                                            <div class="panel-body">
-                                                <div class="list-group">
-                                                    <button type="button" class="list-group-item">
-                                                        <span class="pull-left">Date</span> <span class="pull-right">25 January 2019</span>
-                                                    </button>
-                                                    <button type="button" class="list-group-item">
-                                                        <span class="pull-left">Time</span> <span class="pull-right">11.30 A.M</span>
-                                                    </button>
-                                                    <button type="button" class="list-group-item">
-                                                        <span class="pull-left">Patient</span> <span class="pull-right">D.G. Sumanapala</span>
-                                                    </button>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--panel-->
-                                    <!--panel-->
-                                    <div class="panel panel-primary">
-                                        <div class="panel-heading" role="tab" id="nwh_2">
-                                            <h4 class="panel-title">
-                                                <a class="collapsed text-center" role="button" data-toggle="collapse"
-                                                   href="#nwh_collapse_2" aria-expanded="false"
-                                                   aria-controls="nwh_collapse_2">
-                                                    11.30 A.M | 25 January 2019
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="nwh_collapse_2" class="panel-collapse collapse" role="tabpanel"
-                                             aria-labelledby="twh_1">
-                                            <div class="panel-body">
-                                                <div class="list-group">
-                                                    <button type="button" class="list-group-item">
-                                                        <span class="pull-left">Date</span> <span class="pull-right">25 January 2019</span>
-                                                    </button>
-                                                    <button type="button" class="list-group-item">
-                                                        <span class="pull-left">Time</span> <span class="pull-right">11.30 A.M</span>
-                                                    </button>
-                                                    <button type="button" class="list-group-item">
-                                                        <span class="pull-left">Patient</span> <span class="pull-right">D.G. Sumanapala</span>
-                                                    </button>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--panel-->
-                                    <!--panel-->
-                                    <div class="panel panel-primary">
-                                        <div class="panel-heading" role="tab" id="nwh_3">
-                                            <h4 class="panel-title">
-                                                <a class="collapsed text-center" role="button" data-toggle="collapse"
-                                                   href="#nwh_collapse_3" aria-expanded="false"
-                                                   aria-controls="nwh_collapse_3">
-                                                    11.30 A.M | 25 January 2019
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="nwh_collapse_3" class="panel-collapse collapse" role="tabpanel"
-                                             aria-labelledby="twh_1">
-                                            <div class="panel-body">
-                                                <div class="list-group">
-                                                    <button type="button" class="list-group-item">
-                                                        <span class="pull-left">Date</span> <span class="pull-right">25 January 2019</span>
-                                                    </button>
-                                                    <button type="button" class="list-group-item">
-                                                        <span class="pull-left">Time</span> <span class="pull-right">11.30 A.M</span>
-                                                    </button>
-                                                    <button type="button" class="list-group-item">
-                                                        <span class="pull-left">Patient</span> <span class="pull-right">D.G. Sumanapala</span>
-                                                    </button>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--panel-->
-                                </div>
-                            </div>
-                            <!-collapse panel group-->
-                        </div>
-                        <div class="col-md-4">
-                            <!-collapse panel group-->
-                            <div class="col-xs-12 ol-sm-12 col-md-12 col-lg-12">
-                                <h5 class="text-center">Next week</h5>
-                                <div class="panel-group" id="pwh" role="tablist" aria-multiselectable="true">
-                                    <!--panel-->
-                                    <div class="panel panel-warning">
-                                        <div class="panel-heading" role="tab" id="pwh_1">
-                                            <h4 class="panel-title">
-                                                <a class="collapsed text-center" role="button" data-toggle="collapse"
-                                                   data-parent="#pwh" href="#pwh_collapse_1" aria-expanded="false"
-                                                   aria-controls="pwh_collapse_1">
-                                                    11.30 A.M | 25 January 2019
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="pwh_collapse_1" class="panel-collapse collapse" role="tabpanel"
-                                             aria-labelledby="nwh_1">
-                                            <div class="panel-body">
-                                                <div class="list-group">
-                                                    <button type="button" class="list-group-item">
-                                                        <span class="pull-left">Date</span> <span class="pull-right">25 January 2019</span>
-                                                    </button>
-                                                    <button type="button" class="list-group-item">
-                                                        <span class="pull-left">Time</span> <span class="pull-right">11.30 A.M</span>
-                                                    </button>
-                                                    <button type="button" class="list-group-item">
-                                                        <span class="pull-left">Patient</span> <span class="pull-right">D.G. Sumanapala</span>
-                                                    </button>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--panel-->
-                                    <!--panel-->
-                                    <div class="panel panel-warning">
-                                        <div class="panel-heading" role="tab" id="pwh_2">
-                                            <h4 class="panel-title">
-                                                <a class="collapsed text-center" role="button" data-toggle="collapse"
-                                                   href="#pwh_collapse_2" aria-expanded="false"
-                                                   aria-controls="pwh_collapse_2">
-                                                    11.30 A.M | 25 January 2019
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="pwh_collapse_2" class="panel-collapse collapse" role="tabpanel"
-                                             aria-labelledby="twh_1">
-                                            <div class="panel-body">
-                                                <div class="list-group">
-                                                    <button type="button" class="list-group-item">
-                                                        <span class="pull-left">Date</span> <span class="pull-right">25 January 2019</span>
-                                                    </button>
-                                                    <button type="button" class="list-group-item">
-                                                        <span class="pull-left">Time</span> <span class="pull-right">11.30 A.M</span>
-                                                    </button>
-                                                    <button type="button" class="list-group-item">
-                                                        <span class="pull-left">Patient</span> <span class="pull-right">D.G. Sumanapala</span>
-                                                    </button>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--panel-->
-                                    <!--panel-->
-                                    <div class="panel panel-warning">
-                                        <div class="panel-heading" role="tab" id="pwh_3">
-                                            <h4 class="panel-title">
-                                                <a class="collapsed text-center" role="button" data-toggle="collapse"
-                                                   href="#pwh_collapse_3" aria-expanded="false"
-                                                   aria-controls="pwh_collapse_3">
-                                                    11.30 A.M | 25 January 2019
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="pwh_collapse_3" class="panel-collapse collapse" role="tabpanel"
-                                             aria-labelledby="twh_1">
-                                            <div class="panel-body">
-                                                <div class="list-group">
-                                                    <button type="button" class="list-group-item">
-                                                        <span class="pull-left">Date</span> <span class="pull-right">25 January 2019</span>
-                                                    </button>
-                                                    <button type="button" class="list-group-item">
-                                                        <span class="pull-left">Time</span> <span class="pull-right">11.30 A.M</span>
-                                                    </button>
-                                                    <button type="button" class="list-group-item">
-                                                        <span class="pull-left">Patient</span> <span class="pull-right">D.G. Sumanapala</span>
-                                                    </button>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--panel-->
-                                </div>
-                            </div>
-                            <!-collapse panel group-->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 <section class="content" id="viewSchedule">
     <div class="container-fluid">
+        <!-- Exportable Table -->
         <div class="row clearfix">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="card" style="min-height: 80vh;">
+                <div class="card">
                     <div class="header">
                         <h2 class="font-bold col-teal">
-                            View Schedules
+                            View Doctor Schedule
                         </h2>
                     </div>
-                    <div class="body row">
-                        <div class="body table-responsive">
-                            <table class="table table-hover text-center">
-                                <thead class="text-center">
+                    <div class="body">
+                        <div class="row clearfix">
+                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                <label for="searchInput"><i class="material-icons">search</i></label>
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" id="searchInput" class="form-control" onkeyup="search()" placeholder="Search by Doctor name">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover text-center" id="scheduleTable">
+                                <thead class="col-teal">
                                 <tr>
+                                    <th class="text-center col-teal">Doctor</th>
                                     <th class="text-center col-teal">Start Date</th>
                                     <th class="text-center col-teal">Start Time</th>
                                     <th class="text-center col-teal">End Date</th>
                                     <th class="text-center col-teal">End Time</th>
+                                    <th class="text-center col-teal">Status</th>
+                                    <th class="text-center col-teal">Appointments<br>(Remaining)</span></th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr class="schedule-row">
-                                    <td>01/12/2018</td>
-                                    <td>25:53</td>
-                                    <td>01/12/2018</td>
-                                    <td>25:53</td>
-                                </tr>
+                                <tfoot class="col-teal">
                                 <tr>
-                                    <td>01/12/2018</td>
-                                    <td>25:53</td>
-                                    <td>01/12/2018</td>
-                                    <td>25:53</td>
+                                    <th class="text-center col-teal">Doctor</th>
+                                    <th class="text-center col-teal">Start Date</th>
+                                    <th class="text-center col-teal">Start Time</th>
+                                    <th class="text-center col-teal">End Date</th>
+                                    <th class="text-center col-teal">End Time</th>
+                                    <th class="text-center col-teal">Status</th>
+                                    <th class="text-center col-teal">Appointments<br>(Remaining)</th>
                                 </tr>
-                                <tr>
-                                    <td>01/12/2018</td>
-                                    <td>25:53</td>
-                                    <td>01/12/2018</td>
-                                    <td>25:53</td>
-                                </tr>
-                                <tr>
-                                    <td>01/12/2018</td>
-                                    <td>25:53</td>
-                                    <td>01/12/2018</td>
-                                    <td>25:53</td>
-                                </tr>
-                                <tr>
-                                    <td>01/12/2018</td>
-                                    <td>25:53</td>
-                                    <td>01/12/2018</td>
-                                    <td>25:53</td>
-                                </tr>
+                                </tfoot>
+                                <tbody id="view-schedule-body">
+
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
+        <!-- #END# Exportable Table -->
     </div>
 </section>
 
@@ -1456,37 +1125,40 @@ require_once("php/loginDataFetching.php");
                                         <div class="form-group">
                                             <label for="OldPassword" class="col-sm-3 control-label">Old Password</label>
                                             <div class="col-sm-9">
-                                                <div class="form-line">
+                                                <div class="form-line" id="old-pass-error-line">
                                                     <input type="password" class="form-control" id="OldPassword"
-                                                           name="OldPassword" placeholder="Old Password"  >
+                                                           name="OldPassword" placeholder="Old Password" oninput="oldPassVerify(this.value)" required>
                                                 </div>
+                                                <label id="old-pass-error" style="display: none;" class="error error-msg" for="OldPassword">Password mismatched!</label>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="NewPassword" class="col-sm-3 control-label">New Password</label>
                                             <div class="col-sm-9">
-                                                <div class="form-line">
-                                                    <input type="password" class="form-control" id="NewPassword"
-                                                           name="NewPassword" placeholder="New Password"  >
+                                                <div class="form-line" id="profile-pass-1">
+                                                    <input type="password" class="form-control" id="profile-new-pass"
+                                                           name="profile-new-pass" placeholder="New Password" required oninput="passwordCharVerify(this.value)">
                                                 </div>
+                                                <label id="profile-pass-1-error"  style="display: none;" class="error error-msg" for="profile-new-pass"></label>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="NewPasswordConfirm" class="col-sm-3 control-label">New Password
                                                 (Confirm)</label>
                                             <div class="col-sm-9">
-                                                <div class="form-line">
-                                                    <input type="password" class="form-control" id="NewPasswordConfirm"
-                                                           name="NewPasswordConfirm"
-                                                           placeholder="New Password (Confirm)"  >
+                                                <div class="form-line" id="profile-pass-2">
+                                                    <input type="password" class="form-control" id="profile-new-pass-cmf"
+                                                           name="profile-new-pass-cmf"
+                                                           placeholder="New Password (Confirm)" required oninput="cmfPassCmpare(this.value);">
                                                 </div>
+                                                <label id="profile-pass-2-error"  style="display: none;" class="error error-msg" for="profile-new-pass">Password mismatched with entered new password!</label>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="col-sm-offset-3 col-sm-9">
-                                                <button type="submit" class="btn bg-teal waves-effect">Change Password
-                                                </button>
+                                                <a class="btn bg-teal waves-effect" onclick="updatePassword()">Change Password
+                                                </a>
                                             </div>
                                         </div>
                                     </form>

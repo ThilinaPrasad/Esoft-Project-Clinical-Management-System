@@ -506,6 +506,7 @@ require_once("php/loginDataFetching.php");
                 <div class="body row table-responsive">
                     <div class="col-md-12">
                         <form class="form-horizontal">
+                            <input type="hidden" id="schedule-id">
                             <div class="row clearfix m-b-10">
                                 <div class="col-lg-4 col-md-2 col-sm-4 col-xs-5 form-control-label">
                                     <label for="app-no">Appointment Number</label>
@@ -537,10 +538,11 @@ require_once("php/loginDataFetching.php");
                         </form>
                     </div>
                 </div>
-            <div class="modal-footer" style="padding-top: 0;">
-                <button type="button" class="btn btn-success waves-effect" onclick="pay();">Pay
-                </button>
-                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
+            <div class="modal-footer m-t-15" style="padding-top: 0;">
+                <div class="row">
+                <div id="paypal-button" class="col-lg-4 col-lg-offset-5"></div>
+                <button type="button" class="btn btn-sm bg-teal waves-effect col-lg-2" data-dismiss="modal" style="border-radius: 30px; margin-top: -3px">Close</button>
+                </div>
             </div>
             </div>
         </div>
@@ -704,37 +706,40 @@ require_once("php/loginDataFetching.php");
                                         <div class="form-group">
                                             <label for="OldPassword" class="col-sm-3 control-label">Old Password</label>
                                             <div class="col-sm-9">
-                                                <div class="form-line">
+                                                <div class="form-line" id="old-pass-error-line">
                                                     <input type="password" class="form-control" id="OldPassword"
-                                                           name="OldPassword" placeholder="Old Password" required>
+                                                           name="OldPassword" placeholder="Old Password" oninput="oldPassVerify(this.value)" required>
                                                 </div>
+                                                <label id="old-pass-error" style="display: none;" class="error error-msg" for="OldPassword">Password mismatched!</label>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="NewPassword" class="col-sm-3 control-label">New Password</label>
                                             <div class="col-sm-9">
-                                                <div class="form-line">
-                                                    <input type="password" class="form-control" id="NewPassword"
-                                                           name="NewPassword" placeholder="New Password" required>
+                                                <div class="form-line" id="profile-pass-1">
+                                                    <input type="password" class="form-control" id="profile-new-pass"
+                                                           name="profile-new-pass" placeholder="New Password" required oninput="passwordCharVerify(this.value)">
                                                 </div>
+                                                <label id="profile-pass-1-error"  style="display: none;" class="error error-msg" for="profile-new-pass"></label>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="NewPasswordConfirm" class="col-sm-3 control-label">New Password
                                                 (Confirm)</label>
                                             <div class="col-sm-9">
-                                                <div class="form-line">
-                                                    <input type="password" class="form-control" id="NewPasswordConfirm"
-                                                           name="NewPasswordConfirm"
-                                                           placeholder="New Password (Confirm)" required>
+                                                <div class="form-line" id="profile-pass-2">
+                                                    <input type="password" class="form-control" id="profile-new-pass-cmf"
+                                                           name="profile-new-pass-cmf"
+                                                           placeholder="New Password (Confirm)" required oninput="cmfPassCmpare(this.value);">
                                                 </div>
+                                                <label id="profile-pass-2-error"  style="display: none;" class="error error-msg" for="profile-new-pass">Password mismatched with entered new password!</label>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="col-sm-offset-3 col-sm-9">
-                                                <button type="submit" class="btn bg-teal waves-effect">Change Password
-                                                </button>
+                                                <a class="btn bg-teal waves-effect" onclick="updatePassword()">Change Password
+                                                </a>
                                             </div>
                                         </div>
                                     </form>
@@ -750,6 +755,9 @@ require_once("php/loginDataFetching.php");
 
 <!-- Jquery Core Js -->
 <script src="plugins/jquery/jquery.min.js"></script>
+
+<!-- Paypal Gateway -->
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
 
 <!-- Bootstrap Core Js -->
 <script src="plugins/bootstrap/js/bootstrap.js"></script>
