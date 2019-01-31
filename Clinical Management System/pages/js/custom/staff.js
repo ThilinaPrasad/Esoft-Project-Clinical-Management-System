@@ -357,46 +357,6 @@ function deleteOther(id, type){
     });
 }
 
-function getAllSchedules() {
-    let temp_html = '';
-    $.get("php/getAllSchedules.php", function (data, status) {
-        if (data != 'false') {
-            data = JSON.parse(data);
-            let currentTime = new Date();
-            for (let i = 0; i < data.length; i++) {
-                let temp = data[i];
-                let start = new Date(temp.start_date + ' ' + temp.start_time);
-                let end = new Date(temp.end_date + ' ' + temp.end_time);
-                let scheduleStatus = '<span class="label label-info">Upcoming</span>';
-                let status = '';
-                if (start>currentTime){
-                    scheduleStatus = '<span class="label label-info">Upcoming</span>';
-                    status = "Upcoming";
-                }
-                else if(start<=currentTime && end>=currentTime){
-                    scheduleStatus = '<span class="label label-success">Ongoing&nbsp;</span>';
-                    status = "Ongoing";
-                }else if(start<currentTime){
-                    scheduleStatus = '<span class="label label-warning">Passed&nbsp;</span>';
-                    status = "Passed";
-                }
-                temp_html += '<tr class="schedule-row">' +
-                    '<td>' + temp.fname + ' ' + temp.sname + '</td>' +
-                    '<td>' + temp.start_date + '</td>' +
-                    '<td>' + temp.start_time + '</td>' +
-                    '<td>' + temp.end_date + '</td>' +
-                    '<td>' + temp.end_time + '</td>' +
-                    '<td >' + scheduleStatus + '</td>' +
-                    '<td>' + temp.appointments + '</td>' +
-                    '</tr>';
-            }
-        } else {
-            temp_html += '<tr class="schedule-row text-center">No schedules found</tr>';
-        }
-        $("#view-schedule-body").html(temp_html);
-    });
-}
-
 function search() {
     // Declare variables
     var input, filter, table, tr, td, i, txtValue;

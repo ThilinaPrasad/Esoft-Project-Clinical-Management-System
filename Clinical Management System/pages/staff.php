@@ -252,7 +252,7 @@ require_once("php/loginDataFetching.php");
                         <span>View Patients</span>
                     </a>
                 </li>
-                <li id="schedule" onclick="viewSchedule('#schedule')">
+                <li id="schedule" onclick="viewScheduleAdmin('#schedule')">
                     <a href="#">
                         <i class="material-icons">schedule</i>
                         <span>View Schedule</span>
@@ -921,17 +921,39 @@ require_once("php/loginDataFetching.php");
 </section>
 
 <section class="content" id="viewSchedule">
+
+    <!-- schedules data model -->
+    <div class="modal fade" id="viewScheduleModel" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-teal" style="padding: 15px;">
+                    <h2 class="modal-title text-center" id="viewSchedulesModelLabel">Appointments on this Schedule</h2>
+                </div>
+                <div class="modal-body" style="padding-bottom: 0;min-height: 70vh;">
+                    <div class="body table-responsive">
+                        <div class="panel-group" id="schedule-appointments" role="tablist" aria-multiselectable="true">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer" style="padding-top: 0;">
+                    <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container-fluid">
-        <!-- Exportable Table -->
         <div class="row clearfix">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="card">
+                <div class="card" style="min-height: 80vh;">
                     <div class="header">
                         <h2 class="font-bold col-teal">
-                            View Doctor Schedule
+                            View Schedules
                         </h2>
                     </div>
-                    <div class="body">
+                    <div class="body row">
                         <div class="row clearfix">
                             <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                                 <label for="searchInput"><i class="material-icons">search</i></label>
@@ -944,9 +966,9 @@ require_once("php/loginDataFetching.php");
                                 </div>
                             </div>
                         </div>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped table-hover text-center" id="scheduleTable">
-                                <thead class="col-teal">
+                        <div class="body table-responsive">
+                            <table class="table table-hover text-center">
+                                <thead class="text-center">
                                 <tr>
                                     <th class="text-center col-teal">Doctor</th>
                                     <th class="text-center col-teal">Start Date</th>
@@ -954,30 +976,20 @@ require_once("php/loginDataFetching.php");
                                     <th class="text-center col-teal">End Date</th>
                                     <th class="text-center col-teal">End Time</th>
                                     <th class="text-center col-teal">Status</th>
-                                    <th class="text-center col-teal">Appointments<br>(Remaining)</span></th>
+                                    <th class="text-center col-teal">Appointments Allowed</span></th>
+                                    <th class="text-center col-teal">Created Date | Time</th>
                                 </tr>
                                 </thead>
-                                <tfoot class="col-teal">
-                                <tr>
-                                    <th class="text-center col-teal">Doctor</th>
-                                    <th class="text-center col-teal">Start Date</th>
-                                    <th class="text-center col-teal">Start Time</th>
-                                    <th class="text-center col-teal">End Date</th>
-                                    <th class="text-center col-teal">End Time</th>
-                                    <th class="text-center col-teal">Status</th>
-                                    <th class="text-center col-teal">Appointments<br>(Remaining)</th>
-                                </tr>
-                                </tfoot>
                                 <tbody id="view-schedule-body">
 
                                 </tbody>
                             </table>
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
-        <!-- #END# Exportable Table -->
     </div>
 </section>
 
@@ -1235,6 +1247,7 @@ require_once("php/loginDataFetching.php");
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <!-- Demo Js -->
 <script src="js/custom/doctor.js"></script>
+<script src="js/custom/admin.js"></script>
 <script src="js/custom/staff.js"></script>
 <script src="js/pages/forms/basic-form-elements.js"></script>
 
