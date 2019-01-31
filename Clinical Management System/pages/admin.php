@@ -1,6 +1,7 @@
 ﻿<?php
 require_once("php/getPatients.php");
 require_once("php/getDoctors.php");
+require_once("php/getStaff.php");
 require_once("php/loginDataFetching.php");
 ?>
 <!DOCTYPE html>
@@ -678,7 +679,6 @@ require_once("php/loginDataFetching.php");
 </section>
 
 <section class="content" id="addDoctor">
-
     <div class="container-fluid">
         <div class="row clearfix">
             <div class="col-xs-12 col-sm-9">
@@ -980,19 +980,7 @@ require_once("php/loginDataFetching.php");
                         </h2>
                     </div>
                     <div class="body row">
-                        <div class="row clearfix">
-                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                <label for="searchInput"><i class="material-icons">search</i></label>
-                            </div>
-                            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input type="text" id="searchInput" class="form-control" onkeyup="search()" placeholder="Search by Doctor name">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="body table-responsive"  id="scheduleTable">
+                        <div class="body table-responsive">
                             <table class="table table-hover text-center">
                                 <thead class="text-center">
                                 <tr>
@@ -1019,7 +1007,290 @@ require_once("php/loginDataFetching.php");
     </div>
 </section>
 
+<section class="content" id="addStaff">
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-xs-12 col-sm-9">
+                <div class="card">
+                    <div class="header">
+                        <h2 class="font-bold col-teal">
+                            Add Staff
+                        </h2>
+                    </div>
+                    <div class="body">
+                        <div>
+                            <div class="tab-content">
+                                <form class="form-horizontal">
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                                        <li id = "staff-personal_tab_ind" role="presentation" class="active col-md-6 text-center" style="margin-bottom: 0;"><a href="#staff-personal" data-toggle="tab">Personal</a></li>
+                                        <li id = "staff-contact_tab_ind" role="presentation" class="col-md-6 text-center"  style="margin-bottom: 0;"><a href="#staff-contact" data-toggle="tab">Contact</a></li>
+                                    </ul>
 
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div role="tabpanel" class="tab-pane fade in active" id="staff-personal">
+                                            <div class="form-group">
+                                                <label for="firstName" class="col-sm-2 control-label">First Name</label>
+                                                <div class="col-sm-8">
+                                                    <div class="form-line" id="add-staff-fname-line">
+                                                        <input type="text" class="form-control"
+                                                               id="staff-firstName"
+                                                               name="firstName" placeholder="First Name">
+                                                    </div>
+                                                    <label class="error" style='display:none;' id="add-staff-fname-error">This field is required.</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="lastName" class="col-sm-2 control-label">Last Name</label>
+                                                <div class="col-sm-8">
+                                                    <div class="form-line" id="add-staff-lname-line">
+                                                        <input type="text" class="form-control"
+                                                               id="staff-lastName"
+                                                               name="lastName" placeholder="Last Name">
+                                                    </div>
+                                                    <label class="error" style='display:none;' style='display:none;' id="add-staff-lname-error">This field is required.</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="gender" class="col-sm-2 control-label">Gender</label>
+                                                <div class="col-sm-8">
+                                                    <div class="form-control">
+                                                        <input name="gender" type="radio" id="staff-male" class="radio-col-teal" value="Male" checked/>
+                                                        <label for=staff-male">Male</label>
+                                                        <input name="gender" type="radio" id="staff-female" class="radio-col-teal" value="Female"/>
+                                                        <label for="staff-female">Female</label>
+                                                    </div>
+                                                    <label class="error" style='display:none;'>This field is required.</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="bday" class="col-sm-2 control-label">Birth Day</label>
+                                                <div class="col-sm-8">
+                                                    <div class="form-line" id="add-staff-bday-line">
+                                                        <input id="staff-bday"
+                                                               class="datepicker form-control"
+                                                               placeholder="Birth Day">
+                                                    </div>
+                                                    <label class="error" style='display:none;' id="add-staff-bday-error">This field is required.</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="nic" class="col-sm-2 control-label">NIC</label>
+                                                <div class="col-sm-8">
+                                                    <div class="form-line" id="add-staff-nic-line">
+                                                        <input type="text" class="form-control"
+                                                               id="staff-nic"
+                                                               name="nic" placeholder="NIC">
+                                                    </div>
+                                                    <label class="error" style='display:none;' id="add-staff-nic-error">This field is required.</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-6">
+                                                    <a href="#contact" class="btn btn-success" data-toggle="tab" onclick="tabShift('#staff-contact')">Continue</a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane fade" id="staff-contact">
+                                            <div class="form-group">
+                                                <label for="street" class="col-sm-2 control-label">Street</label>
+                                                <div class="col-sm-8">
+                                                    <div class="form-line" id="add-staff-street-line">
+                                                        <input type="text" class="form-control"
+                                                               id="staff-street"
+                                                               name="street" placeholder="Street">
+                                                    </div>
+                                                    <label class="error" style='display:none;' id="add-staff-street-error">This field is required.</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="ZipCode" class="col-sm-2 control-label">Zip Code</label>
+                                                <div class="col-sm-8">
+                                                    <div class="form-line" id="add-staff-zipcode-line">
+                                                        <input type="text" class="form-control"
+                                                               id="staff-ZipCode"
+                                                               name="zipCode" placeholder="Zip Code">
+                                                    </div>
+                                                    <label class="error" style='display:none;' id="add-staff-zipcode-error">This field is required.</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="city" class="col-sm-2 control-label">City</label>
+                                                <div class="col-sm-8">
+                                                    <div class="form-line" id="add-staff-city-line">
+                                                        <input type="text" class="form-control"
+                                                               id="staff-city"
+                                                               name="city" placeholder="City">
+                                                    </div>
+                                                    <label class="error" style='display:none;' id="add-staff-city-error">This field is required.</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="ZipCode" class="col-sm-2 control-label">Country</label>
+                                                <div class="col-sm-8">
+                                                    <div class="form-line" id="add-staff-country-line">
+                                                        <input type="text" class="form-control"
+                                                               id="staff-country"
+                                                               name="country" placeholder="Country">
+                                                    </div>
+                                                    <label class="error" style='display:none;' id="add-staff-country-error">This field is required.</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="email" class="col-sm-2 control-label">Email</label>
+                                                <div class="col-sm-8">
+                                                    <div class="form-line" id="add-staff-email-line">
+                                                        <input type="email" class="form-control"
+                                                               id="staff-email"
+                                                               name="email" placeholder="Email" oninput="emailValidation(this.value)">
+                                                    </div>
+                                                    <label class="error" style='display:none;' id="add-staff-email-error">This field is required.</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="tele" class="col-sm-2 control-label">Mobile Number</label>
+                                                <div class="col-sm-8">
+                                                    <div class="form-line" id="add-staff-tele-line">
+                                                        <input type="tel" class="form-control"
+                                                               id="staff-tele"
+                                                               name="tele" placeholder="Telephone Number">
+                                                    </div>
+                                                    <label class="error" style='display:none;' id="add-staff-tele-error">This field is required.</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-4">
+                                                    <a href="#contact" class="btn bg-teal" data-toggle="tab" onclick="tabShift('#staff-personal')">Back</a>
+                                                    <a href="#" class="btn bg-green waves-effect" data-toggle="tab" onclick="confirmRegisterStaff()">Save</a>
+                                                    <label class="error" style='display:none;' id="add-staff-valid">Some field data are invalid. Please complete all fields before submit.</label>
+                                                </div>
+                                            </div>
+                                        </div></div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Staff data model -->
+<div class="modal fade" id="staffDataModel" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-teal" style="padding: 15px;">
+                <h2 class="modal-title text-center" id="staffDataModelLabel">Staff Member Details</h2>
+            </div>
+            <div class="modal-body" style="padding-bottom: 0;">
+                <div class="body table-responsive">
+                    <table class="table text-center">
+                        <tbody>
+                        <tr>
+                            <td>Full name</td>
+                            <td id="view-staff-name"></td>
+                        </tr>
+                        <tr>
+                            <td>Gender</td>
+                            <td id="view-staff-gender"></td>
+                        </tr>
+                        <tr>
+                            <td>Birthday(age)</td>
+                            <td id="view-staff-bday"></td>
+                        </tr>
+
+                        <tr>
+                            <td>NIC/Passport</td>
+                            <td id="view-staff-nic"></td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td id="view-staff-email"></td>
+                        </tr>
+                        <tr>
+                            <td>Telephone</td>
+                            <td id="view-staff-telephone"></td>
+                        </tr>
+                        <tr>
+                            <td>Address</td>
+                            <td id="view-staff-address"></td>
+                        </tr>
+                        <tr style="display: none;">
+                            <td id="view-staff-id"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="modal-footer" style="padding-top: 0;">
+                <button type="button" class="btn btn-danger waves-effect" onclick="deleteOther($('#view-staff-id').text(), 'staff')">Delete</button>
+                <button type="button" class="btn bg-teal waves-effect" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="content" id="viewStaff">
+    <div class="container-fluid">
+        <!-- Exportable Table -->
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h2 class="font-bold col-teal">
+                            View Staff Member Details
+                        </h2>
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                <thead class="col-teal">
+                                <tr>
+                                    <th>Full Name</th>
+                                    <th>Gender</th>
+                                    <th>B'day (m/d/y)</th>
+                                    <th>Email</th>
+                                    <th>Telephone</th>
+                                </tr>
+                                </thead>
+                                <tfoot class="col-teal">
+                                <tr>
+                                    <th>Full Name</th>
+                                    <th>Gender</th>
+                                    <th>B'day (m/d/y)</th>
+                                    <th>Email</th>
+                                    <th>Telephone</th>
+                                </tr>
+                                </tfoot>
+                                <tbody id="viewPatients-table-body">
+                                <?php
+                                foreach ($allStaff as $temp) {
+                                    $temp_html = "<tr onclick='showStaff(" . $temp['id'] . ");' . id='staff-row-".$temp['id']."'>" .
+                                        "<td>" . $temp['fname'] . " " . $temp['sname'] . "</td>" .
+                                        "<td>" . $temp['gender'] . "</td>" .
+                                        "<td>" . $temp['bday'] . "</td>" .
+                                        "<td>" . $temp['email'] . "</td>" .
+                                        "<td>" . $temp['telephone'] . "</td>" .
+                                        "</tr>";
+                                    echo $temp_html;
+                                }
+                                ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Exportable Table -->
+    </div>
+</section>
 
 <section class="content" id="profile">
     <div class="container-fluid">
