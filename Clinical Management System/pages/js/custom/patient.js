@@ -305,7 +305,7 @@ function formatDate(date) {
 function getAllSchedules() {
     let temp_html = '';
     $.get("php/getAllSchedules.php", function (data, status) {
-        if (data != 'false') {
+        if (data.length!=0 && data != 'false') {
             data = JSON.parse(data);
             let currentTime = new Date();
             for (let i = 0; i < data.length; i++) {
@@ -337,7 +337,7 @@ function getAllSchedules() {
                 }
             }
         } else {
-            temp_html += '<tr class="schedule-row text-center">No schedules found</tr>';
+            temp_html += '<tr class="schedule-row text-center"><td colspan="6">No schedules found</td></tr>';
         }
         $("#view-schedule-body").html(temp_html);
     });

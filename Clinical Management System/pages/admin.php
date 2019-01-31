@@ -2,6 +2,7 @@
 require_once("php/getPatients.php");
 require_once("php/getDoctors.php");
 require_once("php/getStaff.php");
+require_once("php/getDailyIncome.php");
 require_once("php/loginDataFetching.php");
 ?>
 <!DOCTYPE html>
@@ -302,6 +303,12 @@ require_once("php/loginDataFetching.php");
                             </a>
                         </li>
                     </ul>
+                </li>
+                <li id="payment" onclick="viewPayment('#payment')">
+                    <a href="#">
+                        <i class="material-icons">attach_money</i>
+                        <span>View Financial</span>
+                    </a>
                 </li>
 
             </ul>
@@ -1268,7 +1275,7 @@ require_once("php/loginDataFetching.php");
                                     <th>Telephone</th>
                                 </tr>
                                 </tfoot>
-                                <tbody id="viewPatients-table-body">
+                                <tbody>
                                 <?php
                                 foreach ($allStaff as $temp) {
                                     $temp_html = "<tr onclick='showStaff(" . $temp['id'] . ");' . id='staff-row-".$temp['id']."'>" .
@@ -1291,6 +1298,55 @@ require_once("php/loginDataFetching.php");
         <!-- #END# Exportable Table -->
     </div>
 </section>
+
+<section class="content" id="viewPayment">
+    <div class="container-fluid">
+        <!-- Exportable Table -->
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h2 class="font-bold col-teal">
+                            View Income Details
+                        </h2>
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                <thead class="col-teal">
+                                <tr class="text-center">
+                                    <th class="text-center">Date</th>
+                                    <th class="text-center">Total Income(USD)</th>
+                                </tr>
+                                </thead>
+                                <tfoot class="col-teal text-center">
+                                <tr>
+                                    <th class="text-center">Date</th>
+                                    <th class="text-center">Total Income (USD)</th>
+                                </tr>
+                                </tfoot>
+                                <tbody>
+                                <?php
+                                foreach ($paymentResponse as $temp) {
+                                    $temp_html = "<tr>" .
+                                        "<td class='text-center'>" . $temp['date']."</td>" .
+                                        "<td class='text-center'>" . $temp['income'] . "</td>" .
+                                        "</tr>";
+                                    echo $temp_html;
+                                }
+                                ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Exportable Table -->
+    </div>
+</section>
+
+
 
 <section class="content" id="profile">
     <div class="container-fluid">

@@ -10,6 +10,13 @@ function viewStaff(id){
     showSection("viewStaff");
 }
 
+function viewPayment(id){
+    addRemoveClass(id);
+    removeSection();
+    showSection("viewPayment");
+}
+
+
 function addRemoveClass(x) {
     $("#home").removeClass("active");
     $("#patient").removeClass("active");
@@ -28,6 +35,7 @@ function removeSection(){
     const addDoctors = document.getElementById("addDoctor");
     const addStaff = document.getElementById("addStaff");
     const viewStaff = document.getElementById("viewStaff");
+    const viewPayment = document.getElementById("viewPayment");
 
     dashboard.style.display = "none";
     schedule.style.display = "none";
@@ -37,6 +45,7 @@ function removeSection(){
     addDoctors.style.display = "none";
     addStaff.style.display = "none";
     viewStaff.style.display = "none";
+    viewPayment.style.display = "none";
 }
 
 function confirmRegisterStaff(){
@@ -219,7 +228,7 @@ function viewScheduleAdmin(id) {
 function getAllSchedules() {
     let temp_html = '';
     $.get("php/getAllSchedules.php", function (data, status) {
-        if (data != 'false') {
+        if (data.length!=0 && data != 'false') {
             data = JSON.parse(data);
             let currentTime = new Date();
             for (let i = 0; i < data.length; i++) {
@@ -247,7 +256,7 @@ function getAllSchedules() {
 
             }
         } else {
-            temp_html += '<tr class="schedule-row text-center">No schedules found</tr>';
+            temp_html += '<tr class="schedule-row text-center"><td colspan="8">No schedules found</td></tr>';
         }
         $("#view-schedule-body").html(temp_html);
     });
