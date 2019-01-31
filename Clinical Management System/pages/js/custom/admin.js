@@ -1,8 +1,42 @@
+function addStaff(id){
+    addRemoveClass(id);
+    removeSection();
+    showSection("addStaff");
+}
+
+function viewStaff(id){
+    addRemoveClass(id);
+    removeSection();
+    showSection("viewStaff");
+}
+
+
+function removeSection(){
+    const dashboard = document.getElementById("dashboard");
+    const schedule = document.getElementById("viewSchedule");
+    const patients = document.getElementById("viewPatients");
+    const profile = document.getElementById("profile");
+    const viewDoctors = document.getElementById("viewDoctors");
+    const addDoctors = document.getElementById("addDoctor");
+    const addStaff = document.getElementById("addStaff");
+
+    dashboard.style.display = "none";
+    schedule.style.display = "none";
+    patients.style.display = "none";
+    profile.style.display = "none";
+    viewDoctors.style.display = "none";
+    addDoctors.style.display = "none";
+    addStaff.style.display = "none";
+
+}
+
+
 function viewScheduleAdmin(id) {
     addRemoveClass(id);
     removeSection();
     showSection("viewSchedule");
     getAllSchedules();
+    console.log("AAA");
 }
 function getAllSchedules() {
     let temp_html = '';
@@ -23,6 +57,7 @@ function getAllSchedules() {
                     scheduleStatus = '<span class="label label-warning">&nbsp;Passed&nbsp;</span>';
                 }
                     temp_html += '<tr class="schedule-row" onclick="viewScheduleModal(' + temp.schedule_id + ')">' +
+                        '<td>' + temp.fname + ' ' + temp.sname + '</td>' +
                         '<td>' + temp.start_date + '</td>' +
                         '<td>' + temp.start_time + '</td>' +
                         '<td>' + temp.end_date + '</td>' +

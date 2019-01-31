@@ -271,12 +271,12 @@ require_once("php/loginDataFetching.php");
                     </a>
                     <ul class="ml-menu">
                         <li>
-                            <a href="javascript:void(0);" onclick="addStaff('#doctor')">
+                            <a href="javascript:void(0);" onclick="addStaff('#staff')">
                                 <span>Add Staff Members</span>
                             </a>
                         </li>
                         <li>
-                            <a href="javascript:void(0);" onclick="viewStaff('#doctor')">
+                            <a href="javascript:void(0);" onclick="viewStaff('#staff')">
                                 <span>View Staff Members</span>
                             </a>
                         </li>
@@ -946,7 +946,6 @@ require_once("php/loginDataFetching.php");
     </div>
 </section>
 
-
 <section class="content" id="viewSchedule">
 
     <!-- schedules data model -->
@@ -985,6 +984,7 @@ require_once("php/loginDataFetching.php");
                             <table class="table table-hover text-center">
                                 <thead class="text-center">
                                 <tr>
+                                    <th class="text-center col-teal">Doctor</th>
                                     <th class="text-center col-teal">Start Date</th>
                                     <th class="text-center col-teal">Start Time</th>
                                     <th class="text-center col-teal">End Date</th>
@@ -1000,6 +1000,179 @@ require_once("php/loginDataFetching.php");
                             </table>
                         </div>
 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content" id="addStaff">
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-xs-12 col-sm-9">
+                <div class="card">
+                    <div class="header">
+                        <h2 class="font-bold col-teal">
+                            Add Staff
+                        </h2>
+                    </div>
+                    <div class="body">
+                        <div>
+                            <div class="tab-content">
+                                <form class="form-horizontal">
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                                        <li id = "staff-personal_tab_ind" role="presentation" class="active col-md-4 text-center" style="margin-bottom: 0;"><a href="#staff-personal" data-toggle="tab">Personal</a></li>
+                                        <li id = "staff-contact_tab_ind" role="presentation" class="col-md-4 text-center"  style="margin-bottom: 0;"><a href="#staff-contact" data-toggle="tab">Contact</a></li>
+                                    </ul>
+
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div role="tabpanel" class="tab-pane fade in active" id="staff-personal">
+                                            <div class="form-group">
+                                                <label for="firstName" class="col-sm-2 control-label">First Name</label>
+                                                <div class="col-sm-8">
+                                                    <div class="form-line" id="add-staff-fname-line">
+                                                        <input type="text" class="form-control"
+                                                               id="staff-firstName"
+                                                               name="firstName" placeholder="First Name">
+                                                    </div>
+                                                    <label class="error" style='display:none;' id="add-staff-fname-error">This field is required.</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="lastName" class="col-sm-2 control-label">Last Name</label>
+                                                <div class="col-sm-8">
+                                                    <div class="form-line" id="add-staff-lname-line">
+                                                        <input type="text" class="form-control"
+                                                               id="staff-lastName"
+                                                               name="lastName" placeholder="Last Name">
+                                                    </div>
+                                                    <label class="error" style='display:none;' style='display:none;' id="add-staff-lname-error">This field is required.</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="gender" class="col-sm-2 control-label">Gender</label>
+                                                <div class="col-sm-8">
+                                                    <div class="form-control">
+                                                        <input name="gender" type="radio" id="staff-male" class="radio-col-teal" value="Male" checked/>
+                                                        <label for="male">Male</label>
+                                                        <input name="gender" type="radio" id="staff-female" class="radio-col-teal" value="Female"/>
+                                                        <label for="female">Female</label>
+                                                    </div>
+                                                    <label class="error" style='display:none;'>This field is required.</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="bday" class="col-sm-2 control-label">Birth Day</label>
+                                                <div class="col-sm-8">
+                                                    <div class="form-line" id="add-staff-bday-line">
+                                                        <input id="staff-bday"
+                                                               class="datepicker form-control"
+                                                               placeholder="Birth Day">
+                                                    </div>
+                                                    <label class="error" style='display:none;' id="add-staff-bday-error">This field is required.</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="nic" class="col-sm-2 control-label">NIC</label>
+                                                <div class="col-sm-8">
+                                                    <div class="form-line" id="add-staff-nic-line">
+                                                        <input type="text" class="form-control"
+                                                               id="staff-nic"
+                                                               name="nic" placeholder="NIC">
+                                                    </div>
+                                                    <label class="error" style='display:none;' id="add-staff-nic-error">This field is required.</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-6">
+                                                    <a href="#contact" class="btn btn-success" data-toggle="tab" onclick="tabShift('#staff-contact')">Continue</a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane fade" id="staff-contact">
+                                            <div class="form-group">
+                                                <label for="street" class="col-sm-2 control-label">Street</label>
+                                                <div class="col-sm-8">
+                                                    <div class="form-line" id="add-staff-street-line">
+                                                        <input type="text" class="form-control"
+                                                               id="staff-street"
+                                                               name="street" placeholder="Street">
+                                                    </div>
+                                                    <label class="error" style='display:none;' id="add-staff-street-error">This field is required.</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="ZipCode" class="col-sm-2 control-label">Zip Code</label>
+                                                <div class="col-sm-8">
+                                                    <div class="form-line" id="add-staff-zipcode-line">
+                                                        <input type="text" class="form-control"
+                                                               id="staff-ZipCode"
+                                                               name="zipCode" placeholder="Zip Code">
+                                                    </div>
+                                                    <label class="error" style='display:none;' id="add-staff-zipcode-error">This field is required.</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="city" class="col-sm-2 control-label">City</label>
+                                                <div class="col-sm-8">
+                                                    <div class="form-line" id="add-staff-city-line">
+                                                        <input type="text" class="form-control"
+                                                               id="staff-city"
+                                                               name="city" placeholder="City">
+                                                    </div>
+                                                    <label class="error" style='display:none;' id="add-staff-city-error">This field is required.</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="ZipCode" class="col-sm-2 control-label">Country</label>
+                                                <div class="col-sm-8">
+                                                    <div class="form-line" id="add-staff-country-line">
+                                                        <input type="text" class="form-control"
+                                                               id="staff-country"
+                                                               name="country" placeholder="Country">
+                                                    </div>
+                                                    <label class="error" style='display:none;' id="add-staff-country-error">This field is required.</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="email" class="col-sm-2 control-label">Email</label>
+                                                <div class="col-sm-8">
+                                                    <div class="form-line" id="add-staff-email-line">
+                                                        <input type="email" class="form-control"
+                                                               id="staff-email"
+                                                               name="email" placeholder="Email" oninput="emailValidation(this.value)">
+                                                    </div>
+                                                    <label class="error" style='display:none;' id="add-staff-email-error">This field is required.</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="tele" class="col-sm-2 control-label">Mobile Number</label>
+                                                <div class="col-sm-8">
+                                                    <div class="form-line" id="add-staff-tele-line">
+                                                        <input type="tel" class="form-control"
+                                                               id="staff-tele"
+                                                               name="tele" placeholder="Telephone Number">
+                                                    </div>
+                                                    <label class="error" style='display:none;' id="add-staff-tele-error">This field is required.</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-4">
+                                                    <a href="#contact" class="btn bg-teal" data-toggle="tab" onclick="tabShift('#staff-personal')">Back</a>
+                                                    <a href="#" class="btn bg-green waves-effect" data-toggle="tab" onclick="confirmRegisterStaff()">Save</a>
+                                                    <label class="error" style='display:none;' id="add-staff-valid">Some field data are invalid. Please complete all fields before submit.</label>
+                                                </div>
+                                            </div>
+                                        </div></div>
+
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
