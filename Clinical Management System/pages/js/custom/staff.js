@@ -24,7 +24,6 @@ function removeSection(){
     const schedule = document.getElementById("viewSchedule");
     const patients = document.getElementById("viewPatients");
     const profile = document.getElementById("profile");
-    const appoinmnet = document.getElementById("viewAppointments");
     const viewDoctors = document.getElementById("viewDoctors");
     const addDoctors = document.getElementById("addDoctor");
 
@@ -32,10 +31,8 @@ function removeSection(){
     schedule.style.display = "none";
     patients.style.display = "none";
     profile.style.display = "none";
-    appoinmnet.style.display = "none";
     viewDoctors.style.display = "none";
     addDoctors.style.display = "none";
-
 }
 
 function showSection(section){
@@ -320,6 +317,8 @@ function deleteOther(id, type){
                                         btnClass: 'btn-success',
                                         action: function () {
                                             $('#'+type+'-row-'+id).hide();
+                                            $("#patientDataModel").modal('hide');
+                                            $("#doctorDataModel").modal('hide');
                                         }
                                     }
                                 }

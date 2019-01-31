@@ -31,7 +31,7 @@ function viewSchedule(id) {
     addRemoveClass(id);
     removeSection();
     showSection("viewSchedule");
-    getAllSchedules();
+    getAllSchedulesById();
 }
 
 
@@ -582,7 +582,7 @@ function saveSchedule() {
     }
 }
 
-function getAllSchedules() {
+function getAllSchedulesById() {
     let id = $("#logged-user-id").val();
     let temp_html = '';
     $.get("php/getSchedules.php?doctor_id=" + id, function (data, status) {
@@ -601,7 +601,7 @@ function getAllSchedules() {
                 } else if (end < currentTime) {
                     scheduleStatus = '<span class="label label-warning">&nbsp;Passed&nbsp;</span>';
                 }
-                temp_html += '<tr class="schedule-row" onclick="viewScheduleModal(' + temp.id + ')">' +
+                temp_html += '<tr class="schedule-row" onclick="viewScheduleModal(' + temp.id+ ')">' +
                     '<td>' + temp.start_date + '</td>' +
                     '<td>' + temp.start_time + '</td>' +
                     '<td>' + temp.end_date + '</td>' +

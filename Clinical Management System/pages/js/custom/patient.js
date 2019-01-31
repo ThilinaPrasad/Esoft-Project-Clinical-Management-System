@@ -448,10 +448,6 @@ function makePayment(app_no) {
     $('#paymentModal').modal('show');
 }
 
-function pay(){
-
-}
-
 function search() {
     // Declare variables
     var input, filter, table, tr, td, i, txtValue;
