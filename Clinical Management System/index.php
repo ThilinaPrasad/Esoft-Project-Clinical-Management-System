@@ -1,3 +1,7 @@
+<?php
+require_once("php/common/getDoctors.php");
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +31,7 @@
     <link href="lib/magnific-popup/magnific-popup.css" rel="stylesheet">
     <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-    <link href="https://unpkg.com/gijgo@1.9.11/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://unpkg.com/gijgo@1.9.11/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
 
     <!-- Main Stylesheet File -->
     <link href="css/style.css" rel="stylesheet">
@@ -71,28 +75,36 @@
 
                     <nav>
                         <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link active col-md-4 text-center" id="personal" data-toggle="tab" href="#personal-tab" role="tab" aria-controls="personal" aria-selected="true">Personal</a>
-                            <a class="nav-item nav-link col-md-4 text-center" id="medical" data-toggle="tab" href="#medical-tab" role="tab" aria-controls="medical" aria-selected="false">Medical</a>
-                            <a class="nav-item nav-link col-md-4 text-center" id="security" data-toggle="tab" href="#security-tab" role="tab" aria-controls="security" aria-selected="false">Security</a>
+                            <a class="nav-item nav-link active col-md-4 text-center" id="personal" data-toggle="tab"
+                               href="#personal-tab" role="tab" aria-controls="personal"
+                               aria-selected="true">Personal</a>
+                            <a class="nav-item nav-link col-md-4 text-center" id="medical" data-toggle="tab"
+                               href="#medical-tab" role="tab" aria-controls="medical" aria-selected="false">Medical</a>
+                            <a class="nav-item nav-link col-md-4 text-center" id="security" data-toggle="tab"
+                               href="#security-tab" role="tab" aria-controls="security"
+                               aria-selected="false">Security</a>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
 
                         <!--Personal tab-->
-                        <div class="tab-pane fade show active" id="personal-tab" role="tabpanel" aria-labelledby="personal">
+                        <div class="tab-pane fade show active" id="personal-tab" role="tabpanel"
+                             aria-labelledby="personal">
                             <div class="row">
                                 <div class="input-group mb-3 col-md-6">
                                     <div class="input-group-prepend">
                       <span class="input-group-text bg-color-type-1 border-type-1" id="fname"><i
-                              class="fa fa-user-circle-o" aria-hidden="true"></i>
+                                  class="fa fa-user-circle-o" aria-hidden="true"></i>
                       </span>
                                     </div>
-                                    <input type="text" class="form-control input-type-1" placeholder="First name" id="fname-input"
+                                    <input type="text" class="form-control input-type-1" placeholder="First name"
+                                           id="fname-input"
                                            aria-label="First name" aria-describedby="fname" autofocus>
                                 </div>
 
                                 <div class="input-group mb-3 col-md-6">
-                                    <input type="text" class="form-control input-type-1" placeholder="Surname" id="sname-input"
+                                    <input type="text" class="form-control input-type-1" placeholder="Surname"
+                                           id="sname-input"
                                            aria-label="Surname" aria-describedby="sname" autofocus>
                                 </div>
                             </div>
@@ -100,7 +112,7 @@
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                       <span class="input-group-text bg-color-type-1 border-type-1" id="gender"><i
-                              class="fa fa-user-circle-o" aria-hidden="true"></i>
+                                  class="fa fa-user-circle-o" aria-hidden="true"></i>
                       </span>
                                 </div>
                                 <div class="radio-group">
@@ -116,16 +128,17 @@
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                       <span class="input-group-text bg-color-type-1 border-type-1" id="bday"><i
-                              class="fa fa-user-circle-o" aria-hidden="true"></i>
+                                  class="fa fa-user-circle-o" aria-hidden="true"></i>
                       </span>
                                 </div>
-                                <input class="form-control input-type-1" aria-describedby="bday" placeholder="Birthday (mm/dd/yyyy)" id="birthday" width="83%"/>
+                                <input class="form-control input-type-1" aria-describedby="bday"
+                                       placeholder="Birthday (mm/dd/yyyy)" id="birthday" width="83%"/>
                             </div>
 
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                             <span class="input-group-text bg-color-type-1 border-type-1" id="nic-area"><i
-                                    class="fa fa-user-circle-o" aria-hidden="true"></i>
+                                        class="fa fa-user-circle-o" aria-hidden="true"></i>
                             </span>
                                 </div>
                                 <input type="tel" class="form-control input-type-1" id="nic-input"
@@ -136,14 +149,16 @@
                                 <div class="input-group mb-3 col-md-8" style="padding-right: 0;">
                                     <div class="input-group-prepend">
                               <span class="input-group-text bg-color-type-1 border-type-1" id="saddress"><i
-                                      class="fa fa-home" aria-hidden="true"></i>
+                                          class="fa fa-home" aria-hidden="true"></i>
                               </span>
                                     </div>
-                                    <input type="text" class="form-control input-type-1" id="street-address-input" placeholder="Street Address"
+                                    <input type="text" class="form-control input-type-1" id="street-address-input"
+                                           placeholder="Street Address"
                                            aria-label="Address" aria-describedby="address">
                                 </div>
                                 <div class="input-group mb-3 col-md-4">
-                                    <input type="text" class="form-control input-type-1 ml-0" id="zipcode-input" placeholder="Zip Code"
+                                    <input type="text" class="form-control input-type-1 ml-0" id="zipcode-input"
+                                           placeholder="Zip Code"
                                            aria-label="Address" aria-describedby="address">
                                 </div>
 
@@ -153,14 +168,16 @@
                                 <div class="input-group mb-3 col-md-6" style="padding-right: 0;">
                                     <div class="input-group-prepend">
                               <span class="input-group-text bg-color-type-1 border-type-1" id="city"><i
-                                      class="fa fa-home" aria-hidden="true"></i>
+                                          class="fa fa-home" aria-hidden="true"></i>
                               </span>
                                     </div>
-                                    <input type="text" class="form-control input-type-1" id="city-input" placeholder="City"
+                                    <input type="text" class="form-control input-type-1" id="city-input"
+                                           placeholder="City"
                                            aria-label="Address" aria-describedby="address">
                                 </div>
                                 <div class="input-group mb-3 col-md-6">
-                                    <input type="text" class="form-control input-type-1 ml-0" id="country-input" placeholder="Country"
+                                    <input type="text" class="form-control input-type-1 ml-0" id="country-input"
+                                           placeholder="Country"
                                            aria-label="Address" aria-describedby="address">
                                 </div>
 
@@ -169,23 +186,26 @@
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                           <span class="input-group-text bg-color-type-1 border-type-1" id="email"><i
-                                  class="fa fa-envelope" aria-hidden="true"></i>
+                                      class="fa fa-envelope" aria-hidden="true"></i>
                           </span>
                                 </div>
-                                <input type="email" oninput="email(this.value,'#email');" class="form-control input-type-1"
+                                <input type="email" oninput="email(this.value,'#email');"
+                                       class="form-control input-type-1"
                                        id="email-input" placeholder="Email" aria-label="Email" aria-describedby="email">
-                                <p class="error text-danger invalid-feedback text-right" id="email-input-error">error msg</p>
+                                <p class="error text-danger invalid-feedback text-right" id="email-input-error">error
+                                    msg</p>
 
                             </div>
 
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                             <span class="input-group-text bg-color-type-1 border-type-1" id="telephone"><i
-                                    class="fa fa-phone" aria-hidden="true"></i>
+                                        class="fa fa-phone" aria-hidden="true"></i>
                             </span>
                                 </div>
                                 <input type="tel" class="form-control input-type-1" id="telephone-input"
-                                       placeholder="Telephone No" aria-label="Telephone No" aria-describedby="telephone">
+                                       placeholder="Telephone No" aria-label="Telephone No"
+                                       aria-describedby="telephone">
                             </div>
 
                             <div class="form-group">
@@ -207,11 +227,11 @@
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                             <span class="input-group-text bg-color-type-1 border-type-1" id="bllod"><i
-                                    class="fa fa-user-circle-o" aria-hidden="true"></i>
+                                        class="fa fa-user-circle-o" aria-hidden="true"></i>
                             </span>
                                 </div>
                                 <select class="custom-select form-control input-type-1" id="blood-type">
-                                    <option value="" hidden selected >Blood Type</option>
+                                    <option value="" hidden selected>Blood Type</option>
                                     <option value="O+">O+ (O-Positive)</option>
                                     <option value="O-">O- (O-Negative)</option>
                                     <option value="A+">A+ (A-Positive)</option>
@@ -227,26 +247,28 @@
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                             <span class="input-group-text bg-color-type-1 border-type-1" id="weight"><i
-                                    class="fa fa-user-circle-o" aria-hidden="true"></i>
+                                        class="fa fa-user-circle-o" aria-hidden="true"></i>
                             </span>
                                 </div>
                                 <input type="tel" class="form-control input-type-1" id="weight-input"
                                        placeholder="Weight" aria-label="Weight" aria-describedby="weight">
                                 <div class="input-group-append">
-                                    <span class="input-group-text bg-color-type-1 border-type-1" id="weight-unit">kg</span>
+                                    <span class="input-group-text bg-color-type-1 border-type-1"
+                                          id="weight-unit">kg</span>
                                 </div>
                             </div>
 
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                             <span class="input-group-text bg-color-type-1 border-type-1" id="height"><i
-                                    class="fa fa-user-circle-o" aria-hidden="true"></i>
+                                        class="fa fa-user-circle-o" aria-hidden="true"></i>
                             </span>
                                 </div>
                                 <input type="tel" class="form-control input-type-1" id="height-input"
                                        placeholder="Height" aria-label="Weight" aria-describedby="telephone">
                                 <div class="input-group-append">
-                                    <span class="input-group-text bg-color-type-1 border-type-1" id="height-unit">cm</span>
+                                    <span class="input-group-text bg-color-type-1 border-type-1"
+                                          id="height-unit">cm</span>
                                 </div>
                             </div>
 
@@ -271,41 +293,49 @@
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                 <span class="input-group-text bg-color-type-1 border-type-1" id="password"><i
-                                        class="fa fa-key" aria-hidden="true"></i>
+                                            class="fa fa-key" aria-hidden="true"></i>
                                 </span>
                                 </div>
-                                <input type="password" class="form-control input-type-1" oninput="cmf_password('#cmf-password')"
-                                       id="password-input" placeholder="Password (8-16 characters)" aria-label="Password"
+                                <input type="password" class="form-control input-type-1"
+                                       oninput="cmf_password('#cmf-password')"
+                                       id="password-input" placeholder="Password (8-16 characters)"
+                                       aria-label="Password"
                                        aria-describedby="passowrd">
                             </div>
 
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                   <span class="input-group-text bg-color-type-1 border-type-1" id="cmf-password"><i
-                                          class="fa fa-key" aria-hidden="true"></i>
+                                              class="fa fa-key" aria-hidden="true"></i>
                                   </span>
                                 </div>
-                                <input type="password" class="form-control input-type-1" oninput="cmf_password('#cmf-password')"
-                                       id="cmf-password-input" placeholder="Retype Password (8-16 characters)" aria-label="Retype Password"
+                                <input type="password" class="form-control input-type-1"
+                                       oninput="cmf_password('#cmf-password')"
+                                       id="cmf-password-input" placeholder="Retype Password (8-16 characters)"
+                                       aria-label="Retype Password"
                                        aria-describedby="cmf-passowrd">
-                                <p class="error text-danger invalid-feedback text-right" id="cmf-password-input-error">error
+                                <p class="error text-danger invalid-feedback text-right" id="cmf-password-input-error">
+                                    error
                                     msg</p>
                             </div>
 
                             <div class="form-group">
                                 <center>
-                                    <div id="register-spinner"><i class="fa fa-spinner rotating spinner" aria-hidden="true"></i>
+                                    <div id="register-spinner"><i class="fa fa-spinner rotating spinner"
+                                                                  aria-hidden="true"></i>
                                     </div>
                                 </center>
                                 <center id="final-button-section">
                                     <button type="button" class="btn btn-type-1" onclick="$('#personal').tab('show');">
                                         Previous
                                     </button>
-                                    <button type="button" class="btn btn-type-1" id="register-btn" onclick="reg_user();">
+                                    <button type="button" class="btn btn-type-1" id="register-btn"
+                                            onclick="reg_user();">
                                         Register
                                     </button>
                                 </center>
-                                <p class="error text-danger invalid-feedback text-center" id="register-btn-input-error">Please
+                                <p class="error text-danger invalid-feedback text-center" id="register-btn-input-error">
+                                    Please
                                     enter all valid inputs!</p>
                             </div>
                         </div>
@@ -332,29 +362,33 @@
             </div>
             <div class="modal-body pl-5 pr-5">
                 <form>
-                    <p class="error text-danger invalid-feedback text-center" style="font-size:12px;" id="invalid-cred-error">Invalid Credentials!</p>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                          <span class="input-group-text bg-color-type-1 border-type-1" id="cred-email"><i
-                                  class="fa fa-envelope" aria-hidden="true"></i>
+                          <span class="input-group-text bg-color-type-1 border-type-1" id="login-email"><i
+                                      class="fa fa-envelope" aria-hidden="true"></i>
                           </span>
                         </div>
-                        <input type="email" id="login-email" class="form-control input-type-1" placeholder="Email" aria-label="Email"
+                        <input type="email" id="login-email-input" class="form-control input-type-1" placeholder="Email"
+                               aria-label="Email"
                                aria-describedby="cred-email" autofocus>
                     </div>
 
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                                <span class="input-group-text bg-color-type-1 border-type-1" id="cred-password"><i
-                                        class="fa fa-key" aria-hidden="true"></i>
+                                <span class="input-group-text bg-color-type-1 border-type-1" id="login-password"><i
+                                            class="fa fa-key" aria-hidden="true"></i>
                                 </span>
                         </div>
                         <input type="password" class="form-control input-type-1" placeholder="Password"
-                               aria-label="Password" aria-describedby="cred-passowrd" id="login-password">
+                               aria-label="Password" aria-describedby="cred-passowrd" id="login-password-input">
                     </div>
 
+                    <center><p class="error text-danger invalid-feedback text-center" style="font-size:12px;"
+                               id="invalid-cred-error">Invalid Credentials. Please try again!</p>
+                    </center>
+
                     <center>
-                        <button type="button" class="btn btn-type-1" onclick="loginUser()">Login</button>
+                        <button type="button" id="login-btn" class="btn btn-type-1" onclick="loginUser()">Login</button>
                     </center>
                 </form>
             </div>
@@ -362,6 +396,44 @@
     </div>
 </div>
 <!--Login model-->
+<!--doc model-->
+<div class="modal fade" id="all-doc-model" tabindex="-1" role="dialog" aria-labelledby="login-model-label"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content doctor-model">
+            <div class="modal-header text-center modal-header-type-1">
+                <h5 class="modal-title white-text text-center">Our Doctors</h5>
+                <button type="button" class="close hover-white-text" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="max-height:70vh;overflow-y: scroll;">
+                <table class="table text-center table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">Doctor Name</th>
+                        <th scope="col">Speciality</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    foreach ($allDoctors as $temp) {
+                        $temp_html = "<tr>" .
+                            "<td>" . $temp['fname'] . " " . $temp['sname'] . "</td>" .
+                            "<td>" . $temp['speciality'] . "</td>" .
+                            "</tr>";
+                        echo $temp_html;
+                    }
+                    ?>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Doc model-->
 <!--==========================
   Header
 ============================-->
@@ -395,8 +467,8 @@
     <div class="intro-content">
         <h2>WE HERE TO PROVIDE<br><span>SERVICE</span></h2>
         <div>
-            <a href="#" class="btn-get-started ">Channel A Doctor</a>
-            <a href="#" class="btn-projects ">View All Doctors</a>
+            <a href="#" class="btn-get-started" data-toggle="modal" data-target="#login-model">Channel A Doctor</a>
+            <a href="#" class="btn-projects " data-toggle="modal" data-target="#all-doc-model">View All Doctors</a>
         </div>
     </div>
 

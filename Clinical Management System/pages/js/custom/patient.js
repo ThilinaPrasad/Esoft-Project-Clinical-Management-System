@@ -477,6 +477,7 @@ paypal.Button.render({
     }
 }, '#paypal-button');
 
+
 function search() {
     // Declare variables
     var input, filter, table, tr, td, i, txtValue;

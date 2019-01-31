@@ -31,7 +31,7 @@ function viewSchedule(id) {
     addRemoveClass(id);
     removeSection();
     showSection("viewSchedule");
-    getAllSchedules();
+    getAllSchedulesById();
 }
 
 
@@ -582,11 +582,11 @@ function saveSchedule() {
     }
 }
 
-function getAllSchedules() {
+function getAllSchedulesById() {
     let id = $("#logged-user-id").val();
     let temp_html = '';
     $.get("php/getSchedules.php?doctor_id=" + id, function (data, status) {
-        if (data != 'false') {
+        if (data.length!=0 && data != 'false') {
             data = JSON.parse(data);
             let currentTime = new Date();
             for (let i = 0; i < data.length; i++) {
@@ -601,7 +601,7 @@ function getAllSchedules() {
                 } else if (end < currentTime) {
                     scheduleStatus = '<span class="label label-warning">&nbsp;Passed&nbsp;</span>';
                 }
-                temp_html += '<tr class="schedule-row" onclick="viewScheduleModal(' + temp.id + ')">' +
+                temp_html += '<tr class="schedule-row" onclick="viewScheduleModal(' + temp.id+ ')">' +
                     '<td>' + temp.start_date + '</td>' +
                     '<td>' + temp.start_time + '</td>' +
                     '<td>' + temp.end_date + '</td>' +
@@ -612,9 +612,11 @@ function getAllSchedules() {
                     '</tr>';
             }
         } else {
-            temp_html += '<tr class="schedule-row text-center">No schedules found</tr>';
+
+            temp_html += '<tr class="schedule-row text-center" ><td colspan="7">No schedules found</td></tr>';
+
+            $("#view-schedule-body").html(temp_html);
         }
-        $("#view-schedule-body").html(temp_html);
     });
 }
 

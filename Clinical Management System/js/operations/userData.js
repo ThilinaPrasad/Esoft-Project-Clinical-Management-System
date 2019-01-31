@@ -169,13 +169,22 @@ function reg_user() {
 }
 
 function loginUser() {
-    let email = $("#login-email").val();
-    let password = $("#login-password").val();
+    let email = $("#login-email-input").val();
+    let password = $("#login-password-input").val();
 
     $.get("../../php/users/login.php/?email="+email+"&password="+password, function (data, status) {
-
         if (data.length!=0 && data != 'false') {
             $("#invalid-cred-error").hide();
+            $("#login-btn").addClass("btn-type-1");
+            $("#login-btn").removeClass("btn-type-1-error");
+            $("#login-email-input").removeClass('input-type-1-error');
+            $("#login-email-input").addClass('input-type-1');
+            $("#login-password-input").removeClass('input-type-1-error');
+            $("#login-password-input").addClass('input-type-1');
+            $("#login-password").removeClass('bg-color-type-1-error border-type-1-error');
+            $("#login-password").addClass("bg-color-type-1 border-type-1");
+            $("#login-email").removeClass('bg-color-type-1-error border-type-1-error');
+            $("#login-email").addClass("bg-color-type-1 border-type-1");
             let responseData = JSON.parse(data);
             switch(parseInt(responseData.type)) {
                 case 1:
@@ -196,6 +205,16 @@ function loginUser() {
         }
         else {
             $("#invalid-cred-error").show();
+            $("#login-btn").addClass("btn-type-1-error");
+            $("#login-btn").removeClass("btn-type-1");
+            $("#login-email-input").addClass('input-type-1-error');
+            $("#login-email-input").removeClass('input-type-1');
+            $("#login-password-input").addClass('input-type-1-error');
+            $("#login-password-input").removeClass('input-type-1');
+            $("#login-password").addClass('bg-color-type-1-error border-type-1-error');
+            $("#login-password").removeClass("bg-color-type-1 border-type-1");
+            $("#login-email").addClass('bg-color-type-1-error border-type-1-error');
+            $("#login-email").removeClass("bg-color-type-1 border-type-1");
         }
     });
 }

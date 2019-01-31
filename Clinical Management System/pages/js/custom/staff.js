@@ -33,7 +33,6 @@ function removeSection(){
     profile.style.display = "none";
     viewDoctors.style.display = "none";
     addDoctors.style.display = "none";
-
 }
 
 function showSection(section){
@@ -318,6 +317,8 @@ function deleteOther(id, type){
                                         btnClass: 'btn-success',
                                         action: function () {
                                             $('#'+type+'-row-'+id).hide();
+                                            $("#patientDataModel").modal('hide');
+                                            $("#doctorDataModel").modal('hide');
                                         }
                                     }
                                 }
