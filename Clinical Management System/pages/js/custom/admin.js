@@ -28,6 +28,7 @@ function removeSection(){
     const viewDoctors = document.getElementById("viewDoctors");
     const addDoctors = document.getElementById("addDoctor");
     const addStaff = document.getElementById("addStaff");
+    const viewStaff = document.getElementById("viewStaff");
 
     dashboard.style.display = "none";
     schedule.style.display = "none";
@@ -36,12 +37,19 @@ function removeSection(){
     viewDoctors.style.display = "none";
     addDoctors.style.display = "none";
     addStaff.style.display = "none";
-
+    viewStaff.style.display = "none";
 }
 
-function tabShift(id){
+function staffTabShift(id){
     $("#staff-personal_tab_ind").removeClass("active");
     $("#staff-contact_tab_ind").removeClass("active");
+    $(id+"_tab_ind").addClass("active");
+}
+
+function doctorTabShift(id){
+    $("#personal_tab_ind").removeClass("active");
+    $("#contact_tab_ind").removeClass("active");
+    $("#professional_tab_ind").removeClass("active");
     $(id+"_tab_ind").addClass("active");
 }
 
@@ -127,7 +135,6 @@ function confirmRegisterStaff(){
         staffIsValid = false;
     }
     if(staffIsValid && isEmailValid) {
-        console.log("Valid");
         let firstName = $("#staff-firstName").val();
         let lastName = $("#staff-lastName").val();
         let gender = $("input[name='staff-gender']:checked").val();
@@ -296,4 +303,31 @@ function search() {
             }
         }
     }
+}
+
+function showStaff(id) {
+    $('#staffDataModel').modal('show');
+    getStaffById(id);
+}
+
+function getStaffById(id){
+    $.get("../../../php/common/getData.php?table=user&column=id&value="+id, function (data, status) {
+        if (data != 'false') {
+            $("#view-staff-id").value = id;
+            let temp = jQuery.parseJSON(data);
+            let splited = temp[0].bday.split("/");
+            let yrs = new Date(new Date() - new Date(splited[2],splited[0],splited[1]))/1000/60/60/24/365;
+            let age_y = Math.round(yrs);
+            $("#view-staff-name").text(temp[0].fname+" "+temp[0].sname);
+            $("#view-staff-gender").text(temp[0].gender);
+            $("#view-staff-bday").text(temp[0].bday +"  ("+age_y+" yrs)");
+            $("#view-staff-email").text(temp[0].email);
+            $("#view-staff-nic").text(temp[0].nic);
+            $("#view-staff-telephone").text(temp[0].telephone);
+            $("#view-staff-address").text(temp[0].street+", "+temp[0].city+", "+temp[0].country+", "+temp[0].zipCode);
+            $("#view-staff-id").text(id);
+        } else {
+            console.log("Error");
+        }
+    });
 }

@@ -318,7 +318,9 @@ function deleteOther(id, type){
                                         action: function () {
                                             $('#'+type+'-row-'+id).hide();
                                             $("#patientDataModel").modal('hide');
+                                            $("#staffDataModel").modal('hide');
                                             $("#doctorDataModel").modal('hide');
+
                                         }
                                     }
                                 }
