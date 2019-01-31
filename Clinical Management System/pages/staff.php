@@ -967,7 +967,7 @@ require_once("php/loginDataFetching.php");
                             </div>
                         </div>
                         <div class="body table-responsive">
-                            <table class="table table-hover text-center">
+                            <table class="table table-hover text-center" id="scheduleTable" style="margin-top: -30px!important;">
                                 <thead class="text-center">
                                 <tr>
                                     <th class="text-center col-teal">Doctor</th>
