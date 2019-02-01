@@ -9,13 +9,13 @@
                 vals.push(parseInt(data[i].income));
                 temp_html += '<tr>\n' +
                     '<td style="text-align:left;">'+data[i].date+'</td>\n' +
-                    '<td style="text-align:right;">'+data[i].income+'</td>\n' +
+                    '<td style="text-align:right;">'+data[i].income+'.00</td>\n' +
                     '</tr>'
             }
             var tot = vals.reduce(add, 0);
             temp_html+=' <tr>\n' +
                 '<td  style="text-align:left;"><b>Total income</b></td>\n' +
-                '<td style="border-top:1px solid black;border-bottom: 3px double black;text-align: right;"><b>'+tot+'</b></td>\n' +
+                '<td style="border-top:1px solid black;border-bottom: 3px double black;text-align: right;"><b>'+tot+'.00</b></td>\n' +
                 '</tr>'
             $("#t-body").html(temp_html);
             // draw chart
