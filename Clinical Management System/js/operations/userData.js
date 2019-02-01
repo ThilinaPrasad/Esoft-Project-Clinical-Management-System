@@ -1,9 +1,14 @@
 // Validations
 let isEmailValid = false;
 let isPassValid = false;
+let isFirstFormValid = false;
+let isSecondFormValid = false;
+
+let isEmail = false;
 
 // email validations
 function email(email, id) {
+    removeError(id);
     $.get("../../php/common/getData.php?table=patient&column=email&value=" + email, function (data, status) {
         if (data != 'false') {
             isEmailValid = false;
@@ -11,6 +16,14 @@ function email(email, id) {
         } else {
             isEmailValid = true;
             errorToggle(id, "Looks Good!", false);
+        }
+        let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+        if(!regex.test(email)) {
+            errorToggle(id, "Invalid Email!", true);
+            isEmail = false;
+        }else{
+            isEmail = true;
         }
     });
 }
@@ -25,6 +38,13 @@ function cmf_password(id) {
             isPassValid = true;
             errorToggle(id, "Looks Good!", false);
         }
+    }
+    if($('#password-input').val().length < 8){
+        isPassValid = false;
+        errorToggle("#password", "Password must be at least 8 characters!", true);
+    }else {
+        isPassValid = true;
+        errorToggle("#password", "Looks Good!", false);
     }
 }
 
@@ -52,7 +72,24 @@ function errorToggle(id, text_input, isError) {
 
 // add user
 function reg_user() {
-    if (isEmailValid && isPassValid) {
+
+    if($("#password-input").val() === "Required Field!"){
+        removeError("#password");
+    }
+    if($("#cmf-password-input").val() === "Required Field!"){
+        removeError("#cmf-password");
+    }
+
+    let Password = $("#password-input").val();
+    let ConfirmPassword = $("#cmf-password-input").val();
+
+    if(Password === ''){
+        errorToggle("#password", "Required Field!", true);
+    }if(ConfirmPassword === ''){
+        errorToggle("#cmf-password", "Required Field!", true);
+    }
+
+    if (isEmailValid && isPassValid && isFirstFormValid && isSecondFormValid) {
         $("#register-btn").removeClass("btn-type-1-error");
         $("#register-btn").addClass("btn-type-1");
         $("#register-btn-input-error").hide();
@@ -118,6 +155,22 @@ function reg_user() {
                                     text: 'Login',
                                     btnClass: 'btn-success',
                                     action: function () {
+                                        $("#fname-input").val("");
+                                        $("#sname-input").val("");
+                                        $("#birthday").val("");
+                                        $("#nic-input").val("");
+                                        $("#street-address-input").val("");
+                                        $("#zipcode-input").val("");
+                                        $("#city-input").val("");
+                                        $("#country-input").val("");
+                                        $("#email-input").val("");
+                                        $("#telephone-input").val("");
+                                        $("#blood-type").val("");
+                                        $("#weight-input").val("");
+                                        $("#height-input").val("");
+                                        $('#cmf-password-input').val("");
+                                        $("#password-input").val("");
+
                                         $('#register-model').modal('hide');
                                         $('#login-model').modal('show');
                                         $('#register-spinner').hide();
@@ -218,3 +271,137 @@ function loginUser() {
         }
     });
 }
+
+function validateFirstStep(){
+    let isValid = true;
+
+    let fname = $("#fname-input").val();
+    let sname = $("#sname-input").val();
+    let bday = $("#birthday").val();
+    let nic = $("#nic-input").val();
+    let street = $("#street-address-input").val();
+    let zipcode = $("#zipcode-input").val();
+    let city = $("#city-input").val();
+    let country = $("#country-input").val();
+    let email = $("#email-input").val();
+    let telephone = $("#telephone-input").val();
+
+    if(fname === ''){
+        errorToggle("#fname", "Required Field!", true);
+        isValid = false;
+    }if(sname === ''){
+        errorToggle("#sname", "Required Field!", true);
+        isValid = false;
+    }if(bday === ''){
+        $("#birthday-input-error").text("Required Field!");
+        $("#birthday-input-error").show();
+        isValid = false;
+    }if(nic === ''){
+        errorToggle("#nic", "Required Field!", true);
+        isValid = false;
+    }if(street === ''){
+        errorToggle("#street-address", "Required Field!", true);
+        isValid = false;
+    }if(zipcode === ''){
+        errorToggle("#zipcode", "Required Field!", true);
+        isValid = false;
+    }if(country === ''){
+        errorToggle("#country", "Required Field!", true);
+        isValid = false;
+    }if(city === ''){
+        errorToggle("#city", "Required Field!", true);
+        isValid = false;
+    }if(email === ''){
+        errorToggle("#email", "Required Field!", true);
+        isValid = false;
+    }if(telephone === ''){
+            errorToggle("#telephone", "Required Field!", true);
+            isValid = false;
+    }else if(!/^[0-9]+$/.test(telephone) || telephone.length !== 10){
+            errorToggle("#telephone", "Invalid Contact", true);
+            isValid = false;
+    }
+    if(!isValid){
+        $("#firstContinueBtn").addClass("btn-type-1-error");
+        $("#tab1-input-errors").show();
+    }
+    if(isValid && isEmail && isEmailValid){
+        isFirstFormValid = true;
+        $("#firstContinueBtn").removeClass("btn-type-1-error");
+        $("#tab1-input-errors").hide();
+        $("#medical").tab('show');
+    }
+}
+
+function validateSecondStep(){
+    let isVal = true;
+
+    let bloodType = $("#blood-type").val();
+    let weight = $("#weight-input").val();
+    let height = $("#height-input").val();
+
+    if(weight === ''){
+        errorToggle("#weight", "Required Field!", true);
+        isVal = false;
+    }else if(weight<1 || weight>200 || !/^[0-9]+$/.test(weight)){
+        errorToggle("#weight", "Invalid Weight!", true);
+        isVal = false;
+    }
+
+    if(height === ''){
+        errorToggle("#height", "Required Field!", true);
+        isVal = false;
+    }else if((height<1 || height>250) || !/^[0-9]+$/.test(height)){
+        errorToggle("#height", "Invalid Height!", true);
+        isVal = false;
+    }
+
+    if(bloodType === ''){
+        $("#blood-type-input-error").text("Required Field!");
+        $("#blood-type-input-error").show();
+        isVal = false;
+    }if(!isVal){
+        $("#secondContinueBtn").addClass("btn-type-1-error");
+        $("#tab2-input-errors").show();
+    }
+    if(isVal){
+        isSecondFormValid = true;
+        $("#secondContinueBtn").removeClass("btn-type-1-error");
+        $("#tab2-input-errors").hide();
+        $("#security").tab('show');
+    }
+
+}
+
+function removeError(id){
+    errorToggle(id, '', false);
+}
+
+function removeErrorInput(id){
+    $(id).hide();
+}
+
+function checkTelephone(telephone, id){
+    if(!/^[0-9]+$/.test(telephone) || telephone.length !== 10){
+        errorToggle(id, "Invalid Contact", true);
+    }else{
+        removeError(id);
+    }
+}
+
+function checkWeight(weight, id) {
+    if(weight>1 && weight<200){
+        removeError(id);
+    }else{
+        errorToggle(id, "Invalid Weight", true);
+    }
+}
+
+function checkHeight(height, id) {
+    if(height>1 && height<250){
+        removeError(id);
+    }else{
+        errorToggle(id, "Invalid Height", true);
+    }
+}
+
