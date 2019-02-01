@@ -299,7 +299,6 @@ function showPreviousDiagnisis(id) {
 
 }
 
-
 function getPatientById(id) {
     $.get("../../../php/common/getData.php?table=patient&column=id&value=" + id, function (data, status) {
         if (data != 'false') {
