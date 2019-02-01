@@ -244,12 +244,11 @@ function showDiagnosis() {
 function showPreviousDiagnisis(id) {
     $('#patientDataModel').modal('hide');
     $('#previousDiagnosisModel').modal('show');
-
     $.get("php/getAllDiagnosis.php?patient_id=" + id, function (data, status) {
-        if (data != 'false') {
+        let temp_html = "";
+        if (data.length!=0 && data != 'false') {
             data = JSON.parse(data);
             console.log(data.length);
-            let temp_html = "";
             for (let i = 0; i < data.length; i++) {
                 temp_html += '<div class="panel panel-primary">\n' +
                     '                        <div class="panel-heading" role="tab" id="pre-dignosis-head-' + i + '">\n' +
@@ -257,7 +256,7 @@ function showPreviousDiagnisis(id) {
                     '                                <a class="collapsed text-center" role="button" data-toggle="collapse"\n' +
                     '                                   data-parent="#pre-diagnosis-1" href="#pre-diagnosis-collapse-' + i + '" aria-expanded="false"\n' +
                     '                                   aria-controls="pre-diagnosis-collapse-' + i + '">\n' +
-                    '                                    ' + formatDate(new Date(data[i].date)) + '\n' +
+                    '                                    Diagnosis Date: ' + formatDate(new Date(data[i].date)) + '\n' +
                     '                                </a>\n' +
                     '                            </h4>\n' +
                     '                        </div>\n' +
@@ -281,43 +280,25 @@ function showPreviousDiagnisis(id) {
                     '                    </div>\n';
 
             }
-            $('#pre-diagnosis-data').html(temp_html);
         } else {
-            console.error('Error!');
+            temp_html += '<div class="panel bg-grey">\n' +
+                '                                <div class="panel-heading" role="tab" id="appointment-no">\n' +
+                '                                    <h4 class="panel-title">\n' +
+                '                                        <a class="collapsed text-center" role="button" data-toggle="collapse"\n' +
+                '                                           data-parent="#appointment-no" href="#appointment-no-collapse" aria-expanded="false"\n' +
+                '                                           >\n' +
+                'No Previous Diagnoses' +
+                '                                        </a>\n' +
+                '                                    </h4>\n' +
+                '                                </div></div>';
         }
+        $('#pre-diagnosis-data').html(temp_html);
+
     });
 
 
 }
 
-// *************** UI  Scripts ****************
-
-// ************** Data fetching scripts ***************
-/*
-function getAllPatient(){
-    $.get("../../../php/common/getData.php?table=patient&column=&value=", function (data, status) {
-        if (data != 'false') {
-            let bodyHtml = '';
-            data = jQuery.parseJSON(data);
-            for(i=0;i<data.length;i++){
-                let temp = data[i];
-                let tempHtml= "<tr onclick='showPatient("+temp.id+");'>"+
-                                    "<td>"+temp.fname+"</td>"+
-                                    "<td>"+temp.sname+"</td>"+
-                                    "<td>"+temp.gender+"</td>"+
-                                    "<td>"+temp.telephone+"</td>"+
-                                    "<td>"+temp.email+"</td>"+
-                                    "<td>"+temp.bday+"</td>"+
-                                "</tr>";
-                bodyHtml+=tempHtml;
-            }
-            $("#viewPatients-table-body").html(bodyHtml);
-        } else {
-            console.log("Error");
-        }
-    });
-}
-*/
 
 function getPatientById(id) {
     $.get("../../../php/common/getData.php?table=patient&column=id&value=" + id, function (data, status) {
@@ -612,11 +593,9 @@ function getAllSchedulesById() {
                     '</tr>';
             }
         } else {
-
             temp_html += '<tr class="schedule-row text-center" ><td colspan="7">No schedules found</td></tr>';
-
-            $("#view-schedule-body").html(temp_html);
         }
+        $("#view-schedule-body").html(temp_html);
     });
 }
 
