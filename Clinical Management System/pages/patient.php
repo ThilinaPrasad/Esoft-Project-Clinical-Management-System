@@ -221,7 +221,7 @@ require_once("php/loginDataFetching.php");
                             <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" id="searchInput" class="form-control" onkeyup="search()" placeholder="Search by Doctor name">
+                                        <input type="text" id="searchInput" class="form-control" onkeyup="search()" placeholder="Enter doctor name">
                                     </div>
                                 </div>
                             </div>
