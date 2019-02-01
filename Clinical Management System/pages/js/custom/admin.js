@@ -17,6 +17,12 @@ function viewPayment(id){
     showSection("viewPayment");
 }
 
+function viewReports(id){
+    addRemoveClass(id);
+    removeSection();
+    showSection("viewReports");
+}
+
 
 function addRemoveClass(x) {
     $("#home").removeClass("active");
@@ -38,6 +44,9 @@ function removeSection(){
     const addStaff = document.getElementById("addStaff");
     const viewStaff = document.getElementById("viewStaff");
     const viewPayment = document.getElementById("viewPayment");
+    const viewReports = document.getElementById("viewReports");
+
+
 
     dashboard.style.display = "none";
     schedule.style.display = "none";
@@ -48,6 +57,8 @@ function removeSection(){
     addStaff.style.display = "none";
     viewStaff.style.display = "none";
     viewPayment.style.display = "none";
+    viewReports.style.display = "none";
+
 }
 
 function staffTabShift(id){
