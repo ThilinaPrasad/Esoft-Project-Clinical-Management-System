@@ -237,6 +237,7 @@ require_once("php/loginDataFetching.php");
                                     <th class="text-center col-teal">End Time</th>
                                     <th class="text-center col-teal">Status</th>
                                     <th class="text-center col-teal">Appointments<br>(Remaining)</span></th>
+                                    <th class="text-center col-teal">Action</th>
                                 </tr>
                                 </thead>
                                 <tfoot class="col-teal">
@@ -248,6 +249,7 @@ require_once("php/loginDataFetching.php");
                                     <th class="text-center col-teal">End Time</th>
                                     <th class="text-center col-teal">Status</th>
                                     <th class="text-center col-teal">Appointments<br>(Remaining)</th>
+                                    <th class="text-center col-teal">Action</th>
                                 </tr>
                                 </tfoot>
                                 <tbody id="view-schedule-body">

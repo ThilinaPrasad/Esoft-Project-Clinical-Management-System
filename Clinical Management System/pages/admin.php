@@ -38,6 +38,9 @@ require_once("php/loginDataFetching.php");
     <!-- Staff Css -->
     <link href="css/custom/staff.css" rel="stylesheet">
 
+    <!-- Admin Css -->
+    <link href="css/custom/admin.css" rel="stylesheet">
+
     <!-- Animation Css -->
     <link href="plugins/animate-css/animate.css" rel="stylesheet"/>
 
@@ -533,7 +536,7 @@ require_once("php/loginDataFetching.php");
 
                                                 <div class="form-group">
                                                     <div class="col-sm-offset-2 col-sm-6">
-                                                        <a href="#contact" class="btn btn-success" data-toggle="tab" onclick="tabShift('#contact')">Continue</a>
+                                                        <a href="#contact" class="btn btn-success" data-toggle="tab" onclick="doctorTabShift('#contact')">Continue</a>
                                                     </div>
                                                 </div>
 
@@ -607,8 +610,8 @@ require_once("php/loginDataFetching.php");
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-offset-2">
-                                                        <a href="#personal" class="btn bg-teal" data-toggle="tab" onclick="tabShift('#personal')">Back</a>
-                                                        <a href="#professional" class="btn bg-green" data-toggle="tab" onclick="tabShift('#professional')">Continue</a>
+                                                        <a href="#personal" class="btn bg-teal" data-toggle="tab" onclick="doctorTabShift('#personal')">Back</a>
+                                                        <a href="#professional" class="btn bg-green" data-toggle="tab" onclick="doctorTabShift('#professional')">Continue</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -637,7 +640,7 @@ require_once("php/loginDataFetching.php");
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-offset-4">
-                                                        <a href="#contact" class="btn bg-teal" data-toggle="tab" onclick="tabShift('#contact')">Back</a>
+                                                        <a href="#contact" class="btn bg-teal" data-toggle="tab" onclick="doctorTabShift('#contact')">Back</a>
                                                         <a href="#" class="btn bg-green waves-effect" data-toggle="tab" onclick="confirmRegister()">Save</a>
                                                         <label class="error" style='display:none;' id="add-doctor-valid">Some field data are invalid. Please complete all fields before submit.</label>
                                                     </div>
@@ -825,12 +828,12 @@ require_once("php/loginDataFetching.php");
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="gender" class="col-sm-2 control-label">Gender</label>
+                                                <label for="staff-gender" class="col-sm-2 control-label">Gender</label>
                                                 <div class="col-sm-8">
                                                     <div class="form-control">
-                                                        <input name="gender" type="radio" id="staff-male" class="radio-col-teal" value="Male" checked/>
-                                                        <label for=staff-male">Male</label>
-                                                        <input name="gender" type="radio" id="staff-female" class="radio-col-teal" value="Female"/>
+                                                        <input name="staff-gender" type="radio" id="staff-male" class="radio-col-teal" value="Male" checked/>
+                                                        <label for="staff-male">Male</label>
+                                                        <input name="staff-gender" type="radio" id="staff-female" class="radio-col-teal" value="Female"/>
                                                         <label for="staff-female">Female</label>
                                                     </div>
                                                     <label class="error" style='display:none;'>This field is required.</label>
@@ -861,7 +864,7 @@ require_once("php/loginDataFetching.php");
 
                                             <div class="form-group">
                                                 <div class="col-sm-offset-2 col-sm-6">
-                                                    <a href="#contact" class="btn btn-success" data-toggle="tab" onclick="tabShift('#staff-contact')">Continue</a>
+                                                    <a href="#staff-contact" class="btn btn-success" data-toggle="tab" onclick="staffTabShift('#staff-contact')">Continue</a>
                                                 </div>
                                             </div>
 
@@ -935,7 +938,7 @@ require_once("php/loginDataFetching.php");
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-offset-4">
-                                                    <a href="#contact" class="btn bg-teal" data-toggle="tab" onclick="tabShift('#staff-personal')">Back</a>
+                                                    <a href="#staff-personal" class="btn bg-teal" data-toggle="tab" onclick="staffTabShift('#staff-personal')">Back</a>
                                                     <a href="#" class="btn bg-green waves-effect" data-toggle="tab" onclick="confirmRegisterStaff()">Save</a>
                                                     <label class="error" style='display:none;' id="add-staff-valid">Some field data are invalid. Please complete all fields before submit.</label>
                                                 </div>

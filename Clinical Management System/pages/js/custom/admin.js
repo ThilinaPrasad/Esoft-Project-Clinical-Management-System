@@ -1,3 +1,4 @@
+$('#staff-bday').bootstrapMaterialDatePicker({ format : 'MM/DD/YYYY' , time: false, maxDate: new Date()});
 function addStaff(id){
     addRemoveClass(id);
     removeSection();
@@ -23,6 +24,7 @@ function addRemoveClass(x) {
     $("#schedule").removeClass("active");
     $("#doctor").removeClass("active");
     $("#staff").removeClass("active");
+    $("#payment").removeClass("active");
     $(x).addClass("active");
 }
 
@@ -48,6 +50,35 @@ function removeSection(){
     viewPayment.style.display = "none";
 }
 
+function staffTabShift(id){
+    $("#staff-personal_tab_ind").removeClass("active");
+    $("#staff-contact_tab_ind").removeClass("active");
+    $(id+"_tab_ind").addClass("active");
+}
+
+function doctorTabShift(id){
+    $("#personal_tab_ind").removeClass("active");
+    $("#contact_tab_ind").removeClass("active");
+    $("#professional_tab_ind").removeClass("active");
+    $(id+"_tab_ind").addClass("active");
+}
+
+// email validations
+function emailValidation(email) {
+    $.get("../php/common/getData.php?table=user&column=email&value=" + email, function (data, status) {
+        if (data != 'false') {
+            isEmailValid = false;
+            $("#add-staff-email-line").addClass("error");
+            $("#add-staff-email-error").text("Email already exists!");
+            $("#add-staff-email-error").show();
+        } else {
+            isEmailValid = true;
+            $("#add-staff-email-line").removeClass("error");
+            $("#add-staff-email-error").hide();
+        }
+    });
+}
+
 function confirmRegisterStaff(){
     $("#add-staff-fname-line").removeClass("error");
     $("#add-staff-fname-error").hide();
@@ -71,61 +102,60 @@ function confirmRegisterStaff(){
     $("#add-staff-tele-error").hide();
 
     $("#add-staff-valid").hide();
-    let isValid = true;
-    if($("#firstName").val() == ''){
+    let staffIsValid = true;
+    if($("#staff-firstName").val() == ''){
         $("#add-staff-fname-line").addClass("error");
         $("#add-staff-fname-error").show();
-        this.isValid = false;
-    }if($("#lastName").val() == ''){
+        staffIsValid = false;
+    }if($("#staff-lastName").val() == ''){
         $("#add-staff-lname-line").addClass("error");
         $("#add-staff-lname-error").show();
-        this.isValid = false;
-    }if($("#bday").val() == ''){
+        staffIsValid = false;
+    }if($("#staff-bday").val() == ''){
         $("#add-staff-bday-line").addClass("error");
         $("#add-staff-bday-error").show();
-        this.isValid = false;
-    }if($("#nic").val() == ''){
+        staffIsValid = false;
+    }if($("#staff-nic").val() == ''){
         $("#add-staff-nic-line").addClass("error");
         $("#add-staff-nic-error").show();
-        this.isValid = false;
-    }if($("#street").val() == ''){
+        staffIsValid = false;
+    }if($("#staff-street").val() == ''){
         $("#add-staff-street-line").addClass("error");
         $("#add-staff-street-error").show();
-        this.isValid = false;
-    }if($("#ZipCode").val() == ''){
+        staffIsValid = false;
+    }if($("#staff-ZipCode").val() == ''){
         $("#add-staff-zipcode-line").addClass("error");
         $("#add-staff-zipcode-error").show();
-        this.isValid = false;
-    }if($("#city").val() == ''){
+        staffIsValid = false;
+    }if($("#staff-city").val() == ''){
         $("#add-staff-city-line").addClass("error");
         $("#add-staff-city-error").show();
-        this.isValid = false;
-    }if($("#country").val() == ''){
+        staffIsValid = false;
+    }if($("#staff-country").val() == ''){
         $("#add-staff-country-line").addClass("error");
         $("#add-staff-country-error").show();
-        this.isValid = false;
-    }if($("#email").val() == ''){
+        staffIsValid = false;
+    }if($("#staff-email").val() == ''){
         $("#add-staff-email-line").addClass("error");
         $("#add-staff-email-error").show();
-        this.isValid = false;
-    }if($("#tele").val() == '') {
+        staffIsValid = false;
+    }if($("#staff-tele").val() == '') {
         $("#add-staff-tele-line").addClass("error");
         $("#add-staff-tele-error").show();
-        this.isValid = false;
+        staffIsValid = false;
     }
-    if(isValid && isEmailValid) {
-        console.log("Valid");
-        let firstName = $("#firstName").val();
-        let lastName = $("#lastName").val();
-        let gender = $("input[name='gender']:checked").val();
-        let bday = $("#bday").val();
-        let nic = $("#nic").val();
-        let street = $("#street").val();
-        let zipCode = $("#ZipCode").val();
-        let city = $("#city").val();
-        let country = $("#country").val();
-        let email = $("#email").val();
-        let tel = $("#tele").val();
+    if(staffIsValid && isEmailValid) {
+        let firstName = $("#staff-firstName").val();
+        let lastName = $("#staff-lastName").val();
+        let gender = $("input[name='staff-gender']:checked").val();
+        let bday = $("#staff-bday").val();
+        let nic = $("#staff-nic").val();
+        let street = $("#staff-street").val();
+        let zipCode = $("#staff-ZipCode").val();
+        let city = $("#staff-city").val();
+        let country = $("#staff-country").val();
+        let email = $("#staff-email").val();
+        let tel = $("#staff-tele").val();
 
         $.confirm({
             theme: 'modern',

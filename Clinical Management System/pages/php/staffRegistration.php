@@ -34,6 +34,7 @@ $dbResponse_1 = $crud->execute($query_1);
 if($dbResponse_1){
     $query_2 = "SELECT id FROM user where email='".$email."'";
     $id = array_reverse($crud->getData($query_2))[0]['id'];
+    echo true;
 }else{
     echo false;
 }
