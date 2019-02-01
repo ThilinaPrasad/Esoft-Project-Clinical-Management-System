@@ -333,7 +333,129 @@ require_once("php/loginDataFetching.php");
             </div>
 
             <div class="modal-footer" style="padding-top: 0;">
+                <button type="button" class="btn btn-success waves-effect" onclick="editPatient($('#view-patient-id').text())">Edit</button>
                 <button type="button" class="btn btn-danger waves-effect" onclick="deleteOther($('#view-patient-id').text(), 'patient')">Delete</button>
+                <button type="button" class="btn bg-teal waves-effect" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Patient details data model -->
+<div class="modal fade" id="editPatientDetailsDataModel" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-teal" style="padding: 15px;">
+                <h2 class="modal-title text-center" id="editPatientDetailsDataModelLabel">Patient Details</h2>
+            </div>
+            <div class="modal-body" style="padding-bottom: 0;">
+
+                <form class="form-horizontal">
+
+                    <div class="form-group">
+                        <label for="edit-patient-fname" class="col-sm-3 control-label">Name</label>
+                        <div class="col-sm-4">
+                            <div class="form-line">
+                                <input type="text" class="form-control"
+                                       id="edit-patient-fname"
+                                       placeholder="First name">
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-line">
+                                <input type="text" class="form-control"
+                                       id="edit-patient-sname"
+                                       placeholder="Surname">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-patient-street" class="col-sm-3 control-label">Street/ZipCode</label>
+                        <div class="col-sm-5">
+                            <div class="form-line">
+                                <input type="text" class="form-control"
+                                       id="edit-patient-street"
+                                       placeholder="Street">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-line">
+                                <input type="text" class="form-control"
+                                       id="edit-patient-zipcode"
+                                       placeholder="ZipCode">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-patient-city" class="col-sm-3 control-label">City/Country</label>
+                        <div class="col-sm-5">
+                            <div class="form-line">
+                                <input type="text" class="form-control"
+                                       id="edit-patient-city"
+                                       placeholder="City">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-line">
+                                <input type="text" class="form-control"
+                                       id="edit-patient-country"
+                                       placeholder="Country">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-patient-height" class="col-sm-3 control-label">Height</label>
+                        <div class="col-sm-9">
+                            <div class="form-line">
+                                <input type="text" class="form-control"
+                                       id="edit-patient-height"
+                                       name="edit-patient-height" placeholder="Height (cm)">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-patient-weight" class="col-sm-3 control-label">Weight</label>
+                        <div class="col-sm-9">
+                            <div class="form-line">
+                                <input type="text" class="form-control"
+                                       id="edit-patient-weight"
+                                       name="edit-patient-weight" placeholder="Weight (kg)">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-patient-telephone" class="col-sm-3 control-label">Mobile Number</label>
+                        <div class="col-sm-9">
+                            <div class="form-line">
+                                <input type="tel" class="form-control"
+                                       id="edit-patient-telephone"
+                                       name="edit-patient-telephone" placeholder="Telephone Number">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-patient-email" class="col-sm-3 control-label">Email</label>
+                        <div class="col-sm-9">
+                            <div class="form-line" id="email-error-line">
+                                <input type="email" class="form-control details "
+                                       id="edit-patient-email"
+                                       name="edit-patient-email" placeholder="Email" oninput="emailVerify(this.value)">
+                            </div>
+                            <label id="email-error" style="display: none;" class="error error-msg" for="edit-patient-email">Email Already Exists!</label>
+                        </div>
+                    </div>
+
+                    <input id="edit-patient-id" type="hidden">
+                </form>
+            </div>
+            <div class="modal-footer" style="padding-top: 0; margin-top: 20px; margin-right: 40px;">
+                <button type="button" class="btn btn-success waves-effect" onclick="updatePatient()">Update</button>
                 <button type="button" class="btn bg-teal waves-effect" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -396,12 +518,135 @@ require_once("php/loginDataFetching.php");
             </div>
 
             <div class="modal-footer" style="padding-top: 0;">
+                <button type="button" class="btn btn-success waves-effect" onclick="editDoctor($('#view-doctor-id').text())">Edit</button>
                 <button type="button" class="btn btn-danger waves-effect" onclick="deleteOther($('#view-doctor-id').text(), 'doctor')">Delete</button>
                 <button type="button" class="btn bg-teal waves-effect" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Edit Doctor details data model -->
+<div class="modal fade" id="editDoctorDetailsDataModel" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-teal" style="padding: 15px;">
+                <h2 class="modal-title text-center" id="editDoctorDetailsDataModelLabel">Doctor Details</h2>
+            </div>
+            <div class="modal-body" style="padding-bottom: 0;">
+
+                <form class="form-horizontal">
+
+                    <div class="form-group">
+                        <label for="edit-doctor-fname" class="col-sm-3 control-label">Name</label>
+                        <div class="col-sm-4">
+                            <div class="form-line">
+                                <input type="text" class="form-control"
+                                       id="edit-doctor-fname"
+                                       placeholder="First name">
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-line">
+                                <input type="text" class="form-control"
+                                       id="edit-doctor-sname"
+                                       placeholder="Surname">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-doctor-street" class="col-sm-3 control-label">Street/ZipCode</label>
+                        <div class="col-sm-5">
+                            <div class="form-line">
+                                <input type="text" class="form-control"
+                                       id="edit-doctor-street"
+                                       placeholder="Street">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-line">
+                                <input type="text" class="form-control"
+                                       id="edit-doctor-zipcode"
+                                       placeholder="ZipCode">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-doctor-city" class="col-sm-3 control-label">City/Country</label>
+                        <div class="col-sm-5">
+                            <div class="form-line">
+                                <input type="text" class="form-control"
+                                       id="edit-doctor-city"
+                                       placeholder="City">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-line">
+                                <input type="text" class="form-control"
+                                       id="edit-doctor-country"
+                                       placeholder="Country">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-doctor-medLicenceNo" class="col-sm-3 control-label">Med. Licence No</label>
+                        <div class="col-sm-9">
+                            <div class="form-line">
+                                <input type="text" class="form-control"
+                                       id="edit-doctor-medLicenceNo"
+                                       name="edit-doctor-medLicenceNo" placeholder="Medical Licence No">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-doctor-speciality" class="col-sm-3 control-label">Speciality</label>
+                        <div class="col-sm-9">
+                            <div class="form-line">
+                                <input type="text" class="form-control"
+                                       id="edit-doctor-speciality"
+                                       name="edit-doctor-speciality" placeholder="Speciality)">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-doctor-telephone" class="col-sm-3 control-label">Mobile Number</label>
+                        <div class="col-sm-9">
+                            <div class="form-line">
+                                <input type="tel" class="form-control"
+                                       id="edit-doctor-telephone"
+                                       name="edit-doctor-telephone" placeholder="Telephone Number">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-doctor-email" class="col-sm-3 control-label">Email</label>
+                        <div class="col-sm-9">
+                            <div class="form-line" id="doctor-email-error-line">
+                                <input type="email" class="form-control details "
+                                       id="edit-doctor-email"
+                                       name="edit-doctor-email" placeholder="Email" oninput="doctorEmailVerify(this.value)">
+                            </div>
+                            <label id="doctor-email-error" style="display: none;" class="error error-msg" for="edit-doctor-email">Email Already Exists!</label>
+                        </div>
+                    </div>
+
+                    <input id="edit-doctor-id" type="hidden">
+                </form>
+            </div>
+            <div class="modal-footer" style="padding-top: 0; margin-top: 20px; margin-right: 40px;">
+                <button type="button" class="btn btn-success waves-effect" onclick="updateDoctor()">Update</button>
+                <button type="button" class="btn bg-teal waves-effect" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <section class="content" id="viewPatients">
     <div class="container-fluid">
@@ -1016,7 +1261,107 @@ require_once("php/loginDataFetching.php");
             </div>
 
             <div class="modal-footer" style="padding-top: 0;">
+                <button type="button" class="btn btn-success waves-effect" onclick="editStaff($('#view-staff-id').text())">Edit</button>
                 <button type="button" class="btn btn-danger waves-effect" onclick="deleteOther($('#view-staff-id').text(), 'staff')">Delete</button>
+                <button type="button" class="btn bg-teal waves-effect" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Staff details data model -->
+<div class="modal fade" id="editStaffDetailsDataModel" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-teal" style="padding: 15px;">
+                <h2 class="modal-title text-center" id="editStaffDetailsDataModelLabel">Staff Details</h2>
+            </div>
+            <div class="modal-body" style="padding-bottom: 0;">
+
+                <form class="form-horizontal">
+
+                    <div class="form-group">
+                        <label for="edit-staff-fname" class="col-sm-3 control-label">Name</label>
+                        <div class="col-sm-4">
+                            <div class="form-line">
+                                <input type="text" class="form-control"
+                                       id="edit-staff-fname"
+                                       placeholder="First name">
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-line">
+                                <input type="text" class="form-control"
+                                       id="edit-staff-sname"
+                                       placeholder="Surname">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-staff-street" class="col-sm-3 control-label">Street/ZipCode</label>
+                        <div class="col-sm-5">
+                            <div class="form-line">
+                                <input type="text" class="form-control"
+                                       id="edit-staff-street"
+                                       placeholder="Street">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-line">
+                                <input type="text" class="form-control"
+                                       id="edit-staff-zipcode"
+                                       placeholder="ZipCode">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-staff-city" class="col-sm-3 control-label">City/Country</label>
+                        <div class="col-sm-5">
+                            <div class="form-line">
+                                <input type="text" class="form-control"
+                                       id="edit-staff-city"
+                                       placeholder="City">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-line">
+                                <input type="text" class="form-control"
+                                       id="edit-staff-country"
+                                       placeholder="Country">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-staff-telephone" class="col-sm-3 control-label">Mobile Number</label>
+                        <div class="col-sm-9">
+                            <div class="form-line">
+                                <input type="tel" class="form-control"
+                                       id="edit-staff-telephone"
+                                       name="edit-staff-telephone" placeholder="Telephone Number">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-staff-email" class="col-sm-3 control-label">Email</label>
+                        <div class="col-sm-9">
+                            <div class="form-line" id="staff-email-error-line">
+                                <input type="email" class="form-control details "
+                                       id="edit-staff-email"
+                                       name="edit-staff-email" placeholder="Email" oninput="staffEmailVerify(this.value)">
+                            </div>
+                            <label id="staff-email-error" style="display: none;" class="error error-msg" for="edit-staff-email">Email Already Exists!</label>
+                        </div>
+                    </div>
+
+                    <input id="edit-staff-id" type="hidden">
+                </form>
+            </div>
+            <div class="modal-footer" style="padding-top: 0; margin-top: 20px; margin-right: 40px;">
+                <button type="button" class="btn btn-success waves-effect" onclick="updateStaff()">Update</button>
                 <button type="button" class="btn bg-teal waves-effect" data-dismiss="modal">Close</button>
             </div>
         </div>
