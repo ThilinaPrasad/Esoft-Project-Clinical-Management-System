@@ -98,14 +98,18 @@ require_once("php/common/getDoctors.php");
                       </span>
                                     </div>
                                     <input type="text" class="form-control input-type-1" placeholder="First name"
-                                           id="fname-input"
+                                           id="fname-input" oninput="removeError('#fname');"
                                            aria-label="First name" aria-describedby="fname" autofocus>
+                                    <p class="error text-danger invalid-feedback text-right" id="fname-input-error"></p>
+                                    <br>
+
                                 </div>
 
                                 <div class="input-group mb-3 col-md-6">
                                     <input type="text" class="form-control input-type-1" placeholder="Surname"
-                                           id="sname-input"
+                                           id="sname-input" oninput="removeError('#sname');"
                                            aria-label="Surname" aria-describedby="sname" autofocus>
+                                    <p class="error text-danger invalid-feedback text-right" id="sname-input-error"></p>
                                 </div>
                             </div>
 
@@ -131,35 +135,39 @@ require_once("php/common/getDoctors.php");
                                   class="fa fa-user-circle-o" aria-hidden="true"></i>
                       </span>
                                 </div>
-                                <input class="form-control input-type-1" aria-describedby="bday"
-                                       placeholder="Birthday (mm/dd/yyyy)" id="birthday" width="83%"/>
+                                <input class="form-control input-type-1" aria-describedby="bday" onchange="removeErrorInput('#birthday-input-error');"
+                                       placeholder="Birthday (mm/dd/yyyy)" id="birthday" width="86%"/>
+                                <p class="error text-danger invalid-feedback text-right" id="birthday-input-error"></p>
                             </div>
 
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                            <span class="input-group-text bg-color-type-1 border-type-1" id="nic-area"><i
+                            <span class="input-group-text bg-color-type-1 border-type-1" id="nic"><i
                                         class="fa fa-user-circle-o" aria-hidden="true"></i>
                             </span>
                                 </div>
                                 <input type="tel" class="form-control input-type-1" id="nic-input"
-                                       placeholder="NIC/Passport" aria-label="NIC" aria-describedby="nic-area">
+                                       placeholder="NIC/Passport" oninput="removeError('#nic');" aria-label="NIC" aria-describedby="nic-area">
+                                <p class="error text-danger invalid-feedback text-right" id="nic-input-error"></p>
                             </div>
 
                             <div class="row">
                                 <div class="input-group mb-3 col-md-8" style="padding-right: 0;">
                                     <div class="input-group-prepend">
-                              <span class="input-group-text bg-color-type-1 border-type-1" id="saddress"><i
+                              <span class="input-group-text bg-color-type-1 border-type-1" id="street-address"><i
                                           class="fa fa-home" aria-hidden="true"></i>
                               </span>
                                     </div>
                                     <input type="text" class="form-control input-type-1" id="street-address-input"
-                                           placeholder="Street Address"
+                                           placeholder="Street Address" oninput="removeError('#street-address');"
                                            aria-label="Address" aria-describedby="address">
+                                    <p class="error text-danger invalid-feedback text-right" id="street-address-input-error"></p>
                                 </div>
                                 <div class="input-group mb-3 col-md-4">
                                     <input type="text" class="form-control input-type-1 ml-0" id="zipcode-input"
-                                           placeholder="Zip Code"
+                                           placeholder="Zip Code" oninput="removeError('#zipcode');"
                                            aria-label="Address" aria-describedby="address">
+                                    <p class="error text-danger invalid-feedback text-right" id="zipcode-input-error"></p>
                                 </div>
 
                             </div>
@@ -172,13 +180,15 @@ require_once("php/common/getDoctors.php");
                               </span>
                                     </div>
                                     <input type="text" class="form-control input-type-1" id="city-input"
-                                           placeholder="City"
+                                           placeholder="City" oninput="removeError('#city');"
                                            aria-label="Address" aria-describedby="address">
+                                    <p class="error text-danger invalid-feedback text-right" id="city-input-error"></p>
                                 </div>
                                 <div class="input-group mb-3 col-md-6">
                                     <input type="text" class="form-control input-type-1 ml-0" id="country-input"
-                                           placeholder="Country"
+                                           placeholder="Country" oninput="removeError('#country');"
                                            aria-label="Address" aria-describedby="address">
+                                    <p class="error text-danger invalid-feedback text-right" id="country-input-error"></p>
                                 </div>
 
                             </div>
@@ -204,19 +214,20 @@ require_once("php/common/getDoctors.php");
                             </span>
                                 </div>
                                 <input type="tel" class="form-control input-type-1" id="telephone-input"
-                                       placeholder="Telephone No" aria-label="Telephone No"
+                                       placeholder="Telephone No" aria-label="Telephone No" oninput="checkTelephone(this.value, '#telephone');"
                                        aria-describedby="telephone">
+                                <p class="error text-danger invalid-feedback text-right" id="telephone-input-error"></p>
                             </div>
 
                             <div class="form-group">
                                 <center>
-
-                                    <button type="button" class="btn btn-type-1" onclick="$('#medical').tab('show');">
+                                    <p class="error text-danger invalid-feedback text-center" id="tab1-input-errors">Please
+                                        enter all valid inputs!</p>
+                                    <button type="button" class="btn btn-type-1" id="firstContinueBtn" onclick="validateFirstStep()">
                                         Continue
                                     </button>
                                 </center>
-                                <p class="error text-danger invalid-feedback text-center" id="tab1-input-errors">Please
-                                    enter all valid inputs!</p>
+
                             </div>
 
                         </div>
@@ -230,7 +241,7 @@ require_once("php/common/getDoctors.php");
                                         class="fa fa-user-circle-o" aria-hidden="true"></i>
                             </span>
                                 </div>
-                                <select class="custom-select form-control input-type-1" id="blood-type">
+                                <select class="custom-select form-control input-type-1" id="blood-type" onchange="removeErrorInput('#blood-type-input-error');">
                                     <option value="" hidden selected>Blood Type</option>
                                     <option value="O+">O+ (O-Positive)</option>
                                     <option value="O-">O- (O-Negative)</option>
@@ -241,6 +252,7 @@ require_once("php/common/getDoctors.php");
                                     <option value="AB+">AB+ (AB-Positive)</option>
                                     <option value="AB-">AB- (AB-Negative)</option>
                                 </select>
+                                <p class="error text-danger invalid-feedback text-right" id="blood-type-input-error"></p>
                             </div>
 
 
@@ -250,12 +262,13 @@ require_once("php/common/getDoctors.php");
                                         class="fa fa-user-circle-o" aria-hidden="true"></i>
                             </span>
                                 </div>
-                                <input type="tel" class="form-control input-type-1" id="weight-input"
-                                       placeholder="Weight" aria-label="Weight" aria-describedby="weight">
-                                <div class="input-group-append">
-                                    <span class="input-group-text bg-color-type-1 border-type-1"
-                                          id="weight-unit">kg</span>
-                                </div>
+                                <input type="tel" class="form-control input-type-1" id="weight-input" oninput="checkWeight(this.value, '#weight')"
+                                       placeholder="Weight (kg)" aria-label="Weight" aria-describedby="weight">
+                                <p class="error text-danger invalid-feedback text-right" id="weight-input-error"></p>
+<!--                                <div class="input-group-append">-->
+<!--                                    <span class="input-group-text bg-color-type-1 border-type-1"-->
+<!--                                          id="weight-unit">kg</span>-->
+<!--                                </div>-->
                             </div>
 
                             <div class="input-group mb-3">
@@ -264,25 +277,26 @@ require_once("php/common/getDoctors.php");
                                         class="fa fa-user-circle-o" aria-hidden="true"></i>
                             </span>
                                 </div>
-                                <input type="tel" class="form-control input-type-1" id="height-input"
-                                       placeholder="Height" aria-label="Weight" aria-describedby="telephone">
-                                <div class="input-group-append">
-                                    <span class="input-group-text bg-color-type-1 border-type-1"
-                                          id="height-unit">cm</span>
-                                </div>
+                                <input type="tel" class="form-control input-type-1" id="height-input" oninput="checkHeight(this.value, '#height')"
+                                       placeholder="Height (cm)" aria-label="Weight" aria-describedby="telephone">
+                                <p class="error text-danger invalid-feedback text-right" id="height-input-error"></p>
+<!--                                <div class="input-group-append">-->
+<!--                                    <span class="input-group-text bg-color-type-1 border-type-1"-->
+<!--                                          id="height-unit">cm</span>-->
+<!--                                </div>-->
                             </div>
 
                             <div class="form-group">
                                 <center>
+                                    <p class="error text-danger invalid-feedback text-center" id="tab2-input-errors">Please
+                                        enter all valid inputs!</p>
                                     <button type="button" class="btn btn-type-1" onclick="$('#personal').tab('show');">
                                         Previous
                                     </button>
-                                    <button type="button" class="btn btn-type-1" onclick="$('#security').tab('show');">
+                                    <button type="button" class="btn btn-type-1" onclick="validateSecondStep()" id="secondContinueBtn">
                                         Continue
                                     </button>
                                 </center>
-                                <p class="error text-danger invalid-feedback text-center" id="input-error">Please
-                                    enter all valid inputs!</p>
                             </div>
 
 
@@ -301,6 +315,7 @@ require_once("php/common/getDoctors.php");
                                        id="password-input" placeholder="Password (8-16 characters)"
                                        aria-label="Password"
                                        aria-describedby="passowrd">
+                                <p class="error text-danger invalid-feedback text-right" id="password-input-error"></p>
                             </div>
 
                             <div class="input-group mb-3">
@@ -326,7 +341,8 @@ require_once("php/common/getDoctors.php");
                                     </div>
                                 </center>
                                 <center id="final-button-section">
-                                    <button type="button" class="btn btn-type-1" onclick="$('#personal').tab('show');">
+                                    <p class="error text-danger invalid-feedback text-center" id="register-btn-input-error">Please enter all valid inputs!</p>
+                                    <button type="button" class="btn btn-type-1" onclick="$('#medical').tab('show');">
                                         Previous
                                     </button>
                                     <button type="button" class="btn btn-type-1" id="register-btn"
@@ -334,9 +350,6 @@ require_once("php/common/getDoctors.php");
                                         Register
                                     </button>
                                 </center>
-                                <p class="error text-danger invalid-feedback text-center" id="register-btn-input-error">
-                                    Please
-                                    enter all valid inputs!</p>
                             </div>
                         </div>
 
