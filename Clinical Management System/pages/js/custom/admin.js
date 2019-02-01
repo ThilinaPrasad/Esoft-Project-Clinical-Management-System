@@ -1,4 +1,8 @@
 $('#staff-bday').bootstrapMaterialDatePicker({ format : 'MM/DD/YYYY' , time: false, maxDate: new Date()});
+
+let staffUserEmail = '';
+let isStaffUserEmailValid = true;
+
 function addStaff(id){
     addRemoveClass(id);
     removeSection();
@@ -48,6 +52,21 @@ function removeSection(){
     addStaff.style.display = "none";
     viewStaff.style.display = "none";
     viewPayment.style.display = "none";
+}
+
+function staffEmailVerify(email) {
+    isStaffUserEmailValid = true;
+
+    $.get("../../php/common/getData.php?table=user&column=email&value=" + email, function (data, status) {
+        if (data != 'false' && staffUserEmail != email) {
+            isStaffUserEmailValid = false;
+            $("#staff-email-error").show();
+            $("#staff-email-error-line").addClass('error');
+        } else {
+            $("#staff-email-error").hide();
+            $("#staff-email-error-line").removeClass('error');
+        }
+    });
 }
 
 function staffTabShift(id){
@@ -338,6 +357,150 @@ function getStaffById(id){
             $("#view-staff-id").text(id);
         } else {
             console.log("Error");
+        }
+    });
+}
+
+function editStaff(id) {
+    $('#staffDataModel').modal('hide');
+    $('#editStaffDetailsDataModel').modal('show');
+    getStaffDetailsById(id);
+}
+
+function getStaffDetailsById(id) {
+
+    isStaffUserEmailValid = true;
+    $("#staff-email-error").hide();
+    $("#staff-email-error-line").removeClass('error');
+
+    $.get("../../../php/common/getData.php?table=user&column=id&value=" + id, function (data, status) {
+        if (data != 'false') {
+            let temp = jQuery.parseJSON(data);
+            $("#edit-staff-id").val(temp[0].id);
+            $("#edit-staff-fname").val(temp[0].fname);
+            $("#edit-staff-sname").val(temp[0].sname);
+            $("#edit-staff-street").val(temp[0].street);
+            $("#edit-staff-zipcode").val(temp[0].zipCode);
+            $("#edit-staff-city").val(temp[0].city);
+            $("#edit-staff-country").val(temp[0].country);
+            $("#edit-staff-email").val(temp[0].email);
+            $("#edit-staff-telephone").val(temp[0].telephone);
+            staffUserEmail = temp[0].email;
+        } else {
+            console.log("Error");
+        }
+    });
+}
+
+function updateStaff() {
+
+    let id = $("#edit-staff-id").val();
+    let fname = $("#edit-staff-fname").val();
+    let sname = $("#edit-staff-sname").val();
+    let street = $("#edit-staff-street").val();
+    let zipcode = $("#edit-staff-zipcode").val();
+    let city = $("#edit-staff-city").val();
+    let country = $("#edit-staff-country").val();
+    let telephone = $("#edit-staff-telephone").val();
+    let email = $("#edit-staff-email").val();
+
+    $.confirm({
+        theme: 'modern',
+        icon: 'fa fa-question',
+        title: 'Update!',
+        content: "Do you want to update this record?",
+        draggable: true,
+        animationBounce: 2.5,
+        type: 'blue',
+        typeAnimated: true,
+        buttons: {
+            Delete: {
+                text: 'Update',
+                btnClass: 'btn-primary',
+                action: function () {
+                    if(isStaffUserEmailValid) {
+                        $.post("php/updateUser.php",
+                            {
+                                id: id,
+                                fname: fname,
+                                sname: sname,
+                                street: street,
+                                zipCode: zipcode,
+                                city: city,
+                                country: country,
+                                email: email,
+                                telephone: telephone
+                            },
+
+                            function (result) {
+                                if (result == 1) {
+
+                                    $.confirm({
+                                        theme: 'modern',
+                                        icon: 'fa fa-check-circle',
+                                        title: 'Success!',
+                                        content: "Your data successfully updated!",
+                                        draggable: true,
+                                        animationBounce: 2.5,
+                                        type: 'green',
+                                        typeAnimated: true,
+                                        buttons: {
+                                            Delete: {
+                                                text: 'Okay',
+                                                btnClass: 'btn-success',
+                                                action: function () {
+                                                }
+                                            },
+
+                                        }
+                                    });
+
+                                } else {
+                                    $.confirm({
+                                        theme: 'modern',
+                                        icon: 'fa fa-exclamation-circle',
+                                        title: 'Error !',
+                                        content: "Error happened. Please try again!",
+                                        draggable: true,
+                                        animationBounce: 2.5,
+                                        type: 'red',
+                                        typeAnimated: true,
+                                        buttons: {
+                                            Delete: {
+                                                text: 'Try Again',
+                                                btnClass: 'btn-danger',
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+
+                    }else{
+                        $.confirm({
+                            theme: 'modern',
+                            icon: 'fa fa-exclamation-circle',
+                            title: 'Error !',
+                            content: "Please enter valid inputs!",
+                            draggable: true,
+                            animationBounce: 2.5,
+                            type: 'red',
+                            typeAnimated: true,
+                            buttons: {
+                                Delete: {
+                                    text: 'Try Again',
+                                    btnClass: 'btn-danger',
+                                }
+                            }
+                        });
+                    }
+                }
+            },
+            later: {
+                text: 'cancel',
+                action: function () {
+
+                }
+            }
         }
     });
 }

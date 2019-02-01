@@ -1,4 +1,11 @@
 $('#bday').bootstrapMaterialDatePicker({ format : 'MM/DD/YYYY' , time: false, maxDate: new Date()});
+
+let patientUserEmail = '';
+let isPatientUserEmailValid = true;
+
+let doctorUserEmail = '';
+let isDoctorUserEmailValid = true;
+
 function addDoctors(id){
     addRemoveClass(id);
     removeSection();
@@ -54,6 +61,36 @@ function tabShift(id){
 function showDoctor(id) {
     $('#doctorDataModel').modal('show');
     getDoctorById(id);
+}
+
+function patientEmailVerify(email) {
+    isPatientUserEmailValid = true;
+
+    $.get("../../php/common/getData.php?table=user&column=email&value=" + email, function (data, status) {
+        if (data != 'false' && patientUserEmail != email) {
+            isPatientUserEmailValid = false;
+            $("#patient-email-error").show();
+            $("#patient-email-error-line").addClass('error');
+        } else {
+            $("#patient-email-error").hide();
+            $("#patient-email-error-line").removeClass('error');
+        }
+    });
+}
+
+function doctorEmailVerify(email) {
+    isDoctorUserEmailValid = true;
+
+    $.get("../../php/common/getData.php?table=user&column=email&value=" + email, function (data, status) {
+        if (data != 'false' && doctorUserEmail != email) {
+            isDoctorUserEmailValid = false;
+            $("#doctor-email-error").show();
+            $("#doctor-email-error-line").addClass('error');
+        } else {
+            $("#doctor-email-error").hide();
+            $("#doctor-email-error-line").removeClass('error');
+        }
+    });
 }
 
 function getDoctorById(id){
@@ -280,6 +317,320 @@ function emailValidation(email) {
             isEmailValid = true;
             $("#add-doctor-email-line").removeClass("error");
             $("#add-doctor-email-error").hide();
+        }
+    });
+}
+
+function editPatient(id) {
+    $('#patientDataModel').modal('hide');
+    $('#editPatientDetailsDataModel').modal('show');
+    getPatientDetailsById(id);
+}
+
+function editDoctor(id) {
+    $('#doctorDataModel').modal('hide');
+    $('#editDoctorDetailsDataModel').modal('show');
+    getDoctorDetailsById(id);
+}
+
+function getDoctorDetailsById(id) {
+
+    isDoctorUserEmailValid = true;
+    $("#doctor-email-error").hide();
+    $("#doctor-email-error-line").removeClass('error');
+
+    $.get("../../../php/common/getData.php?table=doctor&column=id&value=" + id, function (data, status) {
+        if (data != 'false') {
+            let temp = jQuery.parseJSON(data);
+            $("#edit-doctor-id").val(temp[0].id);
+            $("#edit-doctor-fname").val(temp[0].fname);
+            $("#edit-doctor-sname").val(temp[0].sname);
+            $("#edit-doctor-street").val(temp[0].street);
+            $("#edit-doctor-zipcode").val(temp[0].zipCode);
+            $("#edit-doctor-city").val(temp[0].city);
+            $("#edit-doctor-country").val(temp[0].country);
+            $("#edit-doctor-medLicenceNo").val(temp[0].medLicenceNo);
+            $("#edit-doctor-speciality").val(temp[0].speciality);
+            $("#edit-doctor-email").val(temp[0].email);
+            $("#edit-doctor-telephone").val(temp[0].telephone);
+            doctorUserEmail = temp[0].email;
+        } else {
+            console.log("Error");
+        }
+    });
+}
+
+function getPatientDetailsById(id) {
+
+    isPatientUserEmailValid = true;
+    $("#patient-email-error").hide();
+    $("#patient-email-error-line").removeClass('error');
+
+    $.get("../../../php/common/getData.php?table=patient&column=id&value=" + id, function (data, status) {
+        if (data != 'false') {
+            let temp = jQuery.parseJSON(data);
+            $("#edit-patient-id").val(temp[0].id);
+            $("#edit-patient-fname").val(temp[0].fname);
+            $("#edit-patient-sname").val(temp[0].sname);
+            $("#edit-patient-street").val(temp[0].street);
+            $("#edit-patient-zipcode").val(temp[0].zipCode);
+            $("#edit-patient-city").val(temp[0].city);
+            $("#edit-patient-country").val(temp[0].country);
+            $("#edit-patient-height").val(temp[0].height);
+            $("#edit-patient-weight").val(temp[0].weight);
+            $("#edit-patient-email").val(temp[0].email);
+            $("#edit-patient-telephone").val(temp[0].telephone);
+            patientUserEmail = temp[0].email;
+        } else {
+            console.log("Error");
+        }
+    });
+}
+
+function updateDoctor() {
+
+    let id = $("#edit-doctor-id").val();
+    let fname = $("#edit-doctor-fname").val();
+    let sname = $("#edit-doctor-sname").val();
+    let street = $("#edit-doctor-street").val();
+    let zipcode = $("#edit-doctor-zipcode").val();
+    let city = $("#edit-doctor-city").val();
+    let country = $("#edit-doctor-country").val();
+    let medLicenceNo = $("#edit-doctor-medLicenceNo").val();
+    let speciality = $("#edit-doctor-speciality").val();
+    let telephone = $("#edit-doctor-telephone").val();
+    let email = $("#edit-doctor-email").val();
+
+    $.confirm({
+        theme: 'modern',
+        icon: 'fa fa-question',
+        title: 'Update!',
+        content: "Do you want to update this record?",
+        draggable: true,
+        animationBounce: 2.5,
+        type: 'blue',
+        typeAnimated: true,
+        buttons: {
+            Delete: {
+                text: 'Update',
+                btnClass: 'btn-primary',
+                action: function () {
+                    if(isDoctorUserEmailValid) {
+                        $.post("php/updateUser.php",
+                            {
+                                id: id,
+                                fname: fname,
+                                sname: sname,
+                                street: street,
+                                zipCode: zipcode,
+                                city: city,
+                                country: country,
+                                email: email,
+                                telephone: telephone
+                            },
+
+                            function (result) {
+                                if (result == 1) {
+                                    $.post("php/updateDoctor.php",
+                                        {
+                                            id: id,
+                                            medLicenceNo: medLicenceNo,
+                                            speciality: speciality
+                                        },
+                                        function (result) {
+                                            if (result == 1) {
+                                                $.confirm({
+                                                    theme: 'modern',
+                                                    icon: 'fa fa-check-circle',
+                                                    title: 'Success!',
+                                                    content: "Your data successfully updated!",
+                                                    draggable: true,
+                                                    animationBounce: 2.5,
+                                                    type: 'green',
+                                                    typeAnimated: true,
+                                                    buttons: {
+                                                        Delete: {
+                                                            text: 'Okay',
+                                                            btnClass: 'btn-success',
+                                                            action: function () {
+                                                            }
+                                                        },
+
+                                                    }
+                                                });
+
+                                            } else {
+                                                $.confirm({
+                                                    theme: 'modern',
+                                                    icon: 'fa fa-exclamation-circle',
+                                                    title: 'Error !',
+                                                    content: "Error happened. Please try again!",
+                                                    draggable: true,
+                                                    animationBounce: 2.5,
+                                                    type: 'red',
+                                                    typeAnimated: true,
+                                                    buttons: {
+                                                        Delete: {
+                                                            text: 'Try Again',
+                                                            btnClass: 'btn-danger',
+                                                        }
+                                                    }
+                                                });
+                                            }
+                                        });
+
+                                }
+                            });
+                    }else{
+                        $.confirm({
+                            theme: 'modern',
+                            icon: 'fa fa-exclamation-circle',
+                            title: 'Error !',
+                            content: "Please enter valid inputs!",
+                            draggable: true,
+                            animationBounce: 2.5,
+                            type: 'red',
+                            typeAnimated: true,
+                            buttons: {
+                                Delete: {
+                                    text: 'Try Again',
+                                    btnClass: 'btn-danger',
+                                }
+                            }
+                        });
+                    }
+                }
+            },
+            later: {
+                text: 'cancel',
+                action: function () {
+
+                }
+            }
+        }
+    });
+}
+
+function updatePatient() {
+
+    let id = $("#edit-patient-id").val();
+    let fname = $("#edit-patient-fname").val();
+    let sname = $("#edit-patient-sname").val();
+    let street = $("#edit-patient-street").val();
+    let zipcode = $("#edit-patient-zipcode").val();
+    let city = $("#edit-patient-city").val();
+    let country = $("#edit-patient-country").val();
+    let height = $("#edit-patient-height").val();
+    let weight = $("#edit-patient-weight").val();
+    let telephone = $("#edit-patient-telephone").val();
+    let email = $("#edit-patient-email").val();
+
+    $.confirm({
+        theme: 'modern',
+        icon: 'fa fa-question',
+        title: 'Update!',
+        content: "Do you want to update this record?",
+        draggable: true,
+        animationBounce: 2.5,
+        type: 'blue',
+        typeAnimated: true,
+        buttons: {
+            Delete: {
+                text: 'Update',
+                btnClass: 'btn-primary',
+                action: function () {
+                    if(isPatientUserEmailValid) {
+                        $.post("php/updateUser.php",
+                            {
+                                id: id,
+                                fname: fname,
+                                sname: sname,
+                                street: street,
+                                zipCode: zipcode,
+                                city: city,
+                                country: country,
+                                email: email,
+                                telephone: telephone
+                            },
+
+                            function (result) {
+                                if (result == 1) {
+                                    $.post("php/updatePatient.php",
+                                        {
+                                            id: id,
+                                            height: height,
+                                            weight: weight
+                                        },
+                                        function (result) {
+                                            if (result == 1) {
+                                                $.confirm({
+                                                    theme: 'modern',
+                                                    icon: 'fa fa-check-circle',
+                                                    title: 'Success!',
+                                                    content: "Your data successfully updated!",
+                                                    draggable: true,
+                                                    animationBounce: 2.5,
+                                                    type: 'green',
+                                                    typeAnimated: true,
+                                                    buttons: {
+                                                        Delete: {
+                                                            text: 'Okay',
+                                                            btnClass: 'btn-success',
+                                                            action: function () {
+                                                            }
+                                                        },
+
+                                                    }
+                                                });
+
+                                            } else {
+                                                $.confirm({
+                                                    theme: 'modern',
+                                                    icon: 'fa fa-exclamation-circle',
+                                                    title: 'Error !',
+                                                    content: "Error happened. Please try again!",
+                                                    draggable: true,
+                                                    animationBounce: 2.5,
+                                                    type: 'red',
+                                                    typeAnimated: true,
+                                                    buttons: {
+                                                        Delete: {
+                                                            text: 'Try Again',
+                                                            btnClass: 'btn-danger',
+                                                        }
+                                                    }
+                                                });
+                                            }
+                                        });
+
+                                }
+                            });
+                    }else{
+                        $.confirm({
+                            theme: 'modern',
+                            icon: 'fa fa-exclamation-circle',
+                            title: 'Error !',
+                            content: "Please enter valid inputs!",
+                            draggable: true,
+                            animationBounce: 2.5,
+                            type: 'red',
+                            typeAnimated: true,
+                            buttons: {
+                                Delete: {
+                                    text: 'Try Again',
+                                    btnClass: 'btn-danger',
+                                }
+                            }
+                        });
+                    }
+                }
+                },
+            later: {
+                text: 'cancel',
+                action: function () {
+
+                }
+            }
         }
     });
 }
