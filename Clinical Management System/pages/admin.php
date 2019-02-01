@@ -1145,7 +1145,7 @@ require_once("php/loginDataFetching.php");
                         </div>
                         <div class="col-md-2">
                             <center><img src="images/pdf-icon.png" style="width: 100px;height: 100px;"></center>
-                            <h6 class="text-center" style="margin-top: 0;">Daily Income Report (pdf)</h6>
+                            <h6 class="text-center" style="margin-top: 0;">Monthly Income Report (pdf)</h6>
                             <a href="reportsTemplates/dailyReport.html" target="_blank" class="btn btn-success waves-effect">Download As pdf</a>
                         </div>
                         <div class="col-md-2">
