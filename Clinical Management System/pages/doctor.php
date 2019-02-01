@@ -1,5 +1,5 @@
 ﻿<?php
-require_once("php/getPatients.php");
+require_once("php/getPatientsWithApp.php");
 require_once("php/loginDataFetching.php");
 
 ?>
@@ -405,7 +405,7 @@ require_once("php/loginDataFetching.php");
                 <div class="card">
                     <div class="header">
                         <h2 class="font-bold col-teal">
-                            View Patient Details
+                            View Patients for schedules
                         </h2>
                     </div>
                     <div class="body">
