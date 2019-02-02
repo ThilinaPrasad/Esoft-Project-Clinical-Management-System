@@ -6,10 +6,12 @@ let isSecondFormValid = false;
 
 let isEmail = false;
 
+let isForgotPasswordEmail = true;
+
 // email validations
 function email(email, id) {
     removeError(id);
-    $.get("../../php/common/getData.php?table=patient&column=email&value=" + email, function (data, status) {
+    $.get("../../php/common/getData.php?table=user&column=email&value=" + email, function (data, status) {
         if (data != 'false') {
             isEmailValid = false;
             errorToggle(id, "Email already exits!", true);
@@ -26,6 +28,112 @@ function email(email, id) {
             isEmail = true;
         }
     });
+}
+
+// forgot password email validations
+function validateForgotPasswordEmail(email, id) {
+    removeError(id);
+    $.get("../../php/common/getData.php?table=user&column=email&value=" + email, function (data, status) {
+        if (data === 'false') {
+            isForgotPasswordEmail = false;
+            errorToggle(id, "Email not exits!", true);
+        } else {
+            isForgotPasswordEmail = true;
+            errorToggle(id, "Looks Good!", false);
+        }
+        let regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+        if(!regex.test(email)) {
+            errorToggle(id, "Invalid Email!", true);
+            isForgotPasswordEmail = false;
+        }else{
+            isForgotPasswordEmail = true;
+        }
+    });
+}
+
+function sendNewPasswordToEmail() {
+    $("#forgotBtn").hide();
+    $("#forgot-spinner").show();
+
+    let email = $("#forgot-password-email-input").val();
+
+    if(email === '') {
+        errorToggle("#email", "Required Field!", true);
+        isForgotPasswordEmail = false;
+    }
+    if(isForgotPasswordEmail) {
+
+        let newPassword = makePassword();
+
+        $.post("/pages/php/updatePassword.php",
+            {
+                email: email,
+                newPassword: newPassword
+            },
+            function (result) {
+                if (result.trim() === '1') {
+                    $.post("/php/phpemail/phpmail.php",
+                        {
+                            email: email,
+                            newPassword: newPassword
+                        },
+                        function (result) {
+                            $.confirm({
+                                theme: 'modern',
+                                icon: 'fa fa-check-circle',
+                                title: 'Success!',
+                                content: "Successfully sent new password to your email!",
+                                draggable: true,
+                                animationBounce: 2.5,
+                                type: 'green',
+                                typeAnimated: true,
+                                buttons: {
+                                    Delete: {
+                                        text: 'Okay',
+                                        btnClass: 'btn-success',
+                                        action: function () {
+                                            $("#forgotPasswordDataModel").modal('hide');
+                                            $("#forgotBtn").show();
+                                            $("#forgot-spinner").hide();
+                                        }
+                                    },
+
+                                }
+                            });
+
+                        })
+                } else {
+                    $.confirm({
+                        theme: 'modern',
+                        icon: 'fa fa-exclamation-circle',
+                        title: 'Error !',
+                        content: "Error happened. Please try again!",
+                        draggable: true,
+                        animationBounce: 2.5,
+                        type: 'red',
+                        typeAnimated: true,
+                        buttons: {
+                            Delete: {
+                                text: 'Try Again',
+                                btnClass: 'btn-danger',
+                            }
+                        }
+                    });
+                }
+            });
+    }
+}
+
+function makePassword() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@";
+
+    for (var i = 0; i < 8; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    console.log(text);
+    return text;
 }
 
 // Password validation
@@ -270,6 +378,11 @@ function loginUser() {
             $("#login-email").removeClass("bg-color-type-1 border-type-1");
         }
     });
+}
+
+function showForgotPasswordModal() {
+    $("#login-model").modal('hide');
+    $("#forgotPasswordDataModel").modal('show');
 }
 
 function validateFirstStep(){
