@@ -403,11 +403,55 @@ require_once("php/common/getDoctors.php");
                     <center>
                         <button type="button" id="login-btn" class="btn btn-type-1" onclick="loginUser()">Login</button>
                     </center>
+                    <center>
+                        <a href="#" class="forgotLink" onclick="showForgotPasswordModal()">Forgot Password</a>
+                    </center>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Forgot Password data model -->
+<<div class="modal fade" id="forgotPasswordDataModel" tabindex="-1" role="dialog" aria-labelledby="login-model-label"
+      aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content login-modal">
+            <div class="modal-header text-center modal-header-type-1">
+                <h5 class="modal-title white-text">Kenway Medicals | Reset Password</h5>
+                <button type="button" class="close hover-white-text" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body pl-5 pr-5">
+                <form>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text bg-color-type-1 border-type-1" id="forgot-password-email"><i
+                                      class="fa fa-envelope" aria-hidden="true"></i>
+                          </span>
+                        </div>
+                        <input type="email" id="forgot-password-email-input" class="form-control input-type-1" placeholder="Email"
+                               aria-label="Email" oninput="validateForgotPasswordEmail(this.value,'#forgot-password-email');"
+                               aria-describedby="cred-email" autofocus>
+                        <p class="error text-danger invalid-feedback text-right" id="forgot-password-email-input-error"></p>
+
+                    </div>
+                    <center>
+                        <div id="forgot-spinner"><i class="fa fa-spinner rotating spinner"
+                                                      aria-hidden="true"></i>
+                        </div>
+                    </center>
+                    <center>
+                        <button id="forgotBtn" type="button" class="btn btn-type-1" onclick="sendNewPasswordToEmail()">Send Email</button>
+                    </center>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!--Login model-->
 <!--doc model-->
 <div class="modal fade" id="all-doc-model" tabindex="-1" role="dialog" aria-labelledby="login-model-label"

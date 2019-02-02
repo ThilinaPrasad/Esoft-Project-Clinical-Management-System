@@ -32,7 +32,7 @@
     color: #dc3545;
 }
 
-#register-spinner{
+#register-spinner, #forgot-spinner{
     display: none;
     padding: 10px 0;
 }
