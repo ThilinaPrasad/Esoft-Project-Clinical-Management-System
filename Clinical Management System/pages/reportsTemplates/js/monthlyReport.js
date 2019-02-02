@@ -102,7 +102,6 @@
                 pdf.save('Kenway Medicals(Monthly income report).pdf');
             }
         });
-
     }
 
     function add(a, b) {
