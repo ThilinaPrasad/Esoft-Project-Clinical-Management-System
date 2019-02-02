@@ -1477,7 +1477,7 @@ require_once("php/loginDataFetching.php");
                         </h2>
                     </div>
                     <div class="body" style="min-height: 70vh; padding-top: 10%;">
-                        <div class="col-md-2 col-md-offset-1">
+                        <div class="col-md-2">
                             <center><img src="images/pdf-icon.png" style="width: 100px;height: 100px;"></center>
                             <h6 class="text-center" style="margin-top: 0;">Daily Income Report (pdf)</h6>
                             <a href="reportsTemplates/dailyReport.html" target="_blank" class="btn btn-success waves-effect">Download As pdf</a>
@@ -1486,6 +1486,11 @@ require_once("php/loginDataFetching.php");
                             <center><img src="images/pdf-icon.png" style="width: 100px;height: 100px;"></center>
                             <h6 class="text-center" style="margin-top: 0;">Monthly Income Report (pdf)</h6>
                             <a href="reportsTemplates/monthlyReport.html" target="_blank" class="btn btn-success waves-effect">Download As pdf</a>
+                        </div>
+                        <div class="col-md-2">
+                            <center><img src="images/pdf-icon.png" style="width: 100px;height: 100px;"></center>
+                            <h6 class="text-center" style="margin-top: 0;">Income By Doctor Report (pdf)</h6>
+                            <a href="reportsTemplates/incomeByDoctorReport.html" target="_blank" class="btn btn-success waves-effect">Download As pdf</a>
                         </div>
                         <div class="col-md-2">
                             <center><img src="images/pdf-icon.png" style="width: 100px;height: 100px;"></center>
