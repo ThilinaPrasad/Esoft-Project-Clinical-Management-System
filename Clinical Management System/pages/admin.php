@@ -210,23 +210,17 @@ require_once("php/loginDataFetching.php");
                         </li>
                     </ul>
                 </li>
-                <li id="payment">
-                    <a href="javascript:void(0);" class="menu-toggle">
+                <li id="payment" onclick="viewPayment('#payment')">
+                    <a href="#">
                         <i class="material-icons">attach_money</i>
-                        <span>Financial</span>
+                        <span>Daily income</span>
                     </a>
-                    <ul class="ml-menu">
-                        <li>
-                            <a href="javascript:void(0);" onclick="viewPayment('#payment')">
-                                <span>View Daily income</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);" onclick="viewReports('#payment')">
-                                <span>Download Reports</span>
-                            </a>
-                        </li>
-                    </ul>
+                </li>
+                <li id="download" onclick="viewReports('#download')">
+                    <a href="#">
+                        <i class="material-icons">library_books</i>
+                        <span>Management Reports</span>
+                    </a>
                 </li>
             </ul>
         </div>
@@ -1491,7 +1485,7 @@ require_once("php/loginDataFetching.php");
                         <div class="col-md-2">
                             <center><img src="images/pdf-icon.png" style="width: 100px;height: 100px;"></center>
                             <h6 class="text-center" style="margin-top: 0;">Monthly Income Report (pdf)</h6>
-                            <a href="reportsTemplates/dailyReport.html" target="_blank" class="btn btn-success waves-effect">Download As pdf</a>
+                            <a href="reportsTemplates/monthlyReport.html" target="_blank" class="btn btn-success waves-effect">Download As pdf</a>
                         </div>
                         <div class="col-md-2">
                             <center><img src="images/pdf-icon.png" style="width: 100px;height: 100px;"></center>

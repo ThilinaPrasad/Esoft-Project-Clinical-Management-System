@@ -35,6 +35,7 @@ function addRemoveClass(x) {
     $("#doctor").removeClass("active");
     $("#staff").removeClass("active");
     $("#payment").removeClass("active");
+    $("#download").removeClass("active");
     $(x).addClass("active");
 }
 
