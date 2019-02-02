@@ -210,11 +210,23 @@ require_once("php/loginDataFetching.php");
                         </li>
                     </ul>
                 </li>
-                <li id="payment" onclick="viewPayment('#payment')">
-                    <a href="#">
+                <li id="payment">
+                    <a href="javascript:void(0);" class="menu-toggle">
                         <i class="material-icons">attach_money</i>
-                        <span>View Financial</span>
+                        <span>Financial</span>
                     </a>
+                    <ul class="ml-menu">
+                        <li>
+                            <a href="javascript:void(0);" onclick="viewPayment('#payment')">
+                                <span>View Daily income</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" onclick="viewReports('#payment')">
+                                <span>Download Reports</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>
@@ -1459,6 +1471,55 @@ require_once("php/loginDataFetching.php");
     </div>
 </section>
 
+<section class="content" id="viewReports">
+    <div class="container-fluid">
+        <!-- Exportable Table -->
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h2 class="font-bold col-teal">
+                            Download Reports
+                        </h2>
+                    </div>
+                    <div class="body" style="min-height: 70vh; padding-top: 10%;">
+                        <div class="col-md-2">
+                            <center><img src="images/pdf-icon.png" style="width: 100px;height: 100px;"></center>
+                            <h6 class="text-center" style="margin-top: 0;">Daily Income Report (pdf)</h6>
+                            <a href="reportsTemplates/dailyReport.html" target="_blank" class="btn btn-success waves-effect">Download As pdf</a>
+                        </div>
+                        <div class="col-md-2">
+                            <center><img src="images/pdf-icon.png" style="width: 100px;height: 100px;"></center>
+                            <h6 class="text-center" style="margin-top: 0;">Monthly Income Report (pdf)</h6>
+                            <a href="reportsTemplates/dailyReport.html" target="_blank" class="btn btn-success waves-effect">Download As pdf</a>
+                        </div>
+                        <div class="col-md-2">
+                            <center><img src="images/pdf-icon.png" style="width: 100px;height: 100px;"></center>
+                            <h6 class="text-center" style="margin-top: 0;">Daily Income Report (pdf)</h6>
+                            <a href="reportsTemplates/dailyReport.html" target="_blank" class="btn btn-success waves-effect">Download As pdf</a>
+                        </div>
+                        <div class="col-md-2">
+                            <center><img src="images/pdf-icon.png" style="width: 100px;height: 100px;"></center>
+                            <h6 class="text-center" style="margin-top: 0;">Daily Income Report (pdf)</h6>
+                            <a href="reportsTemplates/dailyReport.html" target="_blank" class="btn btn-success waves-effect">Download As pdf</a>
+                        </div>
+                        <div class="col-md-2">
+                            <center><img src="images/pdf-icon.png" style="width: 100px;height: 100px;"></center>
+                            <h6 class="text-center" style="margin-top: 0;">Daily Income Report (pdf)</h6>
+                            <a href="reportsTemplates/dailyReport.html" target="_blank" class="btn btn-success waves-effect">Download As pdf</a>
+                        </div>
+                        <div class="col-md-2">
+                            <center><img src="images/pdf-icon.png" style="width: 100px;height: 100px;"></center>
+                            <h6 class="text-center" style="margin-top: 0;">Daily Income Report (pdf)</h6>
+                            <a href="reportsTemplates/dailyReport.html" target="_blank" class="btn btn-success waves-effect">Download As pdf</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Exportable Table -->
+    </div>
+</section>
 
 
 <section class="content" id="profile">
