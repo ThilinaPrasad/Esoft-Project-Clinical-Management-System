@@ -34,9 +34,24 @@
     }
 
 
+
 </style>
 </head>
 <body>
+<center>
+    <h3>Select date range for income report</h3>
+<div class="date-range">
+    <label>Start Date: </label>
+    <select id="start-date" oninput="dateRangeSelect()">
+        <option>01/01/2019</option>
+    </select>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <label>End Date: </label>
+    <select id="end-date" oninput="dateRangeSelect()">
+        <option>01/01/2019</option>
+    </select>
+</div>
+</center>
 <a href="#" class="float" title="Download pdf" onclick="getPDFFileButton()">
     <i class="fa fa-download my-float"></i>
 </a>
