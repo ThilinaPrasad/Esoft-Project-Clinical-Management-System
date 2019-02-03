@@ -413,7 +413,7 @@ require_once("php/common/getDoctors.php");
 </div>
 
 <!-- Forgot Password data model -->
-<<div class="modal fade" id="forgotPasswordDataModel" tabindex="-1" role="dialog" aria-labelledby="login-model-label"
+<div class="modal fade" id="forgotPasswordDataModel" tabindex="-1" role="dialog" aria-labelledby="login-model-label"
       aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content login-modal">
